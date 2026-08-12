@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AD_LUXE | Mode féminine</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --rose: #c9788b;
+            --rose-clair: #e9a8bd;
+            --rose-tres-clair: #fff1f5;
+            --blanc: #ffffff;
+            --fond: #fcf8f9;
+            --texte: #4e4145;
+            --gris: #76666b;
+        }
+
+        body {
+            margin: 0;
+            color: var(--texte);
+            background: linear-gradient(
+                180deg,
+                var(--blanc) 0%,
+                var(--fond) 100%
+            );
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+        .hero {
+            min-height: 88vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 70px 20px;
+            text-align: center;
+        }
+
+        .hero::before,
+        .hero::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            background: #fcebf1;
+        }
+
+        .hero::before {
+            width: 420px;
+            height: 420px;
+            top: -160px;
+            left: -160px;
+        }
+
+        .hero::after {
+            width: 350px;
+            height: 350px;
+            right: -130px;
+            bottom: -140px;
+        }
+
+        .hero-content {
+            width: 100%;
+            max-width: 900px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .small-title {
+            color: #a75569;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            margin: 10px 0 0;
+            color: var(--rose-clair);
+            font-size: clamp(55px, 10vw, 105px);
+            letter-spacing: 6px;
+        }
+
+        .slogan {
+            margin: 20px 0 12px;
+            font-size: clamp(22px, 3vw, 34px);
+        }
+
+        .nouveaute {
+            display: inline-block;
+            margin: 12px 0 30px;
+            padding: 11px 19px;
+            border: 1px solid #f1cbd6;
+            border-radius: 50px;
+            color: #a75569;
+            background: var(--rose-tres-clair);
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 14px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 15px 27px;
+            border: 1px solid var(--rose);
+            border-radius: 50px;
+            color: var(--blanc);
+            background: var(--rose);
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(169, 85, 105, 0.25);
+        }
+
+        .button-white {
+            color: var(--rose);
+            background: var(--blanc);
+        }
+
+        .collections {
+            width: 100%;
+            max-width: 1150px;
+            margin: auto;
+            padding: 80px 20px;
+        }
+
+        .section-small-title {
+            margin: 0;
+            color: #a75569;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            margin: 10px 0;
+            text-align: center;
+            font-size: clamp(34px, 5vw, 50px);
+        }
+
+        .section-description {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: var(--gris);
+            text-align: center;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .category {
+            overflow: hidden;
+            border: 1px solid #f0d9df;
+            border-radius: 24px;
+            background: var(--blanc);
+            box-shadow: 0 12px 35px rgba(90, 54, 65, 0.08);
+        }
+
+        .category summary {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 30px;
+            color: #a75569;
+            cursor: pointer;
+            list-style: none;
+            font-size: 27px;
+            font-weight: bold;
+        }
+
+        .category summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .category summary::after {
+            content: "+";
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: var(--rose-tres-clair);
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            font-weight: normal;
+        }
+
+        .category[open] summary::after {
+            content: "−";
+        }
+
+        .category-content {
+            padding: 0 28px 28px;
+            border-top: 1px solid #f5e5e9;
+        }
+
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding-top: 25px;
+        }
+
+        .product {
+            padding: 10px 15px;
+            border: 1px solid #f1cbd6;
+            border-radius: 50px;
+            background: #fff4f7;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        .stock-message {
+            margin: 22px 0 0;
+            color: #846e75;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .why {
+            width: calc(100% - 40px);
+            max-width: 850px;
+            margin: 20px auto 80px;
+            padding: 48px 30px;
+            border: 1px solid #f0d9df;
+            border-radius: 28px;
+            background: var(--blanc);
+            box-shadow: 0 15px 45px rgba(90, 54, 65, 0.09);
+            text-align: center;
+        }
+
+        .why h2 {
+            margin: 10px 0 0;
+            color: #a75569;
+            font-size: clamp(32px, 5vw, 46px);
+        }
+
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .benefit {
+            padding: 23px 15px;
+            border-radius: 18px;
+            background: #fff6f8;
+            font-family: Arial, sans-serif;
+        }
+
+        .benefit strong,
+        .benefit span {
+            display: block;
+        }
+
+        .benefit span {
+            margin-top: 8px;
+            color: var(--gris);
+            font-size: 14px;
+        }
+
+        .why-description {
+            max-width: 650px;
+            margin: 25px auto;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        footer {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 35px 20px;
+            color: var(--blanc);
+            background: var(--texte);
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        footer strong {
+            font-family: Georgia, serif;
+            font-size: 25px;
+            letter-spacing: 3px;
+        }
+
+        footer span {
+            color: #eadde1;
+            font-size: 13px;
+        }
+
+        @media (max-width: 760px) {
+            .hero {
+                min-height: auto;
+                padding: 85px 18px;
+            }
+
+            .categories,
+            .benefits {
+                grid-template-columns: 1fr;
+            }
+
+            .collections {
+                padding: 65px 16px;
+            }
+
+            .category summary {
+                padding: 24px;
+                font-size: 22px;
+            }
+
+            .why {
+                width: calc(100% - 32px);
+                padding: 38px 20px;
+            }
+
+            .button {
+                width: 100%;
+                max-width: 340px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="hero">
+        <div class="hero-content">
+
+            <p class="small-title">
+                Boutique de mode féminine
+            </p>
+
+            <h1>AD_LUXE</h1>
+
+            <p class="slogan">
+                La mode qui vous ressemble
+            </p>
+
+            <p class="nouveaute">
+                ✨ Nouvelle collection Demi-saison bientôt
+            </p>
+
+            <div class="buttons">
+
+                <a class="button" href="#collections">
+                    Voir la collection
+                </a>
+
+                <a
+                    class="button button-white"
+                    href="https://wa.me/212644162453?text=Bonjour%20AD_LUXE%2C%20je%20souhaite%20passer%20une%20commande"
+                    target="_blank"
+                >
+                    Commander sur WhatsApp
+                </a>
+
+            </div>
+        </div>
+    </header>
+
+
+    <main>
+
+        <section class="collections" id="collections">
+
+            <p class="section-small-title">
+                Découvrez nos univers
+            </p>
+
+            <h2 class="section-title">
+                Nos collections
+            </h2>
+
+            <p class="section-description">
+                Cliquez sur une catégorie pour découvrir tout ce qu’elle contient.
+            </p>
+
+
+            <div class="categories">
+
+
+                <details class="category" name="collections">
+
+                    <summary>Vêtements</summary>
+
+                    <div class="category-content">
+
+                        <div class="products">
+                            <span class="product">Jackets</span>
+                            <span class="product">Pantalons</span>
+                            <span class="product">Ensembles</span>
+                            <span class="product">Jupes</span>
+                            <span class="product">Pulls</span>
+                            <span class="product">Tops</span>
+                            <span class="product">Robes</span>
+                            <span class="product">Manteaux</span>
+                            <span class="product">Trenchs femme</span>
+                        </div>
+
+                        <p class="stock-message">
+                            Nouveautés disponibles dès l’arrivée du stock Demi-saison.
+                        </p>
+
+                    </div>
+                </details>
+
+
+                <details class="category" name="collections">
+
+                    <summary>Sacs</summary>
+
+                    <div class="category-content">
+
+                        <div class="products">
+                            <span class="product">Sacs à main</span>
+                            <span class="product">Bandoulières</span>
+                            <span class="product">Cabas</span>
+                            <span class="product">Mini sacs</span>
+                            <span class="product">Sacs de soirée</span>
+                        </div>
+
+                        <p class="stock-message">
+                            Nouveautés disponibles dès l’arrivée du stock Demi-saison.
+                        </p>
+
+                    </div>
+                </details>
+
+
+                <details class="category" name="collections">
+
+                    <summary>Chaussures</summary>
+
+                    <div class="category-content">
+
+                        <div class="products">
+                            <span class="product">Baskets</span>
+                            <span class="product">Talons</span>
+                            <span class="product">Mocassins</span>
+                            <span class="product">Bottes &amp; bottines</span>
+                            <span class="product">Sandales</span>
+                        </div>
+
+                        <p class="stock-message">
+                            Nouveautés disponibles dès l’arrivée du stock Demi-saison.
+                        </p>
+
+                    </div>
+                </details>
+
+
+                <details class="category" name="collections">
+
+                    <summary>Accessoires &amp; Bijoux</summary>
+
+                    <div class="category-content">
+
+                        <div class="products">
+                            <span class="product">Colliers</span>
+                            <span class="product">Bracelets</span>
+                            <span class="product">Bagues</span>
+                            <span class="product">Boucles d’oreilles</span>
+                            <span class="product">Lunettes</span>
+                            <span class="product">Ceintures</span>
+                            <span class="product">Montres</span>
+                        </div>
+
+                        <p class="stock-message">
+                            Nouveautés disponibles dès l’arrivée du stock Demi-saison.
+                        </p>
+
+                    </div>
+                </details>
+
+            </div>
+        </section>
+
+
+        <section class="why">
+
+            <p class="section-small-title">
+                Votre confiance, notre priorité
+            </p>
+
+            <h2>Pourquoi AD_LUXE ?</h2>
+
+            <div class="benefits">
+
+                <div class="benefit">
+                    <strong>✓ Paiement</strong>
+                    <span>à la livraison</span>
+                </div>
+
+                <div class="benefit">
+                    <strong>🚚 Livraison</strong>
+                    <span>partout au Maroc</span>
+                </div>
+
+                <div class="benefit">
+                    <strong>♡ Sélection</strong>
+                    <span>féminine et soignée</span>
+                </div>
+
+            </div>
+
+            <p class="why-description">
+                Une qualité soigneusement sélectionnée, des prix accessibles
+                et un style unique qui vous distingue.
+            </p>
+
+            <a
+                class="button"
+                href="https://wa.me/212644162453?text=Bonjour%20AD_LUXE%2C%20je%20souhaite%20passer%20une%20commande"
+                target="_blank"
+            >
+                Nous contacter
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        <strong>AD_LUXE</strong>
+        <span>La mode qui vous ressemble · Maroc</span>
+    </footer>
+
+</body>
+</html>
