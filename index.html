@@ -6,6 +6,7 @@
 
     <title>AD_LUXE | Mode féminine</title>
 
+    
     <style>
         * {
             box-sizing: border-box;
@@ -555,7 +556,190 @@
             </a>
 
         </section>
+<style>
+    .featured-product {
+        max-width: 1150px;
+        margin: 0 auto 80px;
+        padding: 0 20px;
+    }
 
+    .featured-product-title {
+        margin: 10px 0 35px;
+        text-align: center;
+        font-size: clamp(34px, 5vw, 50px);
+    }
+
+    .featured-card {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        overflow: hidden;
+        border: 1px solid #f0d9df;
+        border-radius: 28px;
+        background: #ffffff;
+        box-shadow: 0 15px 45px rgba(90, 54, 65, 0.10);
+    }
+
+    .featured-gallery {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding: 18px;
+        background: #fff6f8;
+    }
+
+    .featured-gallery img {
+        width: 100%;
+        aspect-ratio: 3 / 4;
+        object-fit: cover;
+        border-radius: 16px;
+    }
+
+    .featured-info {
+        align-self: center;
+        padding: 40px 35px;
+    }
+
+    .available {
+        display: inline-block;
+        padding: 8px 14px;
+        border-radius: 50px;
+        color: #a75569;
+        background: #fff1f5;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+    .featured-info h3 {
+        margin: 18px 0 8px;
+        color: #4e4145;
+        font-size: 38px;
+    }
+
+    .featured-price {
+        margin: 0 0 25px;
+        color: #c9788b;
+        font-family: Arial, sans-serif;
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    .featured-label {
+        margin: 20px 0 10px;
+        font-family: Arial, sans-serif;
+        font-weight: bold;
+    }
+
+    .color-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+    }
+
+    .color-name {
+        padding: 9px 13px;
+        border: 1px solid #f1cbd6;
+        border-radius: 50px;
+        background: #fff6f8;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+    }
+
+    .delivery-box {
+        margin: 24px 0;
+        padding: 18px;
+        border-radius: 16px;
+        background: #fcf8f9;
+        font-family: Arial, sans-serif;
+        line-height: 1.8;
+    }
+
+    @media (max-width: 760px) {
+        .featured-card {
+            grid-template-columns: 1fr;
+        }
+
+        .featured-gallery {
+            padding: 10px;
+        }
+
+        .featured-info {
+            padding: 30px 22px;
+        }
+
+        .featured-info h3 {
+            font-size: 31px;
+        }
+    }
+</style>
+
+<section class="featured-product" id="produit">
+
+    <p class="section-small-title">Notre coup de cœur</p>
+    <h2 class="featured-product-title">Disponible maintenant</h2>
+
+    <div class="featured-card">
+
+        <div class="featured-gallery">
+            <img
+                src="WhatsApp Image 2026-08-13 at 16.16.19.jpeg"
+                alt="Ensemble Scarf marron"
+                loading="lazy"
+            >
+
+            <img
+                src="WhatsApp Image 2026-08-13 at 16.16.20 (1).jpeg"
+                alt="Ensemble Scarf bleu"
+                loading="lazy"
+            >
+
+            <img
+                src="WhatsApp Image 2026-08-13 at 16.16.20 (2).jpeg"
+                alt="Ensemble Scarf noir"
+                loading="lazy"
+            >
+
+            <img
+                src="WhatsApp Image 2026-08-13 at 16.16.20.jpeg"
+                alt="Ensemble Scarf rose"
+                loading="lazy"
+            >
+        </div>
+
+        <div class="featured-info">
+
+            <span class="available">✓ En stock</span>
+
+            <h3>Ensemble Scarf</h3>
+            <p class="featured-price">180 DH</p>
+
+            <p class="featured-label">Couleurs disponibles :</p>
+
+            <div class="color-list">
+                <span class="color-name">Noir</span>
+                <span class="color-name">Bleu</span>
+                <span class="color-name">Rose</span>
+                <span class="color-name">Marron</span>
+            </div>
+
+            <div class="delivery-box">
+                🚚 Livraison Casablanca : <strong>20 DH</strong><br>
+                📦 Hors Casablanca : <strong>35 DH</strong><br>
+                💵 Paiement à la livraison
+            </div>
+
+            <a
+                class="button"
+                href="https://wa.me/212644162453?text=Bonjour%20AD_LUXE%2C%20je%20souhaite%20commander%20l%27Ensemble%20Scarf%20%C3%A0%20180%20DH.%20Couleur%20%3A%20"
+                target="_blank"
+                rel="noopener"
+            >
+                Commander sur WhatsApp
+            </a>
+
+        </div>
+    </div>
+</section>
     </main>
 
 
