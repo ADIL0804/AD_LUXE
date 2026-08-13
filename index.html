@@ -1173,6 +1173,224 @@
 </head>
 
 <body>
+    <!-- FORMULAIRE DE COMMANDE AD_LUXE -->
+<section class="ad-order" id="commander">
+  <style>
+    .ad-order {
+      max-width: 720px;
+      margin: 60px auto;
+      padding: 25px;
+      font-family: Arial, sans-serif;
+    }
+
+    .ad-order-box {
+      background: #fff;
+      border: 1px solid #f0dce3;
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: 0 15px 45px rgba(169, 86, 112, 0.12);
+    }
+
+    .ad-order h2 {
+      color: #9e4e68;
+      text-align: center;
+      margin-bottom: 8px;
+      font-size: 32px;
+    }
+
+    .ad-order-subtitle {
+      text-align: center;
+      color: #74666b;
+      margin-bottom: 25px;
+    }
+
+    .ad-order-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .ad-field {
+      margin-bottom: 15px;
+    }
+
+    .ad-field-full {
+      grid-column: 1 / -1;
+    }
+
+    .ad-field label {
+      display: block;
+      margin-bottom: 7px;
+      color: #4b3b40;
+      font-weight: 600;
+    }
+
+    .ad-field input,
+    .ad-field select,
+    .ad-field textarea {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ead6dd;
+      border-radius: 12px;
+      font-size: 16px;
+      outline: none;
+      background: #fffafb;
+    }
+
+    .ad-field input:focus,
+    .ad-field select:focus,
+    .ad-field textarea:focus {
+      border-color: #bc6c84;
+    }
+
+    .ad-total {
+      background: #fff3f6;
+      border-radius: 14px;
+      padding: 15px;
+      margin: 10px 0 20px;
+      color: #4b3b40;
+      line-height: 1.7;
+    }
+
+    .ad-order-button {
+      width: 100%;
+      border: none;
+      border-radius: 30px;
+      padding: 15px;
+      color: white;
+      background: #bc6c84;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .ad-order-button:hover {
+      background: #9e4e68;
+    }
+
+    @media (max-width: 600px) {
+      .ad-order-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ad-field-full {
+        grid-column: auto;
+      }
+
+      .ad-order {
+        padding: 15px;
+      }
+    }
+  </style>
+
+  <div class="ad-order-box">
+    <h2>Commander maintenant</h2>
+    <p class="ad-order-subtitle">
+      Remplissez vos informations pour confirmer la commande.
+    </p>
+
+    <form id="adOrderForm">
+      <div class="ad-order-grid">
+
+        <div class="ad-field">
+          <label for="adName">Nom complet</label>
+          <input id="adName" name="nom" type="text" required>
+        </div>
+
+        <div class="ad-field">
+          <label for="adPhone">Téléphone</label>
+          <input id="adPhone" name="telephone" type="tel" required>
+        </div>
+
+        <div class="ad-field">
+          <label for="adColor">Couleur</label>
+          <select id="adColor" name="couleur" required>
+            <option value="">Choisissez</option>
+            <option value="Noir">Noir</option>
+            <option value="Bleu">Bleu</option>
+            <option value="Rose">Rose</option>
+            <option value="Marron">Marron</option>
+          </select>
+        </div>
+
+        <div class="ad-field">
+          <label for="adZone">Livraison</label>
+          <select id="adZone" name="zone" required>
+            <option value="Casablanca">Casablanca — 20 DH</option>
+            <option value="Hors Casablanca">Hors Casablanca — 35 DH</option>
+          </select>
+        </div>
+
+        <div class="ad-field ad-field-full">
+          <label for="adAddress">Adresse complète</label>
+          <textarea
+            id="adAddress"
+            name="adresse"
+            rows="3"
+            required
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="ad-total">
+        Produit : <strong>Ensemble Scarf — 180 DH</strong><br>
+        Livraison : <strong id="adShipping">20 DH</strong><br>
+        Total : <strong id="adTotal">200 DH</strong>
+      </div>
+
+      <button class="ad-order-button" type="submit">
+        Confirmer sur WhatsApp
+      </button>
+    </form>
+  </div>
+
+  <script>
+    (function () {
+      const form = document.getElementById("adOrderForm");
+      const zone = document.getElementById("adZone");
+      const shippingText = document.getElementById("adShipping");
+      const totalText = document.getElementById("adTotal");
+
+      function updateTotal() {
+        const shipping = zone.value === "Casablanca" ? 20 : 35;
+        shippingText.textContent = shipping + " DH";
+        totalText.textContent = (180 + shipping) + " DH";
+      }
+
+      zone.addEventListener("change", updateTotal);
+      updateTotal();
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const data = new FormData(form);
+        const shipping =
+          data.get("zone") === "Casablanca" ? 20 : 35;
+        const total = 180 + shipping;
+
+        const message =
+          "Bonjour AD_LUXE 🌸\n\n" +
+          "Je souhaite confirmer ma commande :\n\n" +
+          "Produit : Ensemble Scarf\n" +
+          "Couleur : " + data.get("couleur") + "\n" +
+          "Nom : " + data.get("nom") + "\n" +
+          "Téléphone : " + data.get("telephone") + "\n" +
+          "Zone : " + data.get("zone") + "\n" +
+          "Adresse : " + data.get("adresse") + "\n" +
+          "Livraison : " + shipping + " DH\n" +
+          "Total : " + total + " DH\n\n" +
+          "Paiement à la livraison ✅";
+
+        const whatsappURL =
+          "https://wa.me/212644162453?text=" +
+          encodeURIComponent(message);
+
+        window.open(whatsappURL, "_blank");
+      });
+    })();
+  </script>
+</section>
+<!-- FIN FORMULAIRE AD_LUXE -->
     <div class="announcement">
         Livraison partout au Maroc · Paiement à la livraison
     </div>
