@@ -1,0 +1,31 @@
+name: One-time Panier edit
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  edit:
+    if: github.event.head_commit.message != 'chore: replace navbar WhatsApp with Panier'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replace navbar label only
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          old = '''                WhatsApp\n            </a>\n        </nav>'''
+          new = '''                🛒 Panier\n            </a>\n        </nav>'''
+          if old not in s:
+              raise SystemExit('Navbar WhatsApp target not found; no change made.')
+          p.write_text(s.replace(old, new, 1), encoding='utf-8')
+          PY
+      - name: Commit edit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git commit -m 'chore: replace navbar WhatsApp with Panier'
+          git push
