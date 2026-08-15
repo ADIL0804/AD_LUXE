@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ad-luxe.ma/SITEMAP.XML
+Sitemap: https://ad-luxe.ma/sitemap.xml
