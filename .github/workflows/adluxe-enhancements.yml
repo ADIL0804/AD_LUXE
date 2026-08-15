@@ -10,6 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Fix Instagram link
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          old='https://www.instagram.com/ad_luxe_1/'
+          new='https://www.instagram.com/ad_luxe.ma/'
+          if old in s:
+              s=s.replace(old,new)
+              p.write_text(s,encoding='utf-8')
+          PY
       - name: Add search filters and cart
         run: |
           python3 - <<'PY'
@@ -18,21 +30,100 @@ jobs:
           s=p.read_text(encoding='utf-8')
           if '<!-- ADLUXE ENHANCEMENTS -->' in s:
               raise SystemExit(0)
-          old='''            <a\n                class="btn btn-small"\n                href="https://wa.me/212644162453?text=Bonjour%20AD_LUXE%2C%20je%20souhaite%20avoir%20plus%20d%27informations."\n                target="_blank"\n                rel="noopener"\n            >\n                WhatsApp\n            </a>'''
-          new='''            <button class="btn btn-small adluxe-cart-trigger" type="button" onclick="ADLUXE_CART.open()">\n                🛒 Panier <span id="adluxe-cart-count">0</span>\n            </button>'''
+          old='''            <a
+                class="btn btn-small"
+                href="https://wa.me/212644162453?text=Bonjour%20AD_LUXE%2C%20je%20souhaite%20avoir%20plus%20d%27informations."
+                target="_blank"
+                rel="noopener"
+            >
+                WhatsApp
+            </a>'''
+          new='''            <button class="btn btn-small adluxe-cart-trigger" type="button" onclick="ADLUXE_CART.open()">
+                🛒 Panier <span id="adluxe-cart-count">0</span>
+            </button>'''
           if old not in s:
               raise SystemExit('Navbar WhatsApp block not found')
           s=s.replace(old,new,1)
           marker='<article class="product-card">'
-          tools='''<!-- ADLUXE ENHANCEMENTS -->\n                <div class="adluxe-shop-tools" id="adluxe-shop-tools">\n                    <div class="adluxe-search">🔎 <input id="adluxe-search" type="search" placeholder="Rechercher un produit..." aria-label="Rechercher un produit"></div>\n                    <div class="adluxe-categories" aria-label="Catégories">\n                        <button class="adluxe-filter active" data-filter="all">Tous</button>\n                        <button class="adluxe-filter" data-filter="vetements">Vêtements</button>\n                        <button class="adluxe-filter" data-filter="parfums">Parfums</button>\n                        <button class="adluxe-filter" data-filter="sacs">Sacs</button>\n                        <button class="adluxe-filter" data-filter="accessoires">Accessoires</button>\n                    </div>\n                </div>\n\n                '''
+          tools='''<!-- ADLUXE ENHANCEMENTS -->
+                <div class="adluxe-shop-tools" id="adluxe-shop-tools">
+                    <div class="adluxe-search">🔎 <input id="adluxe-search" type="search" placeholder="Rechercher un produit..." aria-label="Rechercher un produit"></div>
+                    <div class="adluxe-categories" aria-label="Catégories">
+                        <button class="adluxe-filter active" data-filter="all">Tous</button>
+                        <button class="adluxe-filter" data-filter="vetements">Vêtements</button>
+                        <button class="adluxe-filter" data-filter="parfums">Parfums</button>
+                        <button class="adluxe-filter" data-filter="sacs">Sacs</button>
+                        <button class="adluxe-filter" data-filter="accessoires">Accessoires</button>
+                    </div>
+                </div>
+
+                '''
           if marker not in s:
               raise SystemExit('Product marker not found')
           s=s.replace(marker,tools+marker,1)
           s=s.replace('<article class="product-card">','<article class="product-card" id="adluxe-product" data-category="vetements" data-name="Ensemble Scarf">',1)
-          css='''\n        /* ADLUXE ENHANCEMENTS */\n        .adluxe-shop-tools { margin: 0 auto 28px; padding: 18px; border: 1px solid var(--line); border-radius: 24px; background: rgba(255,255,255,.72); }\n        .adluxe-search { max-width: 560px; margin: 0 auto 14px; display:flex; align-items:center; gap:10px; padding:12px 16px; border:1px solid var(--line); border-radius:999px; background:var(--white); color:var(--muted); }\n        .adluxe-search input { width:100%; border:0; outline:0; background:transparent; color:var(--ink); font:inherit; }\n        .adluxe-categories { display:flex; justify-content:center; gap:8px; flex-wrap:wrap; }\n        .adluxe-filter { padding:10px 15px; border:1px solid var(--line); border-radius:999px; background:var(--white); color:var(--muted); font-weight:800; cursor:pointer; }\n        .adluxe-filter.active,.adluxe-filter:hover { border-color:var(--rose); background:var(--rose); color:var(--white); }\n        .adluxe-cart-trigger #adluxe-cart-count { min-width:20px; height:20px; display:inline-grid; place-items:center; padding:0 5px; border-radius:999px; background:rgba(255,255,255,.25); font-size:11px; }\n        .adluxe-add-cart { margin-top:10px; width:100%; }\n        .adluxe-cart-overlay { position:fixed; inset:0; z-index:100; display:none; background:rgba(0,0,0,.45); }\n        .adluxe-cart-overlay.open { display:block; }\n        .adluxe-cart-panel { position:absolute; top:0; right:0; width:min(430px,94vw); height:100%; overflow:auto; padding:28px; background:var(--cream); box-shadow:-20px 0 60px rgba(0,0,0,.15); }\n        .adluxe-cart-head { display:flex; justify-content:space-between; align-items:center; gap:15px; margin-bottom:20px; }\n        .adluxe-cart-head h3 { margin:0; font:500 30px Georgia,serif; }\n        .adluxe-cart-close { border:0; background:transparent; font-size:28px; cursor:pointer; }\n        .adluxe-cart-item { display:flex; gap:12px; padding:14px 0; border-bottom:1px solid var(--line); }\n        .adluxe-cart-item img { width:70px; height:85px; object-fit:cover; object-position:center top; border-radius:12px; }\n        .adluxe-cart-item strong { display:block; margin-bottom:6px; }\n        .adluxe-cart-total { display:flex; justify-content:space-between; padding:20px 0; font-weight:900; font-size:18px; }\n        .adluxe-cart-empty { color:var(--muted); padding:30px 0; text-align:center; }\n        .adluxe-wa { width:100%; }\n        @media (max-width:600px) { .adluxe-shop-tools { padding:12px; } .adluxe-categories { justify-content:flex-start; overflow:auto; flex-wrap:nowrap; padding-bottom:4px; } .adluxe-filter { white-space:nowrap; } }\n'''
+          css='''
+        /* ADLUXE ENHANCEMENTS */
+        .adluxe-shop-tools { margin: 0 auto 28px; padding: 18px; border: 1px solid var(--line); border-radius: 24px; background: rgba(255,255,255,.72); }
+        .adluxe-search { max-width: 560px; margin: 0 auto 14px; display:flex; align-items:center; gap:10px; padding:12px 16px; border:1px solid var(--line); border-radius:999px; background:var(--white); color:var(--muted); }
+        .adluxe-search input { width:100%; border:0; outline:0; background:transparent; color:var(--ink); font:inherit; }
+        .adluxe-categories { display:flex; justify-content:center; gap:8px; flex-wrap:wrap; }
+        .adluxe-filter { padding:10px 15px; border:1px solid var(--line); border-radius:999px; background:var(--white); color:var(--muted); font-weight:800; cursor:pointer; }
+        .adluxe-filter.active,.adluxe-filter:hover { border-color:var(--rose); background:var(--rose); color:var(--white); }
+        .adluxe-cart-trigger #adluxe-cart-count { min-width:20px; height:20px; display:inline-grid; place-items:center; padding:0 5px; border-radius:999px; background:rgba(255,255,255,.25); font-size:11px; }
+        .adluxe-add-cart { margin-top:10px; width:100%; }
+        .adluxe-cart-overlay { position:fixed; inset:0; z-index:100; display:none; background:rgba(0,0,0,.45); }
+        .adluxe-cart-overlay.open { display:block; }
+        .adluxe-cart-panel { position:absolute; top:0; right:0; width:min(430px,94vw); height:100%; overflow:auto; padding:28px; background:var(--cream); box-shadow:-20px 0 60px rgba(0,0,0,.15); }
+        .adluxe-cart-head { display:flex; justify-content:space-between; align-items:center; gap:15px; margin-bottom:20px; }
+        .adluxe-cart-head h3 { margin:0; font:500 30px Georgia,serif; }
+        .adluxe-cart-close { border:0; background:transparent; font-size:28px; cursor:pointer; }
+        .adluxe-cart-item { display:flex; gap:12px; padding:14px 0; border-bottom:1px solid var(--line); }
+        .adluxe-cart-item img { width:70px; height:85px; object-fit:cover; object-position:center top; border-radius:12px; }
+        .adluxe-cart-item strong { display:block; margin-bottom:6px; }
+        .adluxe-cart-total { display:flex; justify-content:space-between; padding:20px 0; font-weight:900; font-size:18px; }
+        .adluxe-cart-empty { color:var(--muted); padding:30px 0; text-align:center; }
+        .adluxe-wa { width:100%; }
+        @media (max-width:600px) { .adluxe-shop-tools { padding:12px; } .adluxe-categories { justify-content:flex-start; overflow:auto; flex-wrap:nowrap; padding-bottom:4px; } .adluxe-filter { white-space:nowrap; } }
+'''
           s=s.replace('</style>',css+'\n    </style>',1)
-          cart_html='''\n    <div class="adluxe-cart-overlay" id="adluxe-cart-overlay" onclick="if(event.target===this)ADLUXE_CART.close()">\n        <aside class="adluxe-cart-panel">\n            <div class="adluxe-cart-head"><h3>Panier</h3><button class="adluxe-cart-close" type="button" onclick="ADLUXE_CART.close()">×</button></div>\n            <div id="adluxe-cart-items"></div>\n            <div class="adluxe-cart-total"><span>Total</span><span id="adluxe-cart-total">0 DH</span></div>\n            <a class="btn adluxe-wa" id="adluxe-cart-wa" href="https://wa.me/212644162453" target="_blank" rel="noopener">Commander sur WhatsApp</a>\n        </aside>\n    </div>\n'''
-          js='''\n    <script>\n    (function(){\n      const product={name:'Ensemble Scarf',price:180,image:'WhatsApp Image 2026-08-13 at 16.16.19.jpeg'};\n      let cart=JSON.parse(localStorage.getItem('adluxe_cart')||'[]');\n      const save=()=>{localStorage.setItem('adluxe_cart',JSON.stringify(cart));render();};\n      const render=()=>{\n        const count=cart.reduce((n,x)=>n+x.qty,0); const c=document.getElementById('adluxe-cart-count'); if(c)c.textContent=count;\n        const box=document.getElementById('adluxe-cart-items'); if(!box)return;\n        if(!cart.length){box.innerHTML='<div class="adluxe-cart-empty">Votre panier est vide.</div>';document.getElementById('adluxe-cart-total').textContent='0 DH';return;}\n        box.innerHTML=cart.map((x,i)=>`<div class="adluxe-cart-item"><img src="${x.image}" alt=""><div><strong>${x.name}</strong><div>${x.price} DH × ${x.qty}</div><div style="margin-top:8px"><button type="button" onclick="ADLUXE_CART.change(${i},-1)">−</button> <b>${x.qty}</b> <button type="button" onclick="ADLUXE_CART.change(${i},1)">+</button></div></div></div>`).join('');\n        const total=cart.reduce((n,x)=>n+x.price*x.qty,0); document.getElementById('adluxe-cart-total').textContent=total+' DH';\n        const msg='Bonjour AD_LUXE, je souhaite commander :\\n'+cart.map(x=>x.name+' x'+x.qty+' — '+(x.price*x.qty)+' DH').join('\\n')+'\\n\\nTotal produits : '+total+' DH\\nLivraison : Casablanca 20 DH / hors Casablanca 35 DH\\nPaiement à la livraison.';\n        document.getElementById('adluxe-cart-wa').href='https://wa.me/212644162453?text='+encodeURIComponent(msg);\n      };\n      window.ADLUXE_CART={open(){document.getElementById('adluxe-cart-overlay').classList.add('open');render();},close(){document.getElementById('adluxe-cart-overlay').classList.remove('open');},add(){const color=(document.getElementById('selectedColor')||{}).textContent||'Marron';const found=cart.find(x=>x.name==='Ensemble Scarf'&&x.color===color);if(found)found.qty++;else cart.push({...product,color,qty:1});save();this.open();},change(i,d){cart[i].qty+=d;if(cart[i].qty<=0)cart.splice(i,1);save();}};\n      window.addEventListener('DOMContentLoaded',()=>{\n        const card=document.getElementById('adluxe-product');\n        if(card){const b=document.createElement('button');b.type='button';b.className='btn btn-outline adluxe-add-cart';b.textContent='🛒 Ajouter au panier';b.onclick=()=>ADLUXE_CART.add();const order=document.getElementById('orderButton');if(order&&order.parentElement)order.parentElement.insertBefore(b,order);}\n        const input=document.getElementById('adluxe-search'), filters=[...document.querySelectorAll('.adluxe-filter')];\n        function apply(){const q=(input.value||'').toLowerCase().trim(), f=document.querySelector('.adluxe-filter.active')?.dataset.filter||'all';if(!card)return;card.style.display=(!q||card.dataset.name.toLowerCase().includes(q))&&(f==='all'||card.dataset.category===f)?'':'none';}\n        input?.addEventListener('input',apply);filters.forEach(btn=>btn.addEventListener('click',()=>{filters.forEach(x=>x.classList.remove('active'));btn.classList.add('active');apply();}));\n        render();\n      });\n    })();\n    </script>\n'''
+          cart_html='''
+    <div class="adluxe-cart-overlay" id="adluxe-cart-overlay" onclick="if(event.target===this)ADLUXE_CART.close()">
+        <aside class="adluxe-cart-panel">
+            <div class="adluxe-cart-head"><h3>Panier</h3><button class="adluxe-cart-close" type="button" onclick="ADLUXE_CART.close()">×</button></div>
+            <div id="adluxe-cart-items"></div>
+            <div class="adluxe-cart-total"><span>Total</span><span id="adluxe-cart-total">0 DH</span></div>
+            <a class="btn adluxe-wa" id="adluxe-cart-wa" href="https://wa.me/212644162453" target="_blank" rel="noopener">Commander sur WhatsApp</a>
+        </aside>
+    </div>
+'''
+          js='''
+    <script>
+    (function(){
+      const product={name:'Ensemble Scarf',price:180,image:'WhatsApp Image 2026-08-13 at 16.16.19.jpeg'};
+      let cart=JSON.parse(localStorage.getItem('adluxe_cart')||'[]');
+      const save=()=>{localStorage.setItem('adluxe_cart',JSON.stringify(cart));render();};
+      const render=()=>{
+        const count=cart.reduce((n,x)=>n+x.qty,0); const c=document.getElementById('adluxe-cart-count'); if(c)c.textContent=count;
+        const box=document.getElementById('adluxe-cart-items'); if(!box)return;
+        if(!cart.length){box.innerHTML='<div class="adluxe-cart-empty">Votre panier est vide.</div>';document.getElementById('adluxe-cart-total').textContent='0 DH';return;}
+        box.innerHTML=cart.map((x,i)=>`<div class="adluxe-cart-item"><img src="${x.image}" alt=""><div><strong>${x.name}</strong><div>${x.price} DH × ${x.qty}</div><div style="margin-top:8px"><button type="button" onclick="ADLUXE_CART.change(${i},-1)">−</button> <b>${x.qty}</b> <button type="button" onclick="ADLUXE_CART.change(${i},1)">+</button></div></div></div>`).join('');
+        const total=cart.reduce((n,x)=>n+x.price*x.qty,0); document.getElementById('adluxe-cart-total').textContent=total+' DH';
+        const msg='Bonjour AD_LUXE, je souhaite commander :\n'+cart.map(x=>x.name+' x'+x.qty+' — '+(x.price*x.qty)+' DH').join('\n')+'\n\nTotal produits : '+total+' DH\nLivraison : Casablanca 20 DH / hors Casablanca 35 DH\nPaiement à la livraison.';
+        document.getElementById('adluxe-cart-wa').href='https://wa.me/212644162453?text='+encodeURIComponent(msg);
+      };
+      window.ADLUXE_CART={open(){document.getElementById('adluxe-cart-overlay').classList.add('open');render();},close(){document.getElementById('adluxe-cart-overlay').classList.remove('open');},add(){const color=(document.getElementById('selectedColor')||{}).textContent||'Marron';const found=cart.find(x=>x.name==='Ensemble Scarf'&&x.color===color);if(found)found.qty++;else cart.push({...product,color,qty:1});save();this.open();},change(i,d){cart[i].qty+=d;if(cart[i].qty<=0)cart.splice(i,1);save();}};
+      window.addEventListener('DOMContentLoaded',()=>{
+        const card=document.getElementById('adluxe-product');
+        if(card){const b=document.createElement('button');b.type='button';b.className='btn btn-outline adluxe-add-cart';b.textContent='🛒 Ajouter au panier';b.onclick=()=>ADLUXE_CART.add();const order=document.getElementById('orderButton');if(order&&order.parentElement)order.parentElement.insertBefore(b,order);}
+        const input=document.getElementById('adluxe-search'), filters=[...document.querySelectorAll('.adluxe-filter')];
+        function apply(){const q=(input.value||'').toLowerCase().trim(), f=document.querySelector('.adluxe-filter.active')?.dataset.filter||'all';if(!card)return;card.style.display=(!q||card.dataset.name.toLowerCase().includes(q))&&(f==='all'||card.dataset.category===f)?'':'none';}
+        input?.addEventListener('input',apply);filters.forEach(btn=>btn.addEventListener('click',()=>{filters.forEach(x=>x.classList.remove('active'));btn.classList.add('active');apply();}));
+        render();
+      });
+    })();
+    </script>
+'''
           s=s.replace('</body>',cart_html+js+'</body>',1)
           p.write_text(s,encoding='utf-8')
           PY
