@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://adil0804.github.io/AD_LUXE/sitemap.xml
+Sitemap: https://ad-luxe.ma/sitemap.xml
