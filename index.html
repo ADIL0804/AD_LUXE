@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="AD_LUXE, boutique de mode féminine au Maroc. Vêtements et accessoires sélectionnés avec livraison partout au Maroc et paiement à la livraison.">
     <meta name="theme-color" content="#a95670">
+    <link rel="canonical" href="https://adil0804.github.io/AD_LUXE/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="AD_LUXE | Mode féminine au Maroc">
+    <meta property="og:description" content="Mode féminine, prix accessibles et livraison partout au Maroc.">
+    <meta property="og:url" content="https://adil0804.github.io/AD_LUXE/">
     <title>AD_LUXE | Mode féminine au Maroc</title>
 
     <style>
@@ -1667,15 +1672,16 @@
     <script>
     (function(){
       const product={name:'Ensemble Scarf',price:180,image:'WhatsApp Image 2026-08-13 at 16.16.19.jpeg'};
-      let cart=JSON.parse(localStorage.getItem('adluxe_cart')||'[]');
+      let cart=[];
+      try { cart=JSON.parse(localStorage.getItem('adluxe_cart')||'[]'); if(!Array.isArray(cart)) cart=[]; } catch(e) { localStorage.removeItem('adluxe_cart'); }
       const save=()=>{localStorage.setItem('adluxe_cart',JSON.stringify(cart));render();};
       const render=()=>{
         const count=cart.reduce((n,x)=>n+x.qty,0); const c=document.getElementById('adluxe-cart-count'); if(c)c.textContent=count;
         const box=document.getElementById('adluxe-cart-items'); if(!box)return;
-        if(!cart.length){box.innerHTML='<div class="adluxe-cart-empty">Votre panier est vide.</div>';document.getElementById('adluxe-cart-total').textContent='0 DH';return;}
-        box.innerHTML=cart.map((x,i)=>`<div class="adluxe-cart-item"><img src="${x.image}" alt=""><div><strong>${x.name}</strong><div>${x.price} DH × ${x.qty}</div><div style="margin-top:8px"><button type="button" onclick="ADLUXE_CART.change(${i},-1)">−</button> <b>${x.qty}</b> <button type="button" onclick="ADLUXE_CART.change(${i},1)">+</button></div></div></div>`).join('');
+        if(!cart.length){box.innerHTML='<div class="adluxe-cart-empty">Votre panier est vide.</div>';document.getElementById('adluxe-cart-total').textContent='0 DH';const wa=document.getElementById('adluxe-cart-wa');wa.href='https://wa.me/212644162453?text='+encodeURIComponent("Bonjour AD_LUXE, je souhaite avoir plus d'informations.");return;}
+        box.innerHTML=cart.map((x,i)=>`<div class="adluxe-cart-item"><img src="${x.image}" alt=""><div><strong>${x.name}</strong><div>Couleur : ${x.color}</div><div>${x.price} DH × ${x.qty}</div><div style="margin-top:8px"><button type="button" onclick="ADLUXE_CART.change(${i},-1)">−</button> <b>${x.qty}</b> <button type="button" onclick="ADLUXE_CART.change(${i},1)">+</button></div></div></div>`).join('');
         const total=cart.reduce((n,x)=>n+x.price*x.qty,0); document.getElementById('adluxe-cart-total').textContent=total+' DH';
-        const msg='Bonjour AD_LUXE, je souhaite commander :\n'+cart.map(x=>x.name+' x'+x.qty+' — '+(x.price*x.qty)+' DH').join('\n')+'\n\nTotal produits : '+total+' DH\nLivraison : Casablanca 20 DH / hors Casablanca 35 DH\nPaiement à la livraison.';
+        const msg='Bonjour AD_LUXE, je souhaite commander :\n'+cart.map(x=>x.name+' ('+x.color+') x'+x.qty+' — '+(x.price*x.qty)+' DH').join('\n')+'\n\nTotal produits : '+total+' DH\nLivraison : Casablanca 20 DH / hors Casablanca 35 DH\nPaiement à la livraison.';
         document.getElementById('adluxe-cart-wa').href='https://wa.me/212644162453?text='+encodeURIComponent(msg);
       };
       window.ADLUXE_CART={open(){document.getElementById('adluxe-cart-overlay').classList.add('open');render();},close(){document.getElementById('adluxe-cart-overlay').classList.remove('open');},add(){const color=(document.getElementById('selectedColor')||{}).textContent||'Marron';const found=cart.find(x=>x.name==='Ensemble Scarf'&&x.color===color);if(found)found.qty++;else cart.push({...product,color,qty:1});save();this.open();},change(i,d){cart[i].qty+=d;if(cart[i].qty<=0)cart.splice(i,1);save();}};
