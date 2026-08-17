@@ -458,7 +458,7 @@
 
         .thumbnails {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 10px;
             margin-top: 12px;
         }
@@ -1244,6 +1244,48 @@
             .adluxe-wa { position: sticky; bottom: 0; }
             .floating-whatsapp { width: 56px; height: 56px; }
         }
+
+        /* Unified one-page category menu */
+        .adluxe-nav-actions { display:flex; align-items:center; gap:10px; }
+        .adluxe-menu-trigger { width:48px; height:48px; display:grid; place-content:center; gap:5px; border:1px solid var(--line); border-radius:50%; background:var(--white); cursor:pointer; transition:.2s ease; }
+        .adluxe-menu-trigger:hover { border-color:var(--rose); background:var(--blush); }
+        .adluxe-menu-trigger span { display:block; width:21px; height:2px; border-radius:4px; background:var(--ink); }
+        body.adluxe-menu-open { overflow:hidden; }
+        .adluxe-menu-overlay { position:fixed; inset:0; z-index:1000; visibility:hidden; opacity:0; background:rgba(24,16,20,.48); backdrop-filter:blur(3px); transition:.25s ease; }
+        .adluxe-menu-overlay.open { visibility:visible; opacity:1; }
+        .adluxe-menu-panel { width:min(440px,92vw); height:100%; overflow:auto; padding:30px 26px calc(30px + env(safe-area-inset-bottom)); background:var(--cream); box-shadow:18px 0 50px rgba(38,20,28,.22); transform:translateX(-105%); transition:transform .28s ease; }
+        .adluxe-menu-overlay.open .adluxe-menu-panel { transform:translateX(0); }
+        .adluxe-menu-head { display:flex; align-items:flex-start; justify-content:space-between; gap:20px; padding-bottom:12px; }
+        .adluxe-menu-head .eyebrow { margin-bottom:6px; }
+        .adluxe-menu-head h2 { margin:0; font-size:clamp(30px,8vw,40px); }
+        .adluxe-menu-close { width:46px; height:46px; flex:0 0 auto; display:grid; place-items:center; border:1px solid var(--line); border-radius:50%; background:var(--white); color:var(--ink); font:300 32px/1 inherit; cursor:pointer; }
+        .adluxe-menu-intro { margin:0 0 20px; color:var(--muted); }
+        .adluxe-menu-categories { display:grid; gap:10px; }
+        .adluxe-menu-category { width:100%; display:grid; grid-template-columns:46px 1fr auto; align-items:center; gap:13px; padding:14px; border:1px solid var(--line); border-radius:18px; background:var(--white); color:var(--ink); text-align:left; cursor:pointer; transition:.2s ease; }
+        .adluxe-menu-category:hover { border-color:var(--rose); transform:translateX(3px); box-shadow:0 10px 24px rgba(82,43,59,.08); }
+        .adluxe-menu-icon { width:46px; height:46px; display:grid; place-items:center; border-radius:14px; background:var(--blush); color:var(--rose-dark); font-size:22px; }
+        .adluxe-menu-category strong,.adluxe-menu-category small { display:block; }
+        .adluxe-menu-category strong { margin-bottom:3px; font-size:16px; }
+        .adluxe-menu-category small { color:var(--muted); font-size:12px; line-height:1.45; }
+        .adluxe-menu-category b { color:var(--rose-dark); font-size:27px; font-weight:400; }
+        .adluxe-menu-links { display:flex; flex-wrap:wrap; gap:9px 16px; margin-top:24px; padding-top:20px; border-top:1px solid var(--line); }
+        .adluxe-menu-links a { color:var(--muted); font-weight:750; font-size:13px; }
+        .adluxe-menu-links a:hover { color:var(--rose-dark); }
+        .adluxe-empty-category { max-width:650px; margin:24px auto 0; padding:42px 24px; border:1px solid var(--line); border-radius:26px; background:var(--white); text-align:center; }
+        .adluxe-empty-category[hidden] { display:none; }
+        .adluxe-empty-category > span { display:grid; place-items:center; width:56px; height:56px; margin:0 auto 16px; border-radius:50%; background:var(--blush); color:var(--rose-dark); font-size:25px; }
+        .adluxe-empty-category h3 { margin:0 0 8px; font-size:26px; }
+        .adluxe-empty-category p { max-width:480px; margin:0 auto 20px; color:var(--muted); }
+        @media (max-width:700px) {
+            .adluxe-menu-panel { width:94vw; padding:24px 18px calc(24px + env(safe-area-inset-bottom)); }
+            .adluxe-menu-category { padding:12px; grid-template-columns:42px 1fr auto; }
+            .adluxe-menu-icon { width:42px; height:42px; }
+        }
+        @media (max-width:420px) {
+            .adluxe-cart-label { display:none; }
+            .adluxe-nav-actions { gap:7px; }
+            .adluxe-menu-trigger { width:44px; height:44px; }
+        }
 </style>
 </head>
 
@@ -1269,11 +1311,56 @@
                 >Instagram</a>
             </div>
 
-            <button class="btn btn-small adluxe-cart-trigger" type="button" aria-label="Ouvrir le panier" aria-controls="adluxe-cart-overlay" aria-expanded="false" onclick="ADLUXE_CART.open()">
-                🛒 Panier <span id="adluxe-cart-count">0</span>
-            </button>
+            <div class="adluxe-nav-actions">
+                <button class="btn btn-small adluxe-cart-trigger" type="button" aria-label="Ouvrir le panier" aria-controls="adluxe-cart-overlay" aria-expanded="false" onclick="ADLUXE_CART.open()">
+                    🛒 <span class="adluxe-cart-label">Panier</span> <span id="adluxe-cart-count">0</span>
+                </button>
+                <button class="adluxe-menu-trigger" type="button" aria-label="Ouvrir le menu des catégories" aria-controls="adluxe-menu-overlay" aria-expanded="false" onclick="ADLUXE_MENU.open()">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
         </nav>
     </header>
+
+    <div class="adluxe-menu-overlay" id="adluxe-menu-overlay" aria-hidden="true" onclick="ADLUXE_MENU.close()">
+        <aside class="adluxe-menu-panel" role="dialog" aria-modal="true" aria-labelledby="adluxe-menu-title" onclick="event.stopPropagation()">
+            <div class="adluxe-menu-head">
+                <div>
+                    <p class="eyebrow">AD_LUXE</p>
+                    <h2 id="adluxe-menu-title">Nos catégories</h2>
+                </div>
+                <button class="adluxe-menu-close" type="button" aria-label="Fermer le menu" onclick="ADLUXE_MENU.close()">×</button>
+            </div>
+            <p class="adluxe-menu-intro">Tout l'univers AD_LUXE dans une seule page.</p>
+            <nav class="adluxe-menu-categories" aria-label="Choisir une catégorie">
+                <button class="adluxe-menu-category" type="button" data-menu-filter="vetements" onclick="ADLUXE_MENU.showCategory('vetements')">
+                    <span class="adluxe-menu-icon">✦</span><span><strong>Vêtements</strong><small>Ensembles · Robes · Pantalons · Tops</small></span><b>›</b>
+                </button>
+                <button class="adluxe-menu-category" type="button" data-menu-filter="accessoires" onclick="ADLUXE_MENU.showCategory('accessoires')">
+                    <span class="adluxe-menu-icon">◈</span><span><strong>Accessoires</strong><small>Lunettes · Ceintures · Montres</small></span><b>›</b>
+                </button>
+                <button class="adluxe-menu-category" type="button" data-menu-filter="bijoux" onclick="ADLUXE_MENU.showCategory('bijoux')">
+                    <span class="adluxe-menu-icon">◇</span><span><strong>Bijoux</strong><small>Colliers · Bracelets · Boucles</small></span><b>›</b>
+                </button>
+                <button class="adluxe-menu-category" type="button" data-menu-filter="sacs" onclick="ADLUXE_MENU.showCategory('sacs')">
+                    <span class="adluxe-menu-icon">▣</span><span><strong>Sacs</strong><small>Sacs à main · Bandoulières · Cabas</small></span><b>›</b>
+                </button>
+                <button class="adluxe-menu-category" type="button" data-menu-filter="chaussures" onclick="ADLUXE_MENU.showCategory('chaussures')">
+                    <span class="adluxe-menu-icon">◒</span><span><strong>Chaussures</strong><small>Baskets · Talons · Sandales</small></span><b>›</b>
+                </button>
+                <button class="adluxe-menu-category" type="button" data-menu-filter="parfumerie" onclick="ADLUXE_MENU.showCategory('parfumerie')">
+                    <span class="adluxe-menu-icon">✧</span><span><strong>Parfumerie</strong><small>Parfums femme · Brumes · Coffrets</small></span><b>›</b>
+                </button>
+            </nav>
+            <div class="adluxe-menu-links">
+                <a href="#accueil" onclick="ADLUXE_MENU.close()">Accueil</a>
+                <a href="#produit" onclick="ADLUXE_MENU.close()">Nouveauté</a>
+                <a href="#livraison" onclick="ADLUXE_MENU.close()">Livraison</a>
+                <a href="#faq" onclick="ADLUXE_MENU.close()">Questions</a>
+                <a href="https://www.instagram.com/ad_luxe.ma?igsh=MWYwam51NW9reWN3cA==" target="_blank" rel="noopener">Instagram</a>
+            </div>
+        </aside>
+    </div>
 
     <main>
         <section class="hero" id="accueil">
@@ -1365,11 +1452,13 @@
                 <div class="adluxe-shop-tools" id="adluxe-shop-tools">
                     <div class="adluxe-search">🔎 <input id="adluxe-search" type="search" placeholder="Rechercher un produit..." aria-label="Rechercher un produit"></div>
                     <div class="adluxe-categories" aria-label="Catégories">
-                        <button class="adluxe-filter active" data-filter="all">Tous</button>
-                        <button class="adluxe-filter" data-filter="vetements">Vêtements</button>
-                        <button class="adluxe-filter" data-filter="parfums">Parfums</button>
-                        <button class="adluxe-filter" data-filter="sacs">Sacs</button>
-                        <button class="adluxe-filter" data-filter="accessoires">Accessoires</button>
+                        <button class="adluxe-filter active" data-filter="all" aria-pressed="true">Tous</button>
+                        <button class="adluxe-filter" data-filter="vetements" aria-pressed="false">Vêtements</button>
+                        <button class="adluxe-filter" data-filter="accessoires" aria-pressed="false">Accessoires</button>
+                        <button class="adluxe-filter" data-filter="bijoux" aria-pressed="false">Bijoux</button>
+                        <button class="adluxe-filter" data-filter="sacs" aria-pressed="false">Sacs</button>
+                        <button class="adluxe-filter" data-filter="chaussures" aria-pressed="false">Chaussures</button>
+                        <button class="adluxe-filter" data-filter="parfumerie" aria-pressed="false">Parfumerie</button>
                     </div>
                 </div>
 
@@ -1480,6 +1569,13 @@
                         <p class="order-note">La couleur choisie sera ajoutée automatiquement au message.</p>
                     </div>
                 </article>
+
+                <div class="adluxe-empty-category" id="adluxe-empty-category" hidden>
+                    <span>✦</span>
+                    <h3>Nouveautés bientôt disponibles</h3>
+                    <p>Cette catégorie arrive prochainement. Consultez nos articles disponibles dès maintenant.</p>
+                    <button class="btn btn-outline" type="button" onclick="ADLUXE_MENU.showCategory('all')">Voir tous les produits</button>
+                </div>
             </div>
         </section>
 
@@ -1497,23 +1593,30 @@
                         <h3>Vêtements</h3>
                         <p>Ensembles, robes, pantalons, tops et nouveautés.</p>
                     </article>
-
                     <article class="category-card">
                         <span class="category-number">02</span>
+                        <h3>Accessoires</h3>
+                        <p>Lunettes, ceintures, montres et détails tendance.</p>
+                    </article>
+                    <article class="category-card">
+                        <span class="category-number">03</span>
+                        <h3>Bijoux</h3>
+                        <p>Colliers, bracelets, boucles d'oreilles et nouveautés.</p>
+                    </article>
+                    <article class="category-card">
+                        <span class="category-number">04</span>
                         <h3>Sacs</h3>
                         <p>Sacs à main, bandoulières, cabas et modèles de soirée.</p>
                     </article>
-
                     <article class="category-card">
-                        <span class="category-number">03</span>
+                        <span class="category-number">05</span>
                         <h3>Chaussures</h3>
                         <p>Baskets, talons, mocassins, sandales et bottines.</p>
                     </article>
-
                     <article class="category-card">
-                        <span class="category-number">04</span>
-                        <h3>Accessoires</h3>
-                        <p>Bijoux, lunettes, ceintures, montres et détails tendance.</p>
+                        <span class="category-number">06</span>
+                        <h3>Parfumerie</h3>
+                        <p>Parfums pour femme, brumes parfumées et coffrets.</p>
                     </article>
                 </div>
             </div>
@@ -1757,11 +1860,23 @@
       window.addEventListener('DOMContentLoaded',()=>{
         const card=document.getElementById('adluxe-product');
         if(card){const b=document.createElement('button');b.type='button';b.className='btn btn-outline adluxe-add-cart';b.textContent='🛒 Ajouter au panier';b.onclick=()=>ADLUXE_CART.add();const order=document.getElementById('orderButton');if(order&&order.parentElement)order.parentElement.insertBefore(b,order);}
-        const input=document.getElementById('adluxe-search'), filters=[...document.querySelectorAll('.adluxe-filter')];
-        function apply(){const q=(input.value||'').toLowerCase().trim(), f=document.querySelector('.adluxe-filter.active')?.dataset.filter||'all';if(!card)return;card.style.display=(!q||card.dataset.name.toLowerCase().includes(q))&&(f==='all'||card.dataset.category===f)?'':'none';}
-        input?.addEventListener('input',apply);filters.forEach(btn=>btn.addEventListener('click',()=>{filters.forEach(x=>x.classList.remove('active'));btn.classList.add('active');apply();}));
-        document.addEventListener('keydown',(event)=>{if(event.key==='Escape'&&document.getElementById('adluxe-cart-overlay')?.classList.contains('open'))ADLUXE_CART.close();});
+        const input=document.getElementById('adluxe-search'), filters=[...document.querySelectorAll('.adluxe-filter')], cards=[...document.querySelectorAll('.product-card')], empty=document.getElementById('adluxe-empty-category');
+        function apply(){
+          const q=(input?.value||'').toLowerCase().trim(), f=document.querySelector('.adluxe-filter.active')?.dataset.filter||'all';
+          let visible=0;
+          cards.forEach(item=>{const match=(!q||(item.dataset.name||'').toLowerCase().includes(q))&&(f==='all'||item.dataset.category===f);item.style.display=match?'':'none';if(match)visible++;});
+          if(empty)empty.hidden=visible!==0;
+        }
+        input?.addEventListener('input',apply);
+        filters.forEach(btn=>btn.addEventListener('click',()=>{filters.forEach(x=>{x.classList.remove('active');x.setAttribute('aria-pressed','false');});btn.classList.add('active');btn.setAttribute('aria-pressed','true');apply();}));
+        window.ADLUXE_MENU={
+          open(){window.ADLUXE_CART?.close?.();const overlay=document.getElementById('adluxe-menu-overlay');overlay?.classList.add('open');overlay?.setAttribute('aria-hidden','false');document.querySelector('.adluxe-menu-trigger')?.setAttribute('aria-expanded','true');document.body.classList.add('adluxe-menu-open');setTimeout(()=>document.querySelector('.adluxe-menu-close')?.focus(),80);},
+          close(){const overlay=document.getElementById('adluxe-menu-overlay');overlay?.classList.remove('open');overlay?.setAttribute('aria-hidden','true');document.querySelector('.adluxe-menu-trigger')?.setAttribute('aria-expanded','false');document.body.classList.remove('adluxe-menu-open');},
+          showCategory(filter){const target=document.querySelector('.adluxe-filter[data-filter="'+filter+'"]')||document.querySelector('.adluxe-filter[data-filter="all"]');target?.click();this.close();document.getElementById('produit')?.scrollIntoView({behavior:'smooth',block:'start'});}
+        };
+        document.addEventListener('keydown',(event)=>{if(event.key==='Escape'){if(document.getElementById('adluxe-cart-overlay')?.classList.contains('open'))ADLUXE_CART.close();if(document.getElementById('adluxe-menu-overlay')?.classList.contains('open'))ADLUXE_MENU.close();}});
         render();
+        apply();
       });
     })();
     </script>
