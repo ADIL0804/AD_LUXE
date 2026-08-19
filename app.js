@@ -1,17 +1,17 @@
 (() => {
   "use strict";
 
-  const PRODUCT = Object.freeze({
+  const WHATSAPP_BASE = "https://wa.me/212644162453?text=";
+  const SCARF = Object.freeze({
     name: "Ensemble Scarf",
     price: 180,
     image: "WhatsApp Image 2026-08-13 at 16.16.19.jpeg"
   });
-  const ALLOWED_COLORS = new Set(["Marron", "Bleu", "Noir", "Rose"]);
-  const WHATSAPP_BASE = "https://wa.me/212644162453?text=";
+  const SCARF_COLORS = new Set(["Marron", "Bleu", "Noir", "Rose"]);
   let cart = [];
 
-  function loadProfessionalStyles() {
-    ["professional-upgrades.css", "jewelry.css"].forEach((href) => {
+  function loadExtraStyles() {
+    ["professional-upgrades.css", "jewelry.css", "reviews-fix.css?v=3"].forEach((href) => {
       if (document.querySelector('link[href="' + href + '"]')) return;
       const link = document.createElement("link");
       link.rel = "stylesheet";
@@ -20,8 +20,8 @@
     });
   }
 
-  function setWhatsappLink(element, message) {
-    if (element) element.href = WHATSAPP_BASE + encodeURIComponent(message);
+  function setWhatsappLink(el, message) {
+    if (el) el.href = WHATSAPP_BASE + encodeURIComponent(message);
   }
 
   function addProductStructuredData() {
@@ -30,7 +30,7 @@
       "@context": "https://schema.org",
       "@type": "Product",
       "@id": "https://ad-luxe.ma/#ensemble-scarf",
-      name: "Ensemble Scarf",
+      name: SCARF.name,
       description: "Ensemble féminin AD_LUXE disponible en marron, bleu, noir et rose, avec livraison partout au Maroc et paiement à la livraison.",
       image: [
         "https://ad-luxe.ma/WhatsApp%20Image%202026-08-13%20at%2016.16.19.jpeg",
@@ -43,7 +43,7 @@
         "@type": "Offer",
         url: "https://ad-luxe.ma/#produit",
         priceCurrency: "MAD",
-        price: "180",
+        price: String(SCARF.price),
         availability: "https://schema.org/InStock",
         itemCondition: "https://schema.org/NewCondition",
         seller: { "@type": "Organization", name: "AD_LUXE" }
@@ -62,59 +62,32 @@
       hero.decoding = "async";
       hero.fetchPriority = "high";
     }
-    document.querySelectorAll(".thumb img").forEach((image) => {
-      image.loading = "lazy";
-      image.decoding = "async";
+    document.querySelectorAll(".thumb img").forEach((img) => {
+      img.loading = "lazy";
+      img.decoding = "async";
     });
-    const main = document.getElementById("mainProductImage");
-    if (main) main.decoding = "async";
-  }
-
-  function addReviewsSection() {
-    if (document.getElementById("avis-clients")) return;
-    const delivery = document.getElementById("livraison");
-    if (!delivery?.parentElement) return;
-    const section = document.createElement("section");
-    section.className = "adluxe-reviews";
-    section.id = "avis-clients";
-    section.setAttribute("aria-labelledby", "adluxe-reviews-title");
-    section.innerHTML = `
-      <div class="container adluxe-reviews-shell">
-        <div class="adluxe-reviews-intro">
-          <p class="eyebrow">Votre expérience compte</p>
-          <h2 id="adluxe-reviews-title">Avis clients</h2>
-          <p>Nous publierons ici uniquement des retours authentiques de clientes AD_LUXE. Aucun avis ni aucune note ne sont ajoutés artificiellement.</p>
-        </div>
-        <div class="adluxe-review-placeholder"><div>
-          <span class="adluxe-review-stars" aria-hidden="true">☆ ☆ ☆ ☆ ☆</span>
-          <h3>Vous avez commandé chez AD_LUXE ?</h3>
-          <p>Envoyez-nous votre retour sur WhatsApp. Après votre accord, nous pourrons l'afficher ici comme avis client vérifié.</p>
-          <a class="btn" href="https://wa.me/212644162453?text=Bonjour%20AD_LUXE%2C%20je%20souhaite%20laisser%20un%20avis%20sur%20ma%20commande." target="_blank" rel="noopener">Laisser un avis</a>
-        </div></div>
-      </div>`;
-    delivery.parentElement.insertBefore(section, delivery);
   }
 
   function addJewelryProduct() {
     if (document.getElementById("adluxe-jewelry-product")) return;
-    const empty = document.getElementById("adluxe-empty-category");
     const scarf = document.getElementById("adluxe-product");
-    const parent = empty?.parentElement || scarf?.parentElement;
+    const empty = document.getElementById("adluxe-empty-category");
+    const parent = scarf?.parentElement || empty?.parentElement;
     if (!parent) return;
+
+    const colors = ["Rouge", "Bleu", "Noir", "Blanc", "Rouge", "Rose", "Vert", "Marron", "Marron"];
+    const photos = colors.map((color, index) => `
+      <button class="jewelry-photo${index === 0 ? " is-active" : ""}" type="button"
+        data-jewelry-color="${color}" aria-label="Voir le modèle ${color}" aria-pressed="${index === 0}">
+        <span class="jewelry-sprite jewelry-pos-${index + 1}" aria-hidden="true"></span>
+        <span class="jewelry-photo-label">${color}</span>
+      </button>`).join("");
 
     const article = document.createElement("article");
     article.className = "product-card jewelry-product";
     article.id = "adluxe-jewelry-product";
     article.dataset.category = "bijoux";
     article.dataset.name = "Collier Bracelet Floral Acier Inoxydable";
-
-    const colors = ["Rouge", "Bleu", "Noir", "Blanc", "Rouge", "Rose", "Vert", "Marron", "Marron"];
-    const photos = colors.map((color, index) => `
-      <button class="jewelry-photo${index === 0 ? " is-active" : ""}" type="button" data-jewelry-color="${color}" data-jewelry-index="${index + 1}" aria-label="Voir le modèle ${color}" aria-pressed="${index === 0}">
-        <span class="jewelry-sprite jewelry-pos-${index + 1}" aria-hidden="true"></span>
-        <span class="jewelry-photo-label">${color}</span>
-      </button>`).join("");
-
     article.innerHTML = `
       <div class="jewelry-gallery">
         <div class="jewelry-grid" aria-label="9 photos du collier et bracelet floral">${photos}</div>
@@ -136,25 +109,11 @@
         <p class="jewelry-price-note">Prix sur demande</p>
         <p class="option-title">Modèle choisi : <span id="jewelrySelectedColor">Rouge</span></p>
         <a class="btn order-btn" id="jewelryOrderButton" href="#" target="_blank" rel="noopener">Commander sur WhatsApp</a>
-        <p class="order-note">Demandez le prix et confirmez la couleur directement avec AD_LUXE.</p>
+        <p class="order-note">Confirmez la couleur et la disponibilité directement avec AD_LUXE.</p>
       </div>`;
 
     if (empty) parent.insertBefore(article, empty);
     else parent.append(article);
-
-    const schema = document.createElement("script");
-    schema.type = "application/ld+json";
-    schema.id = "adluxe-jewelry-schema";
-    schema.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Product",
-      "@id": "https://ad-luxe.ma/#collier-bracelet-floral",
-      name: "Collier & Bracelet Floral – Acier Inoxydable",
-      description: "Ensemble collier et bracelet floral en acier inoxydable, finition dorée, cristaux brillants et plusieurs couleurs disponibles.",
-      image: "https://ad-luxe.ma/assets/jewelry-sprite.webp",
-      brand: { "@type": "Brand", name: "AD_LUXE" }
-    });
-    document.head.append(schema);
   }
 
   function initializeJewelryGallery() {
@@ -163,7 +122,7 @@
     const order = document.getElementById("jewelryOrderButton");
     if (!buttons.length || !selected || !order) return;
 
-    function choose(button) {
+    const choose = (button) => {
       const color = button.dataset.jewelryColor || "Modèle";
       buttons.forEach((item) => {
         const active = item === button;
@@ -172,90 +131,159 @@
       });
       selected.textContent = color;
       setWhatsappLink(order, "Bonjour AD_LUXE, je souhaite commander l'ensemble Collier & Bracelet Floral en acier inoxydable. Couleur : " + color + ". Pouvez-vous me confirmer le prix et la disponibilité ?");
-    }
+    };
 
     buttons.forEach((button) => button.addEventListener("click", () => choose(button)));
     choose(buttons[0]);
+  }
+
+  function addReviewsSection() {
+    document.getElementById("avis-clients")?.remove();
+    const faq = document.getElementById("faq");
+    if (!faq?.parentElement) return;
+
+    const section = document.createElement("section");
+    section.className = "adluxe-reviews";
+    section.id = "avis-clients";
+    section.setAttribute("aria-labelledby", "adluxe-reviews-title");
+    section.innerHTML = `
+      <div class="container adluxe-reviews-shell">
+        <div class="adluxe-reviews-intro">
+          <p class="eyebrow">Votre expérience compte</p>
+          <h2 id="adluxe-reviews-title">Avis clients</h2>
+          <p>Notez votre expérience directement ici. Aucun passage par WhatsApp n’est nécessaire.</p>
+        </div>
+        <div class="adluxe-review-box">
+          <div class="adluxe-rating" id="adluxe-rating" aria-label="Choisir une note sur 5">
+            ${[1,2,3,4,5].map((n) => `<button class="adluxe-star" type="button" data-rating="${n}" aria-label="${n} étoile${n > 1 ? "s" : ""}">★</button>`).join("")}
+          </div>
+          <form class="adluxe-review-form" id="adluxe-review-form">
+            <input id="adluxe-review-name" type="text" maxlength="40" placeholder="Votre prénom" required>
+            <textarea id="adluxe-review-text" maxlength="400" placeholder="Écrivez votre avis..." required></textarea>
+            <button class="btn" type="submit">Publier mon avis</button>
+            <p class="adluxe-review-status" id="adluxe-review-status" role="status"></p>
+          </form>
+          <div class="adluxe-review-list" id="adluxe-review-list"></div>
+        </div>
+      </div>`;
+    faq.parentElement.insertBefore(section, faq);
+  }
+
+  function initializeReviews() {
+    const stars = [...document.querySelectorAll(".adluxe-star")];
+    const form = document.getElementById("adluxe-review-form");
+    const nameInput = document.getElementById("adluxe-review-name");
+    const textInput = document.getElementById("adluxe-review-text");
+    const list = document.getElementById("adluxe-review-list");
+    const status = document.getElementById("adluxe-review-status");
+    if (!stars.length || !form || !nameInput || !textInput || !list || !status) return;
+
+    let rating = 0;
+    let reviews = [];
+    try {
+      const saved = JSON.parse(localStorage.getItem("adluxe_reviews") || "[]");
+      if (Array.isArray(saved)) reviews = saved.slice(0, 20);
+    } catch {}
+
+    const paintStars = () => stars.forEach((star) => star.classList.toggle("is-active", Number(star.dataset.rating) <= rating));
+    const render = () => {
+      list.replaceChildren();
+      reviews.forEach((review) => {
+        const item = document.createElement("article");
+        item.className = "adluxe-review-item";
+        const head = document.createElement("div");
+        head.className = "adluxe-review-item-head";
+        const name = document.createElement("strong");
+        name.textContent = review.name;
+        const score = document.createElement("span");
+        score.className = "adluxe-review-item-stars";
+        score.textContent = "★".repeat(review.rating) + "☆".repeat(5 - review.rating);
+        head.append(name, score);
+        const text = document.createElement("p");
+        text.textContent = review.text;
+        const date = document.createElement("small");
+        date.textContent = review.date;
+        item.append(head, text, date);
+        list.append(item);
+      });
+    };
+
+    stars.forEach((star) => star.addEventListener("click", () => {
+      rating = Number(star.dataset.rating) || 0;
+      paintStars();
+      status.textContent = rating + "/5 sélectionné";
+    }));
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const name = nameInput.value.trim();
+      const text = textInput.value.trim();
+      if (!rating) {
+        status.textContent = "Choisissez d’abord une note.";
+        return;
+      }
+      if (!name || !text) {
+        status.textContent = "Ajoutez votre prénom et votre avis.";
+        return;
+      }
+      reviews.unshift({ name, text, rating, date: new Date().toLocaleDateString("fr-MA") });
+      reviews = reviews.slice(0, 20);
+      try { localStorage.setItem("adluxe_reviews", JSON.stringify(reviews)); } catch {}
+      render();
+      form.reset();
+      rating = 0;
+      paintStars();
+      status.textContent = "Merci, votre avis a été ajouté sur cet appareil.";
+    });
+
+    render();
   }
 
   function loadCart() {
     try {
       const parsed = JSON.parse(localStorage.getItem("adluxe_cart") || "[]");
       if (!Array.isArray(parsed)) return [];
-      return parsed
-        .filter((item) => item && item.name === PRODUCT.name && ALLOWED_COLORS.has(item.color))
-        .map((item) => ({ ...PRODUCT, color: item.color, qty: Math.min(99, Math.max(1, Number.parseInt(item.qty, 10) || 1)) }));
+      return parsed.filter((item) => item && item.name === SCARF.name && SCARF_COLORS.has(item.color)).map((item) => ({
+        ...SCARF,
+        color: item.color,
+        qty: Math.min(99, Math.max(1, Number.parseInt(item.qty, 10) || 1))
+      }));
     } catch {
-      localStorage.removeItem("adluxe_cart");
       return [];
     }
-  }
-
-  function createCartItem(item, index) {
-    const row = document.createElement("div");
-    row.className = "adluxe-cart-item";
-    const image = document.createElement("img");
-    image.src = item.image;
-    image.alt = item.name;
-    image.loading = "lazy";
-    image.decoding = "async";
-    const details = document.createElement("div");
-    const name = document.createElement("strong");
-    name.textContent = item.name;
-    const color = document.createElement("div");
-    color.textContent = "Couleur : " + item.color;
-    const price = document.createElement("div");
-    price.textContent = item.price + " DH × " + item.qty;
-    const quantity = document.createElement("div");
-    quantity.className = "adluxe-cart-qty";
-    const minus = document.createElement("button");
-    minus.type = "button";
-    minus.dataset.cartIndex = String(index);
-    minus.dataset.cartDelta = "-1";
-    minus.setAttribute("aria-label", "Diminuer la quantité");
-    minus.textContent = "−";
-    const amount = document.createElement("b");
-    amount.textContent = String(item.qty);
-    const plus = document.createElement("button");
-    plus.type = "button";
-    plus.dataset.cartIndex = String(index);
-    plus.dataset.cartDelta = "1";
-    plus.setAttribute("aria-label", "Augmenter la quantité");
-    plus.textContent = "+";
-    quantity.append(minus, document.createTextNode(" "), amount, document.createTextNode(" "), plus);
-    details.append(name, color, price, quantity);
-    row.append(image, details);
-    return row;
-  }
-
-  function renderCart() {
-    const count = cart.reduce((total, item) => total + item.qty, 0);
-    const countElement = document.getElementById("adluxe-cart-count");
-    if (countElement) countElement.textContent = String(count);
-    const box = document.getElementById("adluxe-cart-items");
-    const totalElement = document.getElementById("adluxe-cart-total");
-    const whatsapp = document.getElementById("adluxe-cart-wa");
-    if (!box || !totalElement) return;
-    box.replaceChildren();
-    if (!cart.length) {
-      const empty = document.createElement("div");
-      empty.className = "adluxe-cart-empty";
-      empty.textContent = "Votre panier est vide.";
-      box.append(empty);
-      totalElement.textContent = "0 DH";
-      setWhatsappLink(whatsapp, "Bonjour AD_LUXE, je souhaite avoir plus d'informations.");
-      return;
-    }
-    cart.forEach((item, index) => box.append(createCartItem(item, index)));
-    const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-    totalElement.textContent = total + " DH";
-    const message = "Bonjour AD_LUXE, je souhaite commander :\n" + cart.map((item) => item.name + " (" + item.color + ") x" + item.qty + " — " + (item.price * item.qty) + " DH").join("\n") + "\n\nTotal produits : " + total + " DH\nLivraison : Casablanca 20 DH / hors Casablanca 35 DH\nPaiement à la livraison.";
-    setWhatsappLink(whatsapp, message);
   }
 
   function saveCart() {
     try { localStorage.setItem("adluxe_cart", JSON.stringify(cart)); } catch {}
     renderCart();
+  }
+
+  function createCartItem(item, index) {
+    const row = document.createElement("div");
+    row.className = "adluxe-cart-item";
+    row.innerHTML = `<img src="${item.image}" alt="${item.name}" loading="lazy"><div><strong>${item.name}</strong><div>Couleur : ${item.color}</div><div>${item.price} DH × ${item.qty}</div><div class="adluxe-cart-qty"><button type="button" data-cart-index="${index}" data-cart-delta="-1" aria-label="Diminuer la quantité">−</button> <b>${item.qty}</b> <button type="button" data-cart-index="${index}" data-cart-delta="1" aria-label="Augmenter la quantité">+</button></div></div>`;
+    return row;
+  }
+
+  function renderCart() {
+    const count = cart.reduce((sum, item) => sum + item.qty, 0);
+    const countEl = document.getElementById("adluxe-cart-count");
+    if (countEl) countEl.textContent = String(count);
+    const box = document.getElementById("adluxe-cart-items");
+    const totalEl = document.getElementById("adluxe-cart-total");
+    const wa = document.getElementById("adluxe-cart-wa");
+    if (!box || !totalEl) return;
+    box.replaceChildren();
+    if (!cart.length) {
+      box.innerHTML = '<div class="adluxe-cart-empty">Votre panier est vide.</div>';
+      totalEl.textContent = "0 DH";
+      setWhatsappLink(wa, "Bonjour AD_LUXE, je souhaite avoir plus d'informations.");
+      return;
+    }
+    cart.forEach((item, i) => box.append(createCartItem(item, i)));
+    const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+    totalEl.textContent = total + " DH";
+    setWhatsappLink(wa, "Bonjour AD_LUXE, je souhaite commander :\n" + cart.map((item) => `${item.name} (${item.color}) x${item.qty} — ${item.price * item.qty} DH`).join("\n") + `\n\nTotal produits : ${total} DH\nLivraison : Casablanca 20 DH / hors Casablanca 35 DH\nPaiement à la livraison.`);
   }
 
   window.ADLUXE_CART = {
@@ -267,27 +295,25 @@
       document.body.classList.add("cart-open");
       document.querySelector(".adluxe-cart-trigger")?.setAttribute("aria-expanded", "true");
       renderCart();
-      document.querySelector(".adluxe-cart-close")?.focus();
     },
     close() {
       const overlay = document.getElementById("adluxe-cart-overlay");
-      if (!overlay) return;
-      overlay.classList.remove("open");
-      overlay.setAttribute("aria-hidden", "true");
+      overlay?.classList.remove("open");
+      overlay?.setAttribute("aria-hidden", "true");
       document.body.classList.remove("cart-open");
       document.querySelector(".adluxe-cart-trigger")?.setAttribute("aria-expanded", "false");
     },
     add() {
       const chosen = document.getElementById("selectedColor")?.textContent || "Marron";
-      const color = ALLOWED_COLORS.has(chosen) ? chosen : "Marron";
-      const found = cart.find((item) => item.name === PRODUCT.name && item.color === color);
+      const color = SCARF_COLORS.has(chosen) ? chosen : "Marron";
+      const found = cart.find((item) => item.color === color);
       if (found) found.qty = Math.min(99, found.qty + 1);
-      else cart.push({ ...PRODUCT, color, qty: 1 });
+      else cart.push({ ...SCARF, color, qty: 1 });
       saveCart();
       this.open();
     },
     change(index, delta) {
-      if (!Number.isInteger(index) || ![-1, 1].includes(delta) || !cart[index]) return;
+      if (!cart[index] || ![-1, 1].includes(delta)) return;
       cart[index].qty += delta;
       if (cart[index].qty <= 0) cart.splice(index, 1);
       saveCart();
@@ -302,7 +328,6 @@
       overlay?.setAttribute("aria-hidden", "false");
       document.querySelector(".adluxe-menu-trigger")?.setAttribute("aria-expanded", "true");
       document.body.classList.add("adluxe-menu-open");
-      window.setTimeout(() => document.querySelector(".adluxe-menu-close")?.focus(), 80);
     },
     close() {
       const overlay = document.getElementById("adluxe-menu-overlay");
@@ -312,7 +337,7 @@
       document.body.classList.remove("adluxe-menu-open");
     },
     showCategory(filter) {
-      const target = document.querySelector('.adluxe-filter[data-filter="' + filter + '"]') || document.querySelector('.adluxe-filter[data-filter="all"]');
+      const target = document.querySelector(`.adluxe-filter[data-filter="${filter}"]`) || document.querySelector('.adluxe-filter[data-filter="all"]');
       target?.click();
       this.close();
       document.getElementById("produit")?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -320,59 +345,54 @@
   };
 
   function initializeProductColors() {
-    const thumbnails = [...document.querySelectorAll(".thumb")];
+    const thumbs = [...document.querySelectorAll(".thumb")];
     const colorButtons = [...document.querySelectorAll(".color-btn")];
-    const mainImage = document.getElementById("mainProductImage");
-    const photoLabel = document.getElementById("photoLabel");
-    const selectedColor = document.getElementById("selectedColor");
-    const orderButton = document.getElementById("orderButton");
-    const productImages = Object.fromEntries(thumbnails.map((button) => [button.dataset.color, button.dataset.image]));
-    function selectColor(color) {
-      const image = productImages[color];
-      if (!image || !mainImage || !photoLabel || !selectedColor || !orderButton) return;
-      mainImage.classList.add("is-switching");
-      mainImage.src = image;
-      mainImage.alt = "Ensemble Scarf " + color.toLowerCase() + " AD_LUXE";
-      photoLabel.textContent = color;
-      selectedColor.textContent = color;
-      window.setTimeout(() => mainImage.classList.remove("is-switching"), 120);
-      thumbnails.forEach((button) => {
+    const main = document.getElementById("mainProductImage");
+    const label = document.getElementById("photoLabel");
+    const selected = document.getElementById("selectedColor");
+    const order = document.getElementById("orderButton");
+    const images = Object.fromEntries(thumbs.map((button) => [button.dataset.color, button.dataset.image]));
+    const choose = (color) => {
+      if (!images[color] || !main || !label || !selected || !order) return;
+      main.src = images[color];
+      main.alt = "Ensemble Scarf " + color.toLowerCase() + " AD_LUXE";
+      label.textContent = color;
+      selected.textContent = color;
+      thumbs.forEach((button) => {
         const active = button.dataset.color === color;
         button.classList.toggle("is-active", active);
         button.setAttribute("aria-pressed", String(active));
       });
       colorButtons.forEach((button) => button.classList.toggle("is-active", button.dataset.colorTarget === color));
-      setWhatsappLink(orderButton, "Bonjour AD_LUXE, je souhaite commander l'Ensemble Scarf à 180 DH. Couleur : " + color);
-    }
-    thumbnails.forEach((button) => button.addEventListener("click", () => selectColor(button.dataset.color)));
-    colorButtons.forEach((button) => button.addEventListener("click", () => selectColor(button.dataset.colorTarget)));
+      setWhatsappLink(order, `Bonjour AD_LUXE, je souhaite commander l'Ensemble Scarf à 180 DH. Couleur : ${color}`);
+    };
+    thumbs.forEach((button) => button.addEventListener("click", () => choose(button.dataset.color)));
+    colorButtons.forEach((button) => button.addEventListener("click", () => choose(button.dataset.colorTarget)));
   }
 
   function initializeFilters() {
     const input = document.getElementById("adluxe-search");
     const filters = [...document.querySelectorAll(".adluxe-filter")];
-    const cards = [...document.querySelectorAll(".product-card")];
     const empty = document.getElementById("adluxe-empty-category");
-    function apply() {
+    const apply = () => {
+      const cards = [...document.querySelectorAll(".product-card")];
       const query = (input?.value || "").toLowerCase().trim();
       const filter = document.querySelector(".adluxe-filter.active")?.dataset.filter || "all";
       let visible = 0;
       cards.forEach((card) => {
         const matches = (!query || (card.dataset.name || "").toLowerCase().includes(query)) && (filter === "all" || card.dataset.category === filter);
         card.hidden = !matches;
-        if (matches) visible += 1;
+        if (matches) visible++;
       });
       if (empty) empty.hidden = visible !== 0;
-    }
+    };
     input?.addEventListener("input", apply);
-    filters.forEach((button) => {
-      button.addEventListener("click", () => {
-        filters.forEach((item) => { item.classList.remove("active"); item.setAttribute("aria-pressed", "false"); });
-        button.classList.add("active");
-        button.setAttribute("aria-pressed", "true");
-        apply();
-      });
-    });
+    filters.forEach((button) => button.addEventListener("click", () => {
+      filters.forEach((item) => { item.classList.remove("active"); item.setAttribute("aria-pressed", "false"); });
+      button.classList.add("active");
+      button.setAttribute("aria-pressed", "true");
+      apply();
+    }));
     apply();
   }
 
@@ -381,41 +401,40 @@
     document.querySelector(".adluxe-cart-close")?.addEventListener("click", () => window.ADLUXE_CART.close());
     document.querySelector(".adluxe-menu-trigger")?.addEventListener("click", () => window.ADLUXE_MENU.open());
     document.querySelector(".adluxe-menu-close")?.addEventListener("click", () => window.ADLUXE_MENU.close());
-    const menuOverlay = document.getElementById("adluxe-menu-overlay");
-    menuOverlay?.addEventListener("click", (event) => { if (event.target === menuOverlay) window.ADLUXE_MENU.close(); });
-    const cartOverlay = document.getElementById("adluxe-cart-overlay");
-    cartOverlay?.addEventListener("click", (event) => { if (event.target === cartOverlay) window.ADLUXE_CART.close(); });
+    document.getElementById("adluxe-menu-overlay")?.addEventListener("click", (e) => { if (e.target.id === "adluxe-menu-overlay") window.ADLUXE_MENU.close(); });
+    document.getElementById("adluxe-cart-overlay")?.addEventListener("click", (e) => { if (e.target.id === "adluxe-cart-overlay") window.ADLUXE_CART.close(); });
     document.querySelectorAll("[data-menu-filter]").forEach((button) => button.addEventListener("click", () => window.ADLUXE_MENU.showCategory(button.dataset.menuFilter || "all")));
     document.querySelectorAll(".adluxe-menu-links a").forEach((link) => link.addEventListener("click", () => window.ADLUXE_MENU.close()));
-    document.getElementById("adluxe-cart-items")?.addEventListener("click", (event) => {
-      const button = event.target.closest("[data-cart-index][data-cart-delta]");
+    document.getElementById("adluxe-cart-items")?.addEventListener("click", (e) => {
+      const button = e.target.closest("[data-cart-index][data-cart-delta]");
       if (!button) return;
       window.ADLUXE_CART.change(Number(button.dataset.cartIndex), Number(button.dataset.cartDelta));
     });
-    const card = document.getElementById("adluxe-product");
-    const orderButton = document.getElementById("orderButton");
-    if (card && orderButton?.parentElement && !document.querySelector(".adluxe-add-cart")) {
-      const addButton = document.createElement("button");
-      addButton.type = "button";
-      addButton.className = "btn btn-outline adluxe-add-cart";
-      addButton.textContent = "🛒 Ajouter au panier";
-      addButton.addEventListener("click", () => window.ADLUXE_CART.add());
-      orderButton.parentElement.insertBefore(addButton, orderButton);
+    const order = document.getElementById("orderButton");
+    if (order?.parentElement && !document.querySelector(".adluxe-add-cart")) {
+      const add = document.createElement("button");
+      add.type = "button";
+      add.className = "btn btn-outline adluxe-add-cart";
+      add.textContent = "🛒 Ajouter au panier";
+      add.addEventListener("click", () => window.ADLUXE_CART.add());
+      order.parentElement.insertBefore(add, order);
     }
-    document.addEventListener("keydown", (event) => {
-      if (event.key !== "Escape") return;
-      if (document.getElementById("adluxe-cart-overlay")?.classList.contains("open")) window.ADLUXE_CART.close();
-      if (document.getElementById("adluxe-menu-overlay")?.classList.contains("open")) window.ADLUXE_MENU.close();
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        window.ADLUXE_CART.close();
+        window.ADLUXE_MENU.close();
+      }
     });
   }
 
   function init() {
-    loadProfessionalStyles();
+    loadExtraStyles();
     addProductStructuredData();
     improveImagePerformance();
     addJewelryProduct();
     initializeJewelryGallery();
     addReviewsSection();
+    initializeReviews();
     cart = loadCart();
     initializeProductColors();
     initializeFilters();
