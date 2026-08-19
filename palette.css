@@ -1,0 +1,221 @@
+/* AD_LUXE palette — bordeaux / charcoal / warm beige / sage */
+:root {
+    --ink: #1f1f1f;
+    --muted: rgba(31, 31, 31, 0.68);
+    --rose: #8a3b4f;
+    --rose-dark: #8a3b4f;
+    --rose-light: #f4ede4;
+    --blush: #f4ede4;
+    --cream: #f4ede4;
+    --white: #ffffff;
+    --line: rgba(31, 31, 31, 0.14);
+    --sage: #7a8c6f;
+    --shadow: 0 18px 55px rgba(31, 31, 31, 0.12);
+}
+
+body {
+    color: #1f1f1f;
+    background: #f4ede4;
+}
+
+.announcement {
+    color: #f4ede4;
+    background: #1f1f1f;
+}
+
+.site-header {
+    border-bottom-color: rgba(31, 31, 31, 0.12);
+    background: rgba(244, 237, 228, 0.95);
+}
+
+.brand,
+.eyebrow,
+.hero h1 span,
+.price,
+.option-title span,
+.category-number,
+.delivery-price {
+    color: #8a3b4f;
+}
+
+.nav-links a::after,
+.btn,
+.adluxe-filter.active,
+.adluxe-filter:hover {
+    background: #8a3b4f;
+}
+
+.btn {
+    border-color: #8a3b4f;
+    box-shadow: 0 10px 25px rgba(138, 59, 79, 0.22);
+}
+
+.btn:hover {
+    background: #1f1f1f;
+    border-color: #1f1f1f;
+    box-shadow: 0 14px 30px rgba(31, 31, 31, 0.20);
+}
+
+.btn-outline {
+    color: #8a3b4f;
+    background: transparent;
+}
+
+.hero {
+    background:
+        radial-gradient(circle at 6% 18%, rgba(122, 140, 111, 0.15) 0 13%, transparent 14%),
+        radial-gradient(circle at 94% 84%, rgba(138, 59, 79, 0.10) 0 16%, transparent 17%),
+        #f4ede4;
+}
+
+.hero-points span::before,
+.benefit-check {
+    color: #7a8c6f;
+}
+
+.hero-image-wrap {
+    border-color: rgba(244, 237, 228, 0.95);
+}
+
+.hero-badge {
+    color: #ffffff;
+    background: #8a3b4f;
+    border-color: #f4ede4;
+}
+
+.trust-strip,
+.product-card,
+.category-card,
+.faq-list details,
+.adluxe-menu-panel,
+.adluxe-cart-panel {
+    border-color: rgba(31, 31, 31, 0.14);
+}
+
+.trust-strip {
+    background: rgba(255, 255, 255, 0.72);
+}
+
+.trust-item + .trust-item {
+    border-left-color: rgba(31, 31, 31, 0.14);
+}
+
+.trust-icon,
+.benefit-check,
+.adluxe-menu-icon {
+    color: #7a8c6f;
+    background: rgba(122, 140, 111, 0.12);
+}
+
+.section-soft {
+    background:
+        linear-gradient(rgba(122, 140, 111, 0.06), rgba(122, 140, 111, 0.06)),
+        #f4ede4;
+}
+
+.product-card,
+.category-card {
+    background: rgba(255, 255, 255, 0.74);
+    box-shadow: 0 18px 50px rgba(31, 31, 31, 0.10);
+}
+
+.gallery {
+    background: rgba(122, 140, 111, 0.08);
+}
+
+.main-photo,
+.thumb,
+.color-btn {
+    background: rgba(255, 255, 255, 0.82);
+}
+
+.thumb.is-active {
+    border-color: #8a3b4f;
+    box-shadow: 0 0 0 3px rgba(138, 59, 79, 0.14);
+}
+
+.stock {
+    color: #ffffff;
+    background: #7a8c6f;
+}
+
+.stock::before {
+    background: #f4ede4;
+}
+
+.color-btn:hover,
+.color-btn.is-active {
+    color: #8a3b4f;
+    border-color: #8a3b4f;
+    background: rgba(138, 59, 79, 0.07);
+}
+
+.delivery-card {
+    border-color: rgba(31, 31, 31, 0.14);
+    background: rgba(244, 237, 228, 0.72);
+}
+
+.story-mark {
+    background:
+        linear-gradient(rgba(31, 31, 31, 0.12), rgba(31, 31, 31, 0.12)),
+        linear-gradient(145deg, #8a3b4f, #7a8c6f);
+}
+
+.delivery-panel {
+    background: #1f1f1f;
+}
+
+.delivery-panel .eyebrow,
+.footer-title,
+.footer-brand {
+    color: #f4ede4;
+}
+
+.site-footer {
+    background: #1f1f1f;
+}
+
+.site-footer,
+.site-footer a,
+.site-footer span,
+.footer-copy {
+    color: rgba(244, 237, 228, 0.86);
+}
+
+.footer-brand,
+.footer-title {
+    color: #f4ede4;
+}
+
+.faq-list details[open] {
+    border-color: rgba(138, 59, 79, 0.35);
+}
+
+.floating-whatsapp {
+    background: #7a8c6f;
+    box-shadow: 0 12px 30px rgba(122, 140, 111, 0.30);
+}
+
+.adluxe-filter.active,
+.adluxe-filter:hover {
+    border-color: #8a3b4f;
+    color: #ffffff;
+}
+
+.adluxe-search,
+.adluxe-filter,
+.adluxe-menu-category,
+.adluxe-menu-links a,
+.adluxe-cart-item,
+.adluxe-cart-total {
+    border-color: rgba(31, 31, 31, 0.14);
+}
+
+.adluxe-menu-category:hover,
+.adluxe-menu-links a:hover {
+    background: rgba(122, 140, 111, 0.09);
+}
+
+:focus-visible {
+    outline-color: rgba(122, 140, 111, 0.8);
+}
