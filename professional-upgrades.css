@@ -33,7 +33,7 @@
 
 .adluxe-reviews-intro h2 {
   margin: 0 0 14px;
-  font: 500 clamp(34px, 4vw, 52px)/1.1 Georgia, "Times New Roman", serif;
+  font: 500 clamp(34px, 4vw, 52px)/1.1 "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
 }
 
 .adluxe-reviews-intro p {
@@ -48,20 +48,20 @@
   place-items: center;
   padding: 34px;
   text-align: center;
-  background: linear-gradient(145deg, #fffaf7, #fff2f6);
+  background: linear-gradient(145deg, #fcf8f3, #f8eef1);
 }
 
 .adluxe-review-stars {
   display: block;
   margin-bottom: 15px;
-  color: var(--rose-dark);
+  color: var(--gold);
   font-size: 26px;
   letter-spacing: 4px;
 }
 
 .adluxe-review-placeholder h3 {
   margin: 0 0 10px;
-  font: 700 25px/1.2 Georgia, "Times New Roman", serif;
+  font: 700 25px/1.2 "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
 }
 
 .adluxe-review-placeholder p {
@@ -80,12 +80,195 @@
 .main-photo img,
 .thumb img,
 .adluxe-cart-item img {
-  background: #f5eef0;
+  background: #f2e9e7;
 }
 
 .main-photo img,
 .hero-image-wrap img {
   content-visibility: auto;
+}
+
+/* AD_LUXE brand identity — custom typography and palette */
+:root {
+  --ink: #241a20;
+  --muted: #74666c;
+  --rose: #b56f7f;
+  --rose-dark: #7d4152;
+  --rose-light: #f0d8de;
+  --blush: #f9f1f3;
+  --cream: #fcf8f3;
+  --white: #ffffff;
+  --line: #e7d8dc;
+  --gold: #b18a55;
+  --gold-soft: #eadcc4;
+  --shadow: 0 18px 55px rgba(52, 29, 39, .13);
+}
+
+body {
+  color: var(--ink);
+  background: var(--cream);
+  font-family: "Avenir Next", Avenir, "Segoe UI", Helvetica, Arial, sans-serif;
+  letter-spacing: .005em;
+}
+
+.brand,
+.hero h1,
+.section-head h2,
+.product-info h3,
+.story-copy h2,
+.delivery-panel h2,
+.price,
+.delivery-price,
+.faq-list summary,
+.adluxe-cart-head h3,
+.adluxe-menu-head h2,
+.category-card h3 {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+}
+
+.brand {
+  color: var(--rose-dark);
+  font-weight: 700;
+  letter-spacing: 5px;
+}
+
+.eyebrow {
+  color: var(--gold);
+  letter-spacing: 3.4px;
+}
+
+.announcement {
+  background: #21181d;
+  color: #f8eee8;
+}
+
+.site-header {
+  border-bottom-color: rgba(125, 65, 82, .12);
+  background: rgba(252, 248, 243, .94);
+}
+
+.hero {
+  background:
+    radial-gradient(circle at 8% 18%, rgba(234, 220, 196, .52) 0 12%, transparent 13%),
+    radial-gradient(circle at 94% 84%, rgba(181, 111, 127, .13) 0 17%, transparent 18%),
+    linear-gradient(135deg, #fcf8f3 0%, #f8eff1 100%);
+}
+
+.hero h1 span,
+.option-title span {
+  color: var(--rose-dark);
+}
+
+.btn {
+  border-color: var(--rose-dark);
+  background: var(--rose-dark);
+  box-shadow: 0 10px 25px rgba(125, 65, 82, .20);
+}
+
+.btn:hover {
+  background: #673342;
+  box-shadow: 0 14px 30px rgba(103, 51, 66, .26);
+}
+
+.btn-outline {
+  color: var(--rose-dark);
+  background: transparent;
+}
+
+.hero-badge {
+  background: var(--rose-dark);
+  border-color: var(--cream);
+}
+
+.trust-icon,
+.benefit-check,
+.adluxe-menu-icon {
+  background: #f5ebe6;
+  color: var(--gold);
+}
+
+.stock {
+  color: #416653;
+  background: #edf3ee;
+}
+
+.stock::before {
+  background: #527b64;
+}
+
+.price,
+.delivery-price {
+  color: var(--rose-dark);
+}
+
+.delivery-card {
+  background: #fbf6f1;
+}
+
+.color-btn:hover,
+.color-btn.is-active {
+  border-color: var(--gold);
+  color: var(--rose-dark);
+  background: #fbf4ec;
+}
+
+.thumb.is-active {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(177, 138, 85, .14);
+}
+
+.section-soft {
+  background: #f7eff1;
+}
+
+.category-card {
+  box-shadow: 0 12px 35px rgba(52, 29, 39, .07);
+}
+
+.category-card::before {
+  background: #f6ecef;
+}
+
+.category-card::after {
+  border-color: rgba(177, 138, 85, .32);
+}
+
+.category-number {
+  color: var(--gold);
+}
+
+.story-mark {
+  background:
+    linear-gradient(rgba(36, 26, 32, .22), rgba(36, 26, 32, .22)),
+    linear-gradient(135deg, #9b5b6e, #71394a);
+}
+
+.delivery-panel {
+  background: #241a20;
+}
+
+.delivery-panel .eyebrow,
+.footer-title,
+.footer-brand {
+  color: #d8b98b;
+}
+
+.site-footer {
+  background: #1f171b;
+}
+
+.floating-whatsapp {
+  box-shadow: 0 12px 30px rgba(20, 120, 63, .25);
+}
+
+.adluxe-filter.active,
+.adluxe-filter:hover {
+  border-color: var(--rose-dark);
+  background: var(--rose-dark);
+}
+
+:focus-visible {
+  outline-color: rgba(177, 138, 85, .72);
 }
 
 @media (max-width: 700px) {
@@ -107,5 +290,9 @@
   .adluxe-review-placeholder {
     padding: 26px 20px;
     border-radius: 22px;
+  }
+
+  .brand {
+    letter-spacing: 4px;
   }
 }
