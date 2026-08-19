@@ -11,11 +11,17 @@
   let cart = [];
 
   function loadProfessionalStyles() {
-    if (document.querySelector('link[href="professional-upgrades.css"]')) return;
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = "professional-upgrades.css";
-    document.head.append(link);
+    ["professional-upgrades.css", "jewelry.css"].forEach((href) => {
+      if (document.querySelector('link[href="' + href + '"]')) return;
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = href;
+      document.head.append(link);
+    });
+  }
+
+  function setWhatsappLink(element, message) {
+    if (element) element.href = WHATSAPP_BASE + encodeURIComponent(message);
   }
 
   function addProductStructuredData() {
@@ -68,37 +74,108 @@
     if (document.getElementById("avis-clients")) return;
     const delivery = document.getElementById("livraison");
     if (!delivery?.parentElement) return;
-
     const section = document.createElement("section");
     section.className = "adluxe-reviews";
     section.id = "avis-clients";
     section.setAttribute("aria-labelledby", "adluxe-reviews-title");
-
-    const shell = document.createElement("div");
-    shell.className = "container adluxe-reviews-shell";
-
-    const intro = document.createElement("div");
-    intro.className = "adluxe-reviews-intro";
-    intro.innerHTML = `
-      <p class="eyebrow">Votre expérience compte</p>
-      <h2 id="adluxe-reviews-title">Avis clients</h2>
-      <p>Nous publierons ici uniquement des retours authentiques de clientes AD_LUXE. Aucun avis ni aucune note ne sont ajoutés artificiellement.</p>
-    `;
-
-    const card = document.createElement("div");
-    card.className = "adluxe-review-placeholder";
-    card.innerHTML = `
-      <div>
-        <span class="adluxe-review-stars" aria-hidden="true">☆ ☆ ☆ ☆ ☆</span>
-        <h3>Vous avez commandé chez AD_LUXE ?</h3>
-        <p>Envoyez-nous votre retour sur WhatsApp. Après votre accord, nous pourrons l'afficher ici comme avis client vérifié.</p>
-        <a class="btn" href="https://wa.me/212644162453?text=Bonjour%20AD_LUXE%2C%20je%20souhaite%20laisser%20un%20avis%20sur%20ma%20commande." target="_blank" rel="noopener">Laisser un avis</a>
-      </div>
-    `;
-
-    shell.append(intro, card);
-    section.append(shell);
+    section.innerHTML = `
+      <div class="container adluxe-reviews-shell">
+        <div class="adluxe-reviews-intro">
+          <p class="eyebrow">Votre expérience compte</p>
+          <h2 id="adluxe-reviews-title">Avis clients</h2>
+          <p>Nous publierons ici uniquement des retours authentiques de clientes AD_LUXE. Aucun avis ni aucune note ne sont ajoutés artificiellement.</p>
+        </div>
+        <div class="adluxe-review-placeholder"><div>
+          <span class="adluxe-review-stars" aria-hidden="true">☆ ☆ ☆ ☆ ☆</span>
+          <h3>Vous avez commandé chez AD_LUXE ?</h3>
+          <p>Envoyez-nous votre retour sur WhatsApp. Après votre accord, nous pourrons l'afficher ici comme avis client vérifié.</p>
+          <a class="btn" href="https://wa.me/212644162453?text=Bonjour%20AD_LUXE%2C%20je%20souhaite%20laisser%20un%20avis%20sur%20ma%20commande." target="_blank" rel="noopener">Laisser un avis</a>
+        </div></div>
+      </div>`;
     delivery.parentElement.insertBefore(section, delivery);
+  }
+
+  function addJewelryProduct() {
+    if (document.getElementById("adluxe-jewelry-product")) return;
+    const empty = document.getElementById("adluxe-empty-category");
+    const scarf = document.getElementById("adluxe-product");
+    const parent = empty?.parentElement || scarf?.parentElement;
+    if (!parent) return;
+
+    const article = document.createElement("article");
+    article.className = "product-card jewelry-product";
+    article.id = "adluxe-jewelry-product";
+    article.dataset.category = "bijoux";
+    article.dataset.name = "Collier Bracelet Floral Acier Inoxydable";
+
+    const colors = ["Rouge", "Bleu", "Noir", "Blanc", "Rouge", "Rose", "Vert", "Marron", "Marron"];
+    const photos = colors.map((color, index) => `
+      <button class="jewelry-photo${index === 0 ? " is-active" : ""}" type="button" data-jewelry-color="${color}" data-jewelry-index="${index + 1}" aria-label="Voir le modèle ${color}" aria-pressed="${index === 0}">
+        <span class="jewelry-sprite jewelry-pos-${index + 1}" aria-hidden="true"></span>
+        <span class="jewelry-photo-label">${color}</span>
+      </button>`).join("");
+
+    article.innerHTML = `
+      <div class="jewelry-gallery">
+        <div class="jewelry-grid" aria-label="9 photos du collier et bracelet floral">${photos}</div>
+      </div>
+      <div class="product-info jewelry-info">
+        <span class="stock">En stock</span>
+        <h3>Collier &amp; Bracelet Floral</h3>
+        <span class="jewelry-material">Acier inoxydable</span>
+        <p class="product-subtitle">Un ensemble élégant composé d’un collier avec pendentif floral et d’un bracelet assorti, sublimés par des détails dorés, des touches colorées et de délicats cristaux scintillants.</p>
+        <ul class="jewelry-details">
+          <li>Acier inoxydable résistant et durable</li>
+          <li>Finition dorée élégante</li>
+          <li>Motifs floraux raffinés</li>
+          <li>Cristaux brillants</li>
+          <li>Collier + bracelet assorti</li>
+          <li>Plusieurs couleurs disponibles</li>
+          <li>Idéal à offrir ou à se faire plaisir</li>
+        </ul>
+        <p class="jewelry-price-note">Prix sur demande</p>
+        <p class="option-title">Modèle choisi : <span id="jewelrySelectedColor">Rouge</span></p>
+        <a class="btn order-btn" id="jewelryOrderButton" href="#" target="_blank" rel="noopener">Commander sur WhatsApp</a>
+        <p class="order-note">Demandez le prix et confirmez la couleur directement avec AD_LUXE.</p>
+      </div>`;
+
+    if (empty) parent.insertBefore(article, empty);
+    else parent.append(article);
+
+    const schema = document.createElement("script");
+    schema.type = "application/ld+json";
+    schema.id = "adluxe-jewelry-schema";
+    schema.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "@id": "https://ad-luxe.ma/#collier-bracelet-floral",
+      name: "Collier & Bracelet Floral – Acier Inoxydable",
+      description: "Ensemble collier et bracelet floral en acier inoxydable, finition dorée, cristaux brillants et plusieurs couleurs disponibles.",
+      image: "https://ad-luxe.ma/assets/jewelry-sprite.webp",
+      brand: { "@type": "Brand", name: "AD_LUXE" }
+    });
+    document.head.append(schema);
+  }
+
+  function initializeJewelryGallery() {
+    const buttons = [...document.querySelectorAll(".jewelry-photo")];
+    const selected = document.getElementById("jewelrySelectedColor");
+    const order = document.getElementById("jewelryOrderButton");
+    if (!buttons.length || !selected || !order) return;
+
+    function choose(button) {
+      const color = button.dataset.jewelryColor || "Modèle";
+      buttons.forEach((item) => {
+        const active = item === button;
+        item.classList.toggle("is-active", active);
+        item.setAttribute("aria-pressed", String(active));
+      });
+      selected.textContent = color;
+      setWhatsappLink(order, "Bonjour AD_LUXE, je souhaite commander l'ensemble Collier & Bracelet Floral en acier inoxydable. Couleur : " + color + ". Pouvez-vous me confirmer le prix et la disponibilité ?");
+    }
+
+    buttons.forEach((button) => button.addEventListener("click", () => choose(button)));
+    choose(buttons[0]);
   }
 
   function loadCart() {
@@ -107,31 +184,21 @@
       if (!Array.isArray(parsed)) return [];
       return parsed
         .filter((item) => item && item.name === PRODUCT.name && ALLOWED_COLORS.has(item.color))
-        .map((item) => ({
-          ...PRODUCT,
-          color: item.color,
-          qty: Math.min(99, Math.max(1, Number.parseInt(item.qty, 10) || 1))
-        }));
+        .map((item) => ({ ...PRODUCT, color: item.color, qty: Math.min(99, Math.max(1, Number.parseInt(item.qty, 10) || 1)) }));
     } catch {
       localStorage.removeItem("adluxe_cart");
       return [];
     }
   }
 
-  function setWhatsappLink(element, message) {
-    if (element) element.href = WHATSAPP_BASE + encodeURIComponent(message);
-  }
-
   function createCartItem(item, index) {
     const row = document.createElement("div");
     row.className = "adluxe-cart-item";
-
     const image = document.createElement("img");
     image.src = item.image;
     image.alt = item.name;
     image.loading = "lazy";
     image.decoding = "async";
-
     const details = document.createElement("div");
     const name = document.createElement("strong");
     name.textContent = item.name;
@@ -139,7 +206,6 @@
     color.textContent = "Couleur : " + item.color;
     const price = document.createElement("div");
     price.textContent = item.price + " DH × " + item.qty;
-
     const quantity = document.createElement("div");
     quantity.className = "adluxe-cart-qty";
     const minus = document.createElement("button");
@@ -157,7 +223,6 @@
     plus.setAttribute("aria-label", "Augmenter la quantité");
     plus.textContent = "+";
     quantity.append(minus, document.createTextNode(" "), amount, document.createTextNode(" "), plus);
-
     details.append(name, color, price, quantity);
     row.append(image, details);
     return row;
@@ -167,12 +232,10 @@
     const count = cart.reduce((total, item) => total + item.qty, 0);
     const countElement = document.getElementById("adluxe-cart-count");
     if (countElement) countElement.textContent = String(count);
-
     const box = document.getElementById("adluxe-cart-items");
     const totalElement = document.getElementById("adluxe-cart-total");
     const whatsapp = document.getElementById("adluxe-cart-wa");
     if (!box || !totalElement) return;
-
     box.replaceChildren();
     if (!cart.length) {
       const empty = document.createElement("div");
@@ -183,22 +246,15 @@
       setWhatsappLink(whatsapp, "Bonjour AD_LUXE, je souhaite avoir plus d'informations.");
       return;
     }
-
     cart.forEach((item, index) => box.append(createCartItem(item, index)));
     const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
     totalElement.textContent = total + " DH";
-    const message =
-      "Bonjour AD_LUXE, je souhaite commander :\n" +
-      cart.map((item) => item.name + " (" + item.color + ") x" + item.qty + " — " + (item.price * item.qty) + " DH").join("\n") +
-      "\n\nTotal produits : " + total +
-      " DH\nLivraison : Casablanca 20 DH / hors Casablanca 35 DH\nPaiement à la livraison.";
+    const message = "Bonjour AD_LUXE, je souhaite commander :\n" + cart.map((item) => item.name + " (" + item.color + ") x" + item.qty + " — " + (item.price * item.qty) + " DH").join("\n") + "\n\nTotal produits : " + total + " DH\nLivraison : Casablanca 20 DH / hors Casablanca 35 DH\nPaiement à la livraison.";
     setWhatsappLink(whatsapp, message);
   }
 
   function saveCart() {
-    try {
-      localStorage.setItem("adluxe_cart", JSON.stringify(cart));
-    } catch {}
+    try { localStorage.setItem("adluxe_cart", JSON.stringify(cart)); } catch {}
     renderCart();
   }
 
@@ -222,8 +278,8 @@
       document.querySelector(".adluxe-cart-trigger")?.setAttribute("aria-expanded", "false");
     },
     add() {
-      const selected = document.getElementById("selectedColor")?.textContent || "Marron";
-      const color = ALLOWED_COLORS.has(selected) ? selected : "Marron";
+      const chosen = document.getElementById("selectedColor")?.textContent || "Marron";
+      const color = ALLOWED_COLORS.has(chosen) ? chosen : "Marron";
       const found = cart.find((item) => item.name === PRODUCT.name && item.color === color);
       if (found) found.qty = Math.min(99, found.qty + 1);
       else cart.push({ ...PRODUCT, color, qty: 1 });
@@ -256,9 +312,7 @@
       document.body.classList.remove("adluxe-menu-open");
     },
     showCategory(filter) {
-      const target =
-        document.querySelector('.adluxe-filter[data-filter="' + filter + '"]') ||
-        document.querySelector('.adluxe-filter[data-filter="all"]');
+      const target = document.querySelector('.adluxe-filter[data-filter="' + filter + '"]') || document.querySelector('.adluxe-filter[data-filter="all"]');
       target?.click();
       this.close();
       document.getElementById("produit")?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -273,28 +327,23 @@
     const selectedColor = document.getElementById("selectedColor");
     const orderButton = document.getElementById("orderButton");
     const productImages = Object.fromEntries(thumbnails.map((button) => [button.dataset.color, button.dataset.image]));
-
     function selectColor(color) {
       const image = productImages[color];
       if (!image || !mainImage || !photoLabel || !selectedColor || !orderButton) return;
-
       mainImage.classList.add("is-switching");
       mainImage.src = image;
       mainImage.alt = "Ensemble Scarf " + color.toLowerCase() + " AD_LUXE";
       photoLabel.textContent = color;
       selectedColor.textContent = color;
       window.setTimeout(() => mainImage.classList.remove("is-switching"), 120);
-
       thumbnails.forEach((button) => {
         const active = button.dataset.color === color;
         button.classList.toggle("is-active", active);
         button.setAttribute("aria-pressed", String(active));
       });
       colorButtons.forEach((button) => button.classList.toggle("is-active", button.dataset.colorTarget === color));
-
       setWhatsappLink(orderButton, "Bonjour AD_LUXE, je souhaite commander l'Ensemble Scarf à 180 DH. Couleur : " + color);
     }
-
     thumbnails.forEach((button) => button.addEventListener("click", () => selectColor(button.dataset.color)));
     colorButtons.forEach((button) => button.addEventListener("click", () => selectColor(button.dataset.colorTarget)));
   }
@@ -304,7 +353,6 @@
     const filters = [...document.querySelectorAll(".adluxe-filter")];
     const cards = [...document.querySelectorAll(".product-card")];
     const empty = document.getElementById("adluxe-empty-category");
-
     function apply() {
       const query = (input?.value || "").toLowerCase().trim();
       const filter = document.querySelector(".adluxe-filter.active")?.dataset.filter || "all";
@@ -316,14 +364,10 @@
       });
       if (empty) empty.hidden = visible !== 0;
     }
-
     input?.addEventListener("input", apply);
     filters.forEach((button) => {
       button.addEventListener("click", () => {
-        filters.forEach((item) => {
-          item.classList.remove("active");
-          item.setAttribute("aria-pressed", "false");
-        });
+        filters.forEach((item) => { item.classList.remove("active"); item.setAttribute("aria-pressed", "false"); });
         button.classList.add("active");
         button.setAttribute("aria-pressed", "true");
         apply();
@@ -337,27 +381,17 @@
     document.querySelector(".adluxe-cart-close")?.addEventListener("click", () => window.ADLUXE_CART.close());
     document.querySelector(".adluxe-menu-trigger")?.addEventListener("click", () => window.ADLUXE_MENU.open());
     document.querySelector(".adluxe-menu-close")?.addEventListener("click", () => window.ADLUXE_MENU.close());
-
     const menuOverlay = document.getElementById("adluxe-menu-overlay");
-    menuOverlay?.addEventListener("click", (event) => {
-      if (event.target === menuOverlay) window.ADLUXE_MENU.close();
-    });
+    menuOverlay?.addEventListener("click", (event) => { if (event.target === menuOverlay) window.ADLUXE_MENU.close(); });
     const cartOverlay = document.getElementById("adluxe-cart-overlay");
-    cartOverlay?.addEventListener("click", (event) => {
-      if (event.target === cartOverlay) window.ADLUXE_CART.close();
-    });
-
-    document.querySelectorAll("[data-menu-filter]").forEach((button) => {
-      button.addEventListener("click", () => window.ADLUXE_MENU.showCategory(button.dataset.menuFilter || "all"));
-    });
+    cartOverlay?.addEventListener("click", (event) => { if (event.target === cartOverlay) window.ADLUXE_CART.close(); });
+    document.querySelectorAll("[data-menu-filter]").forEach((button) => button.addEventListener("click", () => window.ADLUXE_MENU.showCategory(button.dataset.menuFilter || "all")));
     document.querySelectorAll(".adluxe-menu-links a").forEach((link) => link.addEventListener("click", () => window.ADLUXE_MENU.close()));
-
     document.getElementById("adluxe-cart-items")?.addEventListener("click", (event) => {
       const button = event.target.closest("[data-cart-index][data-cart-delta]");
       if (!button) return;
       window.ADLUXE_CART.change(Number(button.dataset.cartIndex), Number(button.dataset.cartDelta));
     });
-
     const card = document.getElementById("adluxe-product");
     const orderButton = document.getElementById("orderButton");
     if (card && orderButton?.parentElement && !document.querySelector(".adluxe-add-cart")) {
@@ -368,7 +402,6 @@
       addButton.addEventListener("click", () => window.ADLUXE_CART.add());
       orderButton.parentElement.insertBefore(addButton, orderButton);
     }
-
     document.addEventListener("keydown", (event) => {
       if (event.key !== "Escape") return;
       if (document.getElementById("adluxe-cart-overlay")?.classList.contains("open")) window.ADLUXE_CART.close();
@@ -380,6 +413,8 @@
     loadProfessionalStyles();
     addProductStructuredData();
     improveImagePerformance();
+    addJewelryProduct();
+    initializeJewelryGallery();
     addReviewsSection();
     cart = loadCart();
     initializeProductColors();
