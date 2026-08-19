@@ -10,6 +10,97 @@
   const WHATSAPP_BASE = "https://wa.me/212644162453?text=";
   let cart = [];
 
+  function loadProfessionalStyles() {
+    if (document.querySelector('link[href="professional-upgrades.css"]')) return;
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "professional-upgrades.css";
+    document.head.append(link);
+  }
+
+  function addProductStructuredData() {
+    if (document.getElementById("adluxe-product-schema")) return;
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "@id": "https://ad-luxe.ma/#ensemble-scarf",
+      name: "Ensemble Scarf",
+      description: "Ensemble féminin AD_LUXE disponible en marron, bleu, noir et rose, avec livraison partout au Maroc et paiement à la livraison.",
+      image: [
+        "https://ad-luxe.ma/WhatsApp%20Image%202026-08-13%20at%2016.16.19.jpeg",
+        "https://ad-luxe.ma/WhatsApp%20Image%202026-08-13%20at%2016.16.20%20(1).jpeg",
+        "https://ad-luxe.ma/WhatsApp%20Image%202026-08-13%20at%2016.16.20%20(2).jpeg",
+        "https://ad-luxe.ma/WhatsApp%20Image%202026-08-13%20at%2016.16.20.jpeg"
+      ],
+      brand: { "@type": "Brand", name: "AD_LUXE" },
+      offers: {
+        "@type": "Offer",
+        url: "https://ad-luxe.ma/#produit",
+        priceCurrency: "MAD",
+        price: "180",
+        availability: "https://schema.org/InStock",
+        itemCondition: "https://schema.org/NewCondition",
+        seller: { "@type": "Organization", name: "AD_LUXE" }
+      }
+    };
+    const script = document.createElement("script");
+    script.id = "adluxe-product-schema";
+    script.type = "application/ld+json";
+    script.textContent = JSON.stringify(schema);
+    document.head.append(script);
+  }
+
+  function improveImagePerformance() {
+    const hero = document.querySelector(".hero-image-wrap img");
+    if (hero) {
+      hero.decoding = "async";
+      hero.fetchPriority = "high";
+    }
+    document.querySelectorAll(".thumb img").forEach((image) => {
+      image.loading = "lazy";
+      image.decoding = "async";
+    });
+    const main = document.getElementById("mainProductImage");
+    if (main) main.decoding = "async";
+  }
+
+  function addReviewsSection() {
+    if (document.getElementById("avis-clients")) return;
+    const delivery = document.getElementById("livraison");
+    if (!delivery?.parentElement) return;
+
+    const section = document.createElement("section");
+    section.className = "adluxe-reviews";
+    section.id = "avis-clients";
+    section.setAttribute("aria-labelledby", "adluxe-reviews-title");
+
+    const shell = document.createElement("div");
+    shell.className = "container adluxe-reviews-shell";
+
+    const intro = document.createElement("div");
+    intro.className = "adluxe-reviews-intro";
+    intro.innerHTML = `
+      <p class="eyebrow">Votre expérience compte</p>
+      <h2 id="adluxe-reviews-title">Avis clients</h2>
+      <p>Nous publierons ici uniquement des retours authentiques de clientes AD_LUXE. Aucun avis ni aucune note ne sont ajoutés artificiellement.</p>
+    `;
+
+    const card = document.createElement("div");
+    card.className = "adluxe-review-placeholder";
+    card.innerHTML = `
+      <div>
+        <span class="adluxe-review-stars" aria-hidden="true">☆ ☆ ☆ ☆ ☆</span>
+        <h3>Vous avez commandé chez AD_LUXE ?</h3>
+        <p>Envoyez-nous votre retour sur WhatsApp. Après votre accord, nous pourrons l'afficher ici comme avis client vérifié.</p>
+        <a class="btn" href="https://wa.me/212644162453?text=Bonjour%20AD_LUXE%2C%20je%20souhaite%20laisser%20un%20avis%20sur%20ma%20commande." target="_blank" rel="noopener">Laisser un avis</a>
+      </div>
+    `;
+
+    shell.append(intro, card);
+    section.append(shell);
+    delivery.parentElement.insertBefore(section, delivery);
+  }
+
   function loadCart() {
     try {
       const parsed = JSON.parse(localStorage.getItem("adluxe_cart") || "[]");
@@ -38,6 +129,8 @@
     const image = document.createElement("img");
     image.src = item.image;
     image.alt = item.name;
+    image.loading = "lazy";
+    image.decoding = "async";
 
     const details = document.createElement("div");
     const name = document.createElement("strong");
@@ -179,9 +272,7 @@
     const photoLabel = document.getElementById("photoLabel");
     const selectedColor = document.getElementById("selectedColor");
     const orderButton = document.getElementById("orderButton");
-    const productImages = Object.fromEntries(
-      thumbnails.map((button) => [button.dataset.color, button.dataset.image])
-    );
+    const productImages = Object.fromEntries(thumbnails.map((button) => [button.dataset.color, button.dataset.image]));
 
     function selectColor(color) {
       const image = productImages[color];
@@ -189,7 +280,7 @@
 
       mainImage.classList.add("is-switching");
       mainImage.src = image;
-      mainImage.alt = "Ensemble Scarf " + color.toLowerCase();
+      mainImage.alt = "Ensemble Scarf " + color.toLowerCase() + " AD_LUXE";
       photoLabel.textContent = color;
       selectedColor.textContent = color;
       window.setTimeout(() => mainImage.classList.remove("is-switching"), 120);
@@ -199,14 +290,9 @@
         button.classList.toggle("is-active", active);
         button.setAttribute("aria-pressed", String(active));
       });
-      colorButtons.forEach((button) => {
-        button.classList.toggle("is-active", button.dataset.colorTarget === color);
-      });
+      colorButtons.forEach((button) => button.classList.toggle("is-active", button.dataset.colorTarget === color));
 
-      setWhatsappLink(
-        orderButton,
-        "Bonjour AD_LUXE, je souhaite commander l'Ensemble Scarf à 180 DH. Couleur : " + color
-      );
+      setWhatsappLink(orderButton, "Bonjour AD_LUXE, je souhaite commander l'Ensemble Scarf à 180 DH. Couleur : " + color);
     }
 
     thumbnails.forEach((button) => button.addEventListener("click", () => selectColor(button.dataset.color)));
@@ -224,9 +310,7 @@
       const filter = document.querySelector(".adluxe-filter.active")?.dataset.filter || "all";
       let visible = 0;
       cards.forEach((card) => {
-        const matches =
-          (!query || (card.dataset.name || "").toLowerCase().includes(query)) &&
-          (filter === "all" || card.dataset.category === filter);
+        const matches = (!query || (card.dataset.name || "").toLowerCase().includes(query)) && (filter === "all" || card.dataset.category === filter);
         card.hidden = !matches;
         if (matches) visible += 1;
       });
@@ -266,9 +350,7 @@
     document.querySelectorAll("[data-menu-filter]").forEach((button) => {
       button.addEventListener("click", () => window.ADLUXE_MENU.showCategory(button.dataset.menuFilter || "all"));
     });
-    document.querySelectorAll(".adluxe-menu-links a").forEach((link) => {
-      link.addEventListener("click", () => window.ADLUXE_MENU.close());
-    });
+    document.querySelectorAll(".adluxe-menu-links a").forEach((link) => link.addEventListener("click", () => window.ADLUXE_MENU.close()));
 
     document.getElementById("adluxe-cart-items")?.addEventListener("click", (event) => {
       const button = event.target.closest("[data-cart-index][data-cart-delta]");
@@ -278,7 +360,7 @@
 
     const card = document.getElementById("adluxe-product");
     const orderButton = document.getElementById("orderButton");
-    if (card && orderButton?.parentElement) {
+    if (card && orderButton?.parentElement && !document.querySelector(".adluxe-add-cart")) {
       const addButton = document.createElement("button");
       addButton.type = "button";
       addButton.className = "btn btn-outline adluxe-add-cart";
@@ -295,6 +377,10 @@
   }
 
   function init() {
+    loadProfessionalStyles();
+    addProductStructuredData();
+    improveImagePerformance();
+    addReviewsSection();
     cart = loadCart();
     initializeProductColors();
     initializeFilters();
@@ -302,9 +388,6 @@
     renderCart();
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init, { once: true });
-  } else {
-    init();
-  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init, { once: true });
+  else init();
 })();
