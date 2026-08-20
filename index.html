@@ -1,440 +1,197 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'sha256-NC3gjT/mah3VPfSs8frT043SDtykDCD2bEeQaxZ/lHE=' 'sha256-lA33CKAppB9kcxwCgtQcW1FA80tj2SFeR9vRgSZpSk8='; style-src 'self'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; frame-src 'none'; worker-src 'none'; manifest-src 'self'; form-action 'none'; upgrade-insecure-requests">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AD_LUXE sélectionne une mode féminine qui a du style sans se ruiner, avec livraison partout au Maroc et paiement à la réception.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <meta name="theme-color" content="#8a3b4f">
+    <link rel="canonical" href="https://ad-luxe.ma/">
+    <link rel="alternate" hreflang="fr-MA" href="https://ad-luxe.ma/">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="AD_LUXE">
+    <meta property="og:title" content="AD_LUXE | Boutique de mode féminine au Maroc">
+    <meta property="og:description" content="Des pièces choisies une par une, livrées partout au Maroc, avec paiement à la réception.">
+    <meta property="og:url" content="https://ad-luxe.ma/">
+    <meta property="og:image" content="https://ad-luxe.ma/WhatsApp%20Image%202026-08-13%20at%2016.16.20.jpeg">
+    <meta property="og:locale" content="fr_MA">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AD_LUXE | Mode féminine au Maroc">
+    <meta name="twitter:description" content="Des pièces choisies une par une, livrées partout au Maroc, avec paiement à la réception.">
+    <meta name="twitter:image" content="https://ad-luxe.ma/WhatsApp%20Image%202026-08-13%20at%2016.16.20.jpeg">
+    <title>AD_LUXE | Boutique de mode féminine au Maroc</title>
 
-<!-- ============================================
-     ZONE À MODIFIER : Titre + description Google
-     ============================================ -->
-<title>AD_LUXE — Mode féminine | Livraison partout au Maroc</title>
-<meta name="description" content="AD_LUXE — Mode féminine au Maroc. Pièces intemporelles choisies avec soin, livraison partout au Maroc, paiement à la livraison. Commande facile sur WhatsApp.">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://ad-luxe.ma/#website",
+      "url": "https://ad-luxe.ma/",
+      "name": "AD_LUXE",
+      "alternateName": ["AD Luxe", "ad-luxe.ma"],
+      "inLanguage": "fr-MA"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "OnlineStore",
+      "@id": "https://ad-luxe.ma/#store",
+      "name": "AD_LUXE",
+      "url": "https://ad-luxe.ma/",
+      "description": "AD_LUXE propose une mode féminine sélectionnée pièce par pièce, livrée partout au Maroc avec paiement à la réception.",
+      "image": "https://ad-luxe.ma/WhatsApp%20Image%202026-08-13%20at%2016.16.20.jpeg",
+      "telephone": "+212644162453",
+      "areaServed": {"@type": "Country", "name": "Morocco"},
+      "sameAs": ["https://www.instagram.com/ad_luxe.ma?igsh=MWYwam51NW9reWN3cA=="]
+    }
+    </script>
 
-<style>
-/* ============================================
-   ZONE À MODIFIER : Couleurs du site
-   Change juste les codes couleur ici, tout le site suit.
-   ============================================ */
-:root {
-  --al-bg: #FBF5F5;
-  --al-dark: #2E2E2E;
-  --al-pink: #D98B9E;
-  --al-pink-light: #F5E4E4;
-  --al-pink-pale: #F0DCDC;
-  --al-text-soft: #7A6F6F;
-  --al-white: #FFFFFF;
-}
-
-* { box-sizing: border-box; }
-body { font-family: 'Poppins', 'Segoe UI', sans-serif; background: var(--al-bg); color: var(--al-dark); margin:0; }
-img { max-width: 100%; display:block; }
-a { color: inherit; }
-.al-section { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
-.al-title { font-size: 22px; font-weight: 600; margin-bottom: 20px; text-align:center; }
-
-/* Header */
-header { display:flex; align-items:center; justify-content:space-between; padding:14px 20px; background:var(--al-white); border-bottom:1px solid var(--al-pink-pale); position:sticky; top:0; z-index:500; }
-.al-logo { font-size:18px; font-weight:600; letter-spacing:0.5px; }
-.al-logo span { color: var(--al-pink); }
-nav { display:flex; gap:18px; font-size:13px; }
-nav a { text-decoration:none; }
-.al-header-icons { display:flex; align-items:center; gap:14px; font-size:16px; }
-#al-menu-toggle { display:none; cursor:pointer; }
-#al-mobile-menu { display:none; flex-direction:column; background:var(--al-white); border-bottom:1px solid var(--al-pink-pale); padding:10px 20px; }
-#al-mobile-menu a { padding:10px 0; text-decoration:none; border-bottom:1px solid var(--al-pink-pale); font-size:14px; }
-@media (max-width: 700px){
-  header nav { display:none; }
-  #al-menu-toggle { display:inline; }
-}
-
-/* Trust bar */
-.al-trust-bar { display:flex; justify-content:center; gap:30px; flex-wrap:wrap; background: var(--al-dark); color: var(--al-pink-light); padding: 10px 20px; font-size: 13px; }
-.al-trust-bar span { display:flex; align-items:center; gap:6px; }
-
-/* Hero */
-.al-hero { text-align:center; padding: 50px 20px; }
-.al-hero h1 { font-size: 26px; margin: 0 0 12px; font-weight: 600; }
-.al-hero p { font-size: 14px; color: var(--al-text-soft); max-width: 480px; margin: 0 auto 20px; line-height: 1.7; }
-.al-hero-buttons { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
-.al-btn-primary { background: var(--al-pink); color:#fff; border:none; border-radius:10px; padding:12px 24px; font-size:14px; font-weight:500; cursor:pointer; text-decoration:none; }
-.al-btn-secondary { background:transparent; border:1px solid var(--al-dark); color:var(--al-dark); border-radius:10px; padding:12px 24px; font-size:14px; font-weight:500; cursor:pointer; text-decoration:none; }
-
-/* Reviews */
-.al-reviews-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap:18px; }
-.al-review-card { background: var(--al-white); border:1px solid var(--al-pink-pale); border-radius:14px; padding:18px; }
-.al-stars { color: var(--al-pink); font-size:14px; margin-bottom:8px; }
-.al-review-name { font-weight:600; font-size:13px; margin-top:10px; }
-.al-review-text { font-size:13px; color:var(--al-text-soft); line-height:1.6; }
-
-/* Size table */
-.al-size-table { width:100%; border-collapse:collapse; background:var(--al-white); border-radius:12px; overflow:hidden; }
-.al-size-table th, .al-size-table td { padding:10px 14px; text-align:center; font-size:13px; border-bottom:1px solid var(--al-pink-pale); }
-.al-size-table th { background: var(--al-pink-light); }
-
-/* Products */
-.al-product-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap:16px; }
-.al-product-card { position:relative; background: var(--al-white); border-radius:14px; overflow:hidden; border:1px solid var(--al-pink-pale); transition: transform .2s; }
-.al-product-card:hover { transform: translateY(-4px); }
-.al-product-img { height:220px; background: var(--al-pink-light); display:flex; align-items:center; justify-content:center; color: var(--al-pink); font-size: 12px; cursor:pointer; }
-.al-product-info { padding:12px; }
-.al-product-name { font-size:14px; font-weight:500; margin:0 0 4px; }
-.al-product-price { font-size:13px; color: var(--al-pink); font-weight:600; }
-.al-product-badge { position:absolute; top:10px; left:10px; background:var(--al-dark); color:var(--al-pink-light); font-size:10px; padding:4px 10px; border-radius:20px; }
-.al-fav-btn { position:absolute; top:8px; right:8px; background:var(--al-white); border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:13px; box-shadow:0 2px 6px rgba(0,0,0,0.1); z-index:2; }
-.al-fav-btn.active { color: var(--al-pink); }
-
-.al-whatsapp-btn { display:inline-flex; align-items:center; justify-content:center; gap:6px; background: var(--al-pink); color:#fff; border:none; border-radius:10px; padding:10px 16px; font-size:13px; font-weight:500; text-decoration:none; width:100%; box-sizing:border-box; margin-top:8px; }
-
-/* Cart */
-.al-cart-count { background: var(--al-dark); color: var(--al-pink-light); font-size:10px; border-radius:50%; width:16px; height:16px; display:inline-flex; align-items:center; justify-content:center; }
-#al-cart-icon { position:fixed; bottom:20px; right:20px; background:var(--al-dark); color:var(--al-pink-light); width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.2); z-index:999; }
-#al-cart-badge { position:absolute; top:0; right:0; }
-#al-cart-drawer { display:none; position:fixed; top:0; right:0; width:300px; max-width:85vw; height:100%; background:var(--al-white); box-shadow:-4px 0 20px rgba(0,0,0,0.1); z-index:1000; padding:20px; overflow-y:auto; }
-
-/* Popup */
-#al-popup { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:2000; align-items:center; justify-content:center; }
-#al-popup .al-popup-box { background:var(--al-white); border-radius:20px; padding:30px 24px; max-width:320px; text-align:center; position:relative; }
-#al-popup input { width:100%; padding:10px; border-radius:10px; border:1px solid var(--al-pink-pale); margin-bottom:10px; font-size:13px; }
-
-/* Product modal */
-#al-product-modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:2100; align-items:center; justify-content:center; padding:20px; }
-#al-product-modal .al-modal-box { background:var(--al-white); border-radius:20px; max-width:380px; width:100%; max-height:90vh; overflow-y:auto; position:relative; }
-.al-color-dot { width:26px; height:26px; border-radius:50%; border:1px solid var(--al-pink-pale); cursor:pointer; display:inline-block; }
-.al-size-choice { padding:6px 14px; border:1px solid var(--al-pink-pale); border-radius:8px; font-size:12px; cursor:pointer; display:inline-block; }
-
-/* FAQ */
-.al-faq-item { border-bottom:1px solid var(--al-pink-pale); }
-.al-faq-q { padding:14px 4px; cursor:pointer; display:flex; justify-content:space-between; font-size:14px; font-weight:500; }
-.al-faq-a { display:none; padding:0 4px 14px; font-size:13px; color:var(--al-text-soft); }
-
-/* Instagram */
-.al-insta-grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; max-width:500px; margin:0 auto; }
-.al-insta-item { aspect-ratio:1; background:var(--al-pink-light); border-radius:10px; }
-
-footer { background:var(--al-dark); color:var(--al-pink-light); padding:30px 20px; text-align:center; font-size:13px; }
-</style>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="palette.css">
 </head>
 <body>
+    <div class="announcement">Livraison partout au Maroc · Paiement à la livraison</div>
 
-<!-- ============================================
-     HEADER
-     ============================================ -->
-<header>
-  <span class="al-logo">AD<span>_</span>LUXE</span>
-  <nav>
-    <a href="#produits">Nouveautés</a>
-    <a href="#produits">Catégories</a>
-    <a href="#livraison">Livraison</a>
-    <a href="#faq">FAQ</a>
-  </nav>
-  <div class="al-header-icons">
-    <span>🔍</span>
-    <span onclick="document.getElementById('al-cart-drawer').style.display='block'" style="cursor:pointer;">🛍️</span>
-    <span id="al-menu-toggle" onclick="alToggleMenu()">☰</span>
-  </div>
-</header>
-<div id="al-mobile-menu">
-  <a href="#produits">Nouveautés</a>
-  <a href="#produits">Catégories</a>
-  <a href="#livraison">Livraison</a>
-  <a href="#faq">FAQ</a>
-</div>
+    <header class="site-header">
+        <nav class="nav container" aria-label="Navigation principale">
+            <a class="brand" href="#accueil">AD_LUXE</a>
+            <div class="nav-links">
+                <a href="#accueil">Accueil</a>
+                <a href="#produit">Nouveauté</a>
+                <a href="#livraison">Livraison</a>
+                <a href="#faq">Questions</a>
+                <a href="https://www.instagram.com/ad_luxe.ma?igsh=MWYwam51NW9reWN3cA==" target="_blank" rel="noopener">Instagram</a>
+            </div>
+            <div class="adluxe-nav-actions">
+                <button class="btn btn-small adluxe-cart-trigger" type="button" aria-label="Ouvrir le panier" aria-controls="adluxe-cart-overlay" aria-expanded="false">🛒 <span class="adluxe-cart-label">Panier</span> <span id="adluxe-cart-count">0</span></button>
+                <button class="adluxe-menu-trigger" type="button" aria-label="Ouvrir le menu des catégories" aria-controls="adluxe-menu-overlay" aria-expanded="false"><span></span><span></span><span></span></button>
+            </div>
+        </nav>
+    </header>
 
-<!-- ============================================
-     BANDEAU DE CONFIANCE
-     ============================================ -->
-<div class="al-trust-bar">
-  <span>✓ Paiement à la livraison</span>
-  <span>✓ Livraison partout au Maroc</span>
-  <span>✓ Échange sous 48h</span>
-  <span>✓ +200 clientes satisfaites</span>
-</div>
-
-<!-- ============================================
-     HERO / MESSAGE D'ACCUEIL — ZONE À MODIFIER
-     ============================================ -->
-<section class="al-hero">
-  <h1>On garde juste les tendances qui te vont bien.</h1>
-  <p>J'ai créé AD_LUXE parce que j'en avais marre de courir après des modes qui ne durent pas. Ici, chaque pièce est choisie à la main, avant tout pour sa qualité. Tu commandes, tu reçois chez toi, et tu payes seulement quand tu es sûre que ça te plaît.</p>
-  <div class="al-hero-buttons">
-    <a href="#produits" class="al-btn-primary">Découvrir</a>
-    <a href="https://wa.me/212644162453" class="al-btn-secondary">💬 WhatsApp</a>
-  </div>
-</section>
-
-<!-- ============================================
-     PRODUITS — ZONE À MODIFIER (duplique la carte pour chaque produit)
-     ============================================ -->
-<section class="al-section" id="produits">
-  <h2 class="al-title">Nos catégories</h2>
-  <div class="al-product-grid">
-
-    <div class="al-product-card">
-      <span class="al-product-badge">Nouveauté</span>
-      <span class="al-fav-btn" onclick="alToggleFav(this, 'Ensemble Scarf')">♡</span>
-      <div class="al-product-img" onclick="alOpenModal('Ensemble Scarf', 180)">Photo produit ici</div>
-      <div class="al-product-info">
-        <p class="al-product-name">Ensemble Scarf</p>
-        <p class="al-product-price">180 DH</p>
-        <a href="https://wa.me/212644162453?text=Bonjour%2C%20je%20suis%20intéressée%20par%20l'Ensemble%20Scarf" class="al-whatsapp-btn">Commander</a>
-      </div>
+    <div class="adluxe-menu-overlay" id="adluxe-menu-overlay" aria-hidden="true">
+        <aside class="adluxe-menu-panel" role="dialog" aria-modal="true" aria-labelledby="adluxe-menu-title">
+            <div class="adluxe-menu-head">
+                <div><p class="eyebrow">AD_LUXE</p><h2 id="adluxe-menu-title">Nos catégories</h2></div>
+                <button class="adluxe-menu-close" type="button" aria-label="Fermer le menu">×</button>
+            </div>
+            <p class="adluxe-menu-intro">Tout l'univers AD_LUXE dans une seule page.</p>
+            <nav class="adluxe-menu-categories" aria-label="Choisir une catégorie">
+                <button class="adluxe-menu-category" type="button" data-menu-filter="vetements"><span class="adluxe-menu-icon">✦</span><span><strong>Vêtements</strong><small>Ensembles · Robes · Pantalons · Tops</small></span><b>›</b></button>
+                <button class="adluxe-menu-category" type="button" data-menu-filter="accessoires"><span class="adluxe-menu-icon">◈</span><span><strong>Accessoires</strong><small>Lunettes · Ceintures · Montres</small></span><b>›</b></button>
+                <button class="adluxe-menu-category" type="button" data-menu-filter="bijoux"><span class="adluxe-menu-icon">◇</span><span><strong>Bijoux</strong><small>Colliers · Bracelets · Boucles</small></span><b>›</b></button>
+                <button class="adluxe-menu-category" type="button" data-menu-filter="sacs"><span class="adluxe-menu-icon">▣</span><span><strong>Sacs</strong><small>Sacs à main · Bandoulières · Cabas</small></span><b>›</b></button>
+                <button class="adluxe-menu-category" type="button" data-menu-filter="chaussures"><span class="adluxe-menu-icon">◒</span><span><strong>Chaussures</strong><small>Baskets · Talons · Sandales</small></span><b>›</b></button>
+                <button class="adluxe-menu-category" type="button" data-menu-filter="parfumerie"><span class="adluxe-menu-icon">✧</span><span><strong>Parfumerie</strong><small>Parfums femme · Brumes · Coffrets</small></span><b>›</b></button>
+            </nav>
+            <div class="adluxe-menu-links">
+                <a href="#accueil">Accueil</a><a href="#produit">Nouveauté</a><a href="#livraison">Livraison</a><a href="#faq">Questions</a><a href="https://www.instagram.com/ad_luxe.ma?igsh=MWYwam51NW9reWN3cA==" target="_blank" rel="noopener">Instagram</a>
+            </div>
+        </aside>
     </div>
 
-    <!-- Copie le bloc ci-dessus pour chaque nouveau produit -->
+    <main>
+        <section class="hero" id="accueil">
+            <div class="hero-grid container">
+                <div class="hero-content">
+                    <p class="eyebrow">AD_LUXE</p>
+                    <h1>On a arrêté de courir après toutes les tendances. <span>On garde juste celles qui te vont bien.</span></h1>
+                    <p class="hero-copy">Des pièces qu'on choisit une par une, livrées chez toi partout au Maroc, tu payes seulement quand tu les as en main.</p>
+                    <div class="hero-actions">
+                        <a class="btn" href="#produit">Découvrir la nouveauté</a>
+                        <a class="btn btn-outline" href="https://wa.me/212644162453?text=Bonjour%20AD_LUXE%2C%20je%20souhaite%20passer%20une%20commande." target="_blank" rel="noopener">Commander sur WhatsApp</a>
+                    </div>
+                    <div class="hero-points"><span>Paiement à la livraison</span><span>Livraison nationale</span><span>Commande facile</span></div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-image-wrap"><img src="WhatsApp Image 2026-08-13 at 16.16.20.jpeg" alt="Ensemble Scarf rose AD_LUXE" width="768" height="1024" decoding="async" fetchpriority="high"></div>
+                    <div class="hero-badge" aria-label="Prix 180 dirhams"><strong>180</strong><span>DH</span></div>
+                </div>
+            </div>
+        </section>
 
-  </div>
-</section>
+        <section class="trust-strip" aria-label="Avantages AD_LUXE">
+            <div class="trust-grid container">
+                <div class="trust-item"><div class="trust-icon" aria-hidden="true">💵</div><div><strong>Paiement sécurisé</strong><span>Vous payez à la livraison</span></div></div>
+                <div class="trust-item"><div class="trust-icon" aria-hidden="true">🚚</div><div><strong>Livraison au Maroc</strong><span>Casablanca et toutes les villes</span></div></div>
+                <div class="trust-item"><div class="trust-icon" aria-hidden="true">♡</div><div><strong>Sélection féminine</strong><span>Des pièces choisies avec soin</span></div></div>
+            </div>
+        </section>
 
-<!-- ============================================
-     AVIS CLIENTS — ZONE À MODIFIER (mets de vrais avis)
-     ============================================ -->
-<section class="al-section">
-  <h2 class="al-title">Elles ont commandé chez AD_LUXE</h2>
-  <div class="al-reviews-grid">
-    <div class="al-review-card">
-      <div class="al-stars">★★★★★</div>
-      <p class="al-review-text">Qualité top, exactement comme sur les photos. Livraison rapide sur Casa.</p>
-      <div class="al-review-name">— Salma, Casablanca</div>
+        <section class="section" id="produit">
+            <div class="container">
+                <div class="section-head"><p class="eyebrow">Notre nouveauté</p><h2>Ensemble Scarf</h2><p>Choisissez votre couleur et commandez directement sur WhatsApp.</p></div>
+                <div class="adluxe-shop-tools" id="adluxe-shop-tools">
+                    <div class="adluxe-search">🔎 <input id="adluxe-search" type="search" placeholder="Rechercher un produit..." aria-label="Rechercher un produit"></div>
+                    <div class="adluxe-categories" aria-label="Catégories">
+                        <button class="adluxe-filter active" data-filter="all" aria-pressed="true">Tous</button><button class="adluxe-filter" data-filter="vetements" aria-pressed="false">Vêtements</button><button class="adluxe-filter" data-filter="accessoires" aria-pressed="false">Accessoires</button><button class="adluxe-filter" data-filter="bijoux" aria-pressed="false">Bijoux</button><button class="adluxe-filter" data-filter="sacs" aria-pressed="false">Sacs</button><button class="adluxe-filter" data-filter="chaussures" aria-pressed="false">Chaussures</button><button class="adluxe-filter" data-filter="parfumerie" aria-pressed="false">Parfumerie</button>
+                    </div>
+                </div>
+
+                <article class="product-card" id="adluxe-product" data-category="vetements" data-name="Ensemble Scarf">
+                    <div class="gallery">
+                        <div class="main-photo"><img id="mainProductImage" src="WhatsApp Image 2026-08-13 at 16.16.19.jpeg" alt="Ensemble Scarf marron" width="768" height="1024"><span class="photo-label" id="photoLabel">Marron</span></div>
+                        <div class="thumbnails" aria-label="Choisir une photo">
+                            <button class="thumb is-active" type="button" data-color="Marron" data-image="WhatsApp Image 2026-08-13 at 16.16.19.jpeg" aria-label="Voir la couleur marron" aria-pressed="true"><img src="WhatsApp Image 2026-08-13 at 16.16.19.jpeg" alt="Marron" loading="lazy"></button>
+                            <button class="thumb" type="button" data-color="Bleu" data-image="WhatsApp Image 2026-08-13 at 16.16.20 (1).jpeg" aria-label="Voir la couleur bleue" aria-pressed="false"><img src="WhatsApp Image 2026-08-13 at 16.16.20 (1).jpeg" alt="Bleu" loading="lazy"></button>
+                            <button class="thumb" type="button" data-color="Noir" data-image="WhatsApp Image 2026-08-13 at 16.16.20 (2).jpeg" aria-label="Voir la couleur noire" aria-pressed="false"><img src="WhatsApp Image 2026-08-13 at 16.16.20 (2).jpeg" alt="Noir" loading="lazy"></button>
+                            <button class="thumb" type="button" data-color="Rose" data-image="WhatsApp Image 2026-08-13 at 16.16.20.jpeg" aria-label="Voir la couleur rose" aria-pressed="false"><img src="WhatsApp Image 2026-08-13 at 16.16.20.jpeg" alt="Rose" loading="lazy"></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="stock">En stock</span><h3>Ensemble Scarf</h3><p class="product-subtitle">Un ensemble qui fait le travail tout seul : facile à enfiler, facile à assortir, et assez élégant pour ne pas avoir à trop réfléchir le matin. Disponible en quatre couleurs — marron, bleu, noir, rose.</p><p class="price">180 DH</p><p class="option-title">Couleur choisie : <span id="selectedColor">Marron</span></p>
+                        <div class="color-options" aria-label="Couleurs disponibles"><button class="color-btn is-active" type="button" data-color-target="Marron">Marron</button><button class="color-btn" type="button" data-color-target="Bleu">Bleu</button><button class="color-btn" type="button" data-color-target="Noir">Noir</button><button class="color-btn" type="button" data-color-target="Rose">Rose</button></div>
+                        <div class="delivery-card"><div class="delivery-row"><span>Livraison Casablanca</span><strong>20 DH</strong></div><div class="delivery-row"><span>Livraison hors Casablanca</span><strong>35 DH</strong></div><div class="delivery-row"><span>Paiement</span><strong>À la livraison</strong></div></div>
+                        <a class="btn order-btn" id="orderButton" href="https://wa.me/212644162453?text=Bonjour%20AD_LUXE%2C%20je%20souhaite%20commander%20l%27Ensemble%20Scarf%20%C3%A0%20180%20DH.%20Couleur%20%3A%20Marron" target="_blank" rel="noopener">Commander cette couleur</a>
+                        <p class="order-note">La couleur choisie sera ajoutée automatiquement au message.</p>
+                    </div>
+                </article>
+
+                <div class="adluxe-empty-category" id="adluxe-empty-category" hidden><span>✦</span><h3>Nouveautés bientôt disponibles</h3><p>Cette catégorie arrive prochainement. Consultez nos articles disponibles dès maintenant.</p><button class="btn btn-outline" type="button" data-menu-filter="all">Voir tous les produits</button></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="story-grid container">
+                <div class="story-mark" aria-label="AD_LUXE"><strong>AD</strong><span>Luxe féminin</span></div>
+                <div class="story-copy">
+                    <p class="eyebrow">Pourquoi AD_LUXE ?</p><h2>Pourquoi AD_LUXE ?</h2>
+                    <p>AD_LUXE est née d'une idée simple : proposer une mode féminine qui a du style sans se ruiner. Chaque pièce est sélectionnée avec soin avant d'arriver dans notre boutique — parce qu'on préfère te proposer moins d'articles, mais des articles qu'on choisirait nous-mêmes.</p>
+                    <div class="benefit-list">
+                        <div class="benefit"><span class="benefit-check">✓</span><div><strong>Commande facile</strong><span>Tu choisis ta couleur, tu cliques, et c'est parti direct sur WhatsApp. Pas de compte à créer, pas de formulaire compliqué.</span></div></div>
+                        <div class="benefit"><span class="benefit-check">✓</span><div><strong>Prix accessibles</strong><span>On ne joue pas sur les marges de luxe. Le prix que tu vois, c'est le prix que tu payes.</span></div></div>
+                        <div class="benefit"><span class="benefit-check">✓</span><div><strong>Ta confiance avant tout</strong><span>Tu payes seulement à la réception. Zéro risque, zéro mauvaise surprise.</span></div></div>
+                    </div>
+                    <div class="story-about"><p class="eyebrow">À propos</p><p>AD_LUXE est née d'une idée simple : proposer une mode féminine qui a du style sans se ruiner. Chaque pièce est sélectionnée avec soin avant d'arriver dans notre boutique — parce qu'on préfère te proposer moins d'articles, mais des articles qu'on choisirait nous-mêmes.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="faq">
+            <div class="container"><div class="section-head"><p class="eyebrow">Questions fréquentes</p><h2>Questions fréquentes</h2></div><div class="faq-list"><details><summary>Comment je passe commande ?</summary><p>Choisis ta couleur préférée et clique sur « Commander cette couleur » — un message WhatsApp tout prêt s'ouvre, tu n'as plus qu'à l'envoyer.</p></details><details><summary>Et le paiement ?</summary><p>Rien à payer avant. Tu règles en cash quand le livreur arrive chez toi.</p></details><details><summary>Vous livrez où exactement ?</summary><p>Partout au Maroc. 20 DH à Casablanca, 35 DH dans les autres villes — livré en quelques jours.</p></details><details><summary>Quelles couleurs sont disponibles ?</summary><p>L'Ensemble Scarf est disponible en marron, bleu, noir et rose. D'autres pièces arrivent bientôt.</p></details></div></div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-grid container">
+            <div><a class="brand footer-brand" href="#accueil">AD_LUXE</a><p class="footer-copy">Mode féminine, prix accessibles et livraison partout au Maroc. La mode qui vous ressemble.</p></div>
+            <div><p class="footer-title">Navigation</p><div class="footer-links"><a href="#accueil">Accueil</a><a href="#produit">Nouveauté</a><a href="#livraison">Livraison</a></div></div>
+            <div><p class="footer-title">Contact</p><div class="footer-links"><a href="https://wa.me/212644162453?text=Bonjour%20AD_LUXE%2C%20je%20souhaite%20avoir%20plus%20d%27informations." target="_blank" rel="noopener">WhatsApp : 06 44 16 24 53</a><a href="https://www.instagram.com/ad_luxe.ma?igsh=MWYwam51NW9reWN3cA==" target="_blank" rel="noopener">Instagram : @ad_luxe.ma</a><span>Livraison partout au Maroc</span><span>Paiement à la livraison</span></div></div>
+        </div>
+        <div class="copyright container">© 2026 AD_LUXE · Tous droits réservés</div>
+    </footer>
+
+    <a class="floating-whatsapp" href="https://wa.me/212644162453?text=Bonjour%20AD_LUXE%2C%20je%20souhaite%20avoir%20plus%20d%27informations." target="_blank" rel="noopener" aria-label="Contacter AD_LUXE sur WhatsApp" title="WhatsApp">◉</a>
+
+    <div class="adluxe-cart-overlay" id="adluxe-cart-overlay" role="dialog" aria-modal="true" aria-label="Panier" aria-hidden="true">
+        <aside class="adluxe-cart-panel"><div class="adluxe-cart-head"><h3>Panier</h3><button class="adluxe-cart-close" type="button" aria-label="Fermer le panier">×</button></div><div id="adluxe-cart-items"></div><div class="adluxe-cart-total"><span>Total</span><span id="adluxe-cart-total">0 DH</span></div><a class="btn adluxe-wa" id="adluxe-cart-wa" href="https://wa.me/212644162453" target="_blank" rel="noopener">Commander sur WhatsApp</a></aside>
     </div>
-    <div class="al-review-card">
-      <div class="al-stars">★★★★★</div>
-      <p class="al-review-text">Service client réactif sur WhatsApp, je recommande vivement.</p>
-      <div class="al-review-name">— Imane, Rabat</div>
-    </div>
-    <div class="al-review-card">
-      <div class="al-stars">★★★★☆</div>
-      <p class="al-review-text">Belle matière, taille bien. J'attends la prochaine collection !</p>
-      <div class="al-review-name">— Yasmine, Marrakech</div>
-    </div>
-  </div>
-</section>
 
-<!-- ============================================
-     GUIDE DES TAILLES — ZONE À MODIFIER (tes vraies mesures)
-     ============================================ -->
-<section class="al-section">
-  <h2 class="al-title">Guide des tailles</h2>
-  <p style="text-align:center; font-size:13px; color:var(--al-text-soft); max-width:500px; margin:0 auto 16px;">
-    Prends un mètre de couture et mesure les épaules, la poitrine et la longueur souhaitée. En cas de doute, écris-nous sur WhatsApp.
-  </p>
-  <table class="al-size-table">
-    <tr><th>Taille</th><th>Épaules (cm)</th><th>Poitrine (cm)</th><th>Longueur (cm)</th></tr>
-    <tr><td>S</td><td>36</td><td>84</td><td>140</td></tr>
-    <tr><td>M</td><td>38</td><td>88</td><td>142</td></tr>
-    <tr><td>L</td><td>40</td><td>92</td><td>144</td></tr>
-  </table>
-</section>
-
-<!-- ============================================
-     LIVRAISON — ZONE À MODIFIER
-     ============================================ -->
-<section class="al-section" id="livraison">
-  <h2 class="al-title">Livraison</h2>
-  <p style="text-align:center; font-size:13px; color:var(--al-text-soft); max-width:500px; margin:0 auto; line-height:1.8;">
-    Casablanca : 20 DH, livraison en 24h.<br>
-    Rabat, Salé, Mohammedia : 35 DH, livraison en 24-48h.<br>
-    Autres villes du Maroc : 35 DH, livraison en 48-72h.<br>
-    Paiement en espèces à la réception.
-  </p>
-</section>
-
-<!-- ============================================
-     À PROPOS — ZONE À MODIFIER
-     ============================================ -->
-<section class="al-section" style="background:var(--al-white); border-radius:20px;">
-  <h2 class="al-title">À propos d'AD_LUXE</h2>
-  <p style="text-align:center; max-width:600px; margin:0 auto; color:var(--al-text-soft); font-size:14px; line-height:1.8;">
-    AD_LUXE, c'est mon projet. Je l'ai lancé pour proposer des vêtements et accessoires que je porterais moi-même : intemporels, bien coupés, sans chichi. Je suis basée au Maroc et je livre partout dans le pays. Le paiement se fait à la livraison, pour que tu puisses commander l'esprit tranquille.
-  </p>
-</section>
-
-<!-- ============================================
-     FAQ — ZONE À MODIFIER
-     ============================================ -->
-<section class="al-section" id="faq">
-  <h2 class="al-title">Questions fréquentes</h2>
-  <div style="max-width:600px; margin:0 auto;">
-    <div class="al-faq-item">
-      <div class="al-faq-q" onclick="alToggleFaq(this)">Combien coûte la livraison ? <span>+</span></div>
-      <div class="al-faq-a">20 DH à Casablanca, 35 DH dans les autres villes du Maroc.</div>
-    </div>
-    <div class="al-faq-item">
-      <div class="al-faq-q" onclick="alToggleFaq(this)">Comment je paye ma commande ? <span>+</span></div>
-      <div class="al-faq-a">En espèces, directement au livreur, au moment où tu reçois ton colis.</div>
-    </div>
-    <div class="al-faq-item">
-      <div class="al-faq-q" onclick="alToggleFaq(this)">Puis-je échanger un article ? <span>+</span></div>
-      <div class="al-faq-a">Oui, échange possible sous 48h si l'article n'a pas été porté.</div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================
-     INSTAGRAM — ZONE À MODIFIER
-     ============================================ -->
-<section class="al-section" style="text-align:center;">
-  <h2 class="al-title">Suis-nous sur Instagram</h2>
-  <p style="font-size:13px; color:var(--al-text-soft); margin-bottom:16px;">@ad_luxe.ma</p>
-  <div class="al-insta-grid">
-    <div class="al-insta-item"></div>
-    <div class="al-insta-item"></div>
-    <div class="al-insta-item"></div>
-    <div class="al-insta-item"></div>
-  </div>
-</section>
-
-<!-- ============================================
-     FOOTER — ZONE À MODIFIER
-     ============================================ -->
-<footer>
-  <p style="font-weight:600; letter-spacing:1px; margin-bottom:10px;">AD_LUXE</p>
-  <p>📞 WhatsApp : +212 644-162453</p>
-  <p>✉️ contact@ad-luxe.ma</p>
-  <p style="margin-top:14px; color:var(--al-pink-pale); font-size:11px;">© 2026 AD_LUXE — Tous droits réservés</p>
-</footer>
-
-<!-- ============================================
-     PANIER (icône + tiroir)
-     ============================================ -->
-<div id="al-cart-icon" onclick="document.getElementById('al-cart-drawer').style.display='block'">
-  🛍️ <span id="al-cart-badge" class="al-cart-count">0</span>
-</div>
-<div id="al-cart-drawer">
-  <h3 style="margin-top:0;">Mon panier</h3>
-  <div id="al-cart-items"></div>
-  <p style="font-weight:600;">Total : <span id="al-cart-total">0</span> DH</p>
-  <a id="al-cart-checkout" href="#" class="al-whatsapp-btn" target="_blank">Commander sur WhatsApp</a>
-  <button onclick="document.getElementById('al-cart-drawer').style.display='none'" style="margin-top:10px; width:100%; background:none; border:1px solid var(--al-pink-pale); border-radius:10px; padding:8px; cursor:pointer;">Fermer</button>
-</div>
-
-<!-- ============================================
-     POPUP RÉDUCTION
-     ============================================ -->
-<div id="al-popup">
-  <div class="al-popup-box">
-    <span onclick="document.getElementById('al-popup').style.display='none'" style="position:absolute; top:12px; right:16px; cursor:pointer; font-size:18px; color:var(--al-text-soft);">✕</span>
-    <p style="font-size:20px; margin:0 0 6px;">-10% sur ta 1ère commande</p>
-    <p style="font-size:13px; color:var(--al-text-soft); margin:0 0 16px;">Laisse ton WhatsApp, on t'envoie le code direct.</p>
-    <input id="al-popup-phone" type="tel" placeholder="06 XX XX XX XX">
-    <button onclick="alSubmitPopup()" class="al-btn-primary" style="width:100%; border:none;">Recevoir mon code</button>
-  </div>
-</div>
-
-<!-- ============================================
-     MODALE PRODUIT
-     ============================================ -->
-<div id="al-product-modal">
-  <div class="al-modal-box">
-    <span onclick="document.getElementById('al-product-modal').style.display='none'" style="position:absolute; top:12px; right:16px; cursor:pointer; font-size:18px; background:var(--al-white); border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; z-index:1;">✕</span>
-    <div style="height:220px; background:var(--al-pink-light); margin:16px; border-radius:14px; display:flex; align-items:center; justify-content:center; color:var(--al-pink); font-size:12px;">Photo produit principale</div>
-    <div style="padding:0 20px 20px;">
-      <p id="al-modal-name" style="font-size:18px; font-weight:600; margin:0 0 4px;"></p>
-      <p id="al-modal-price" style="font-size:16px; color:var(--al-pink); font-weight:600; margin:0 0 14px;"></p>
-      <p style="font-size:13px; font-weight:500; margin:0 0 8px;">Taille</p>
-      <div style="display:flex; gap:8px; margin-bottom:16px;">
-        <span class="al-size-choice">S</span>
-        <span class="al-size-choice">M</span>
-        <span class="al-size-choice">L</span>
-      </div>
-      <button id="al-modal-add" style="width:100%; background:var(--al-dark); color:#fff; border:none; border-radius:10px; padding:12px; font-size:13px; font-weight:500; cursor:pointer;">Ajouter au panier</button>
-    </div>
-  </div>
-</div>
-
-<script>
-/* ============================================
-   SCRIPT — pas besoin d'y toucher sauf pour le numéro WhatsApp
-   ============================================ */
-const WHATSAPP_NUMBER = "212644162453"; // <-- CHANGE ICI, un seul endroit pour tout le site
-
-// Menu mobile
-function alToggleMenu(){
-  const m = document.getElementById('al-mobile-menu');
-  m.style.display = (m.style.display === 'flex') ? 'none' : 'flex';
-}
-
-// FAQ
-function alToggleFaq(el){
-  const answer = el.nextElementSibling;
-  const icon = el.querySelector('span');
-  const open = answer.style.display === 'block';
-  answer.style.display = open ? 'none' : 'block';
-  icon.textContent = open ? '+' : '−';
-}
-
-// Favoris
-function alToggleFav(el, productName){
-  let favs = JSON.parse(localStorage.getItem('al_favs') || '[]');
-  if(favs.includes(productName)){
-    favs = favs.filter(f => f !== productName);
-    el.classList.remove('active'); el.textContent = '♡';
-  } else {
-    favs.push(productName);
-    el.classList.add('active'); el.textContent = '♥';
-  }
-  localStorage.setItem('al_favs', JSON.stringify(favs));
-}
-
-// Panier
-function alGetCart(){ return JSON.parse(localStorage.getItem('al_cart') || '[]'); }
-function alSaveCart(cart){ localStorage.setItem('al_cart', JSON.stringify(cart)); alRenderCart(); }
-function alAddToCart(name, price){
-  const cart = alGetCart();
-  cart.push({name, price});
-  alSaveCart(cart);
-  document.getElementById('al-cart-drawer').style.display = 'block';
-}
-function alRemoveFromCart(index){
-  const cart = alGetCart();
-  cart.splice(index, 1);
-  alSaveCart(cart);
-}
-function alRenderCart(){
-  const cart = alGetCart();
-  const itemsEl = document.getElementById('al-cart-items');
-  const totalEl = document.getElementById('al-cart-total');
-  const badgeEl = document.getElementById('al-cart-badge');
-  const checkoutEl = document.getElementById('al-cart-checkout');
-  itemsEl.innerHTML = '';
-  let total = 0;
-  let message = "Bonjour, je souhaite commander :%0A";
-  cart.forEach((item, i) => {
-    total += item.price;
-    message += `- ${item.name} (${item.price} DH)%0A`;
-    itemsEl.innerHTML += `<div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--al-pink-pale); font-size:13px;">
-      <span>${item.name} — ${item.price} DH</span>
-      <span onclick="alRemoveFromCart(${i})" style="cursor:pointer; color:var(--al-pink);">✕</span>
-    </div>`;
-  });
-  message += `%0ATotal : ${total} DH`;
-  totalEl.textContent = total;
-  badgeEl.textContent = cart.length;
-  checkoutEl.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
-}
-alRenderCart();
-
-// Popup réduction (après 5s, une seule fois)
-setTimeout(() => {
-  if(!localStorage.getItem('al_popup_seen')){
-    document.getElementById('al-popup').style.display = 'flex';
-  }
-}, 5000);
-function alSubmitPopup(){
-  const phone = document.getElementById('al-popup-phone').value;
-  if(!phone){ return; }
-  localStorage.setItem('al_popup_seen', '1');
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=Bonjour%2C%20je%20veux%20mon%20code%20-10%25%20(mon%20num%C3%A9ro%20%3A%20${phone})`, '_blank');
-  document.getElementById('al-popup').style.display = 'none';
-}
-
-// Modale produit
-function alOpenModal(name, price){
-  document.getElementById('al-modal-name').textContent = name;
-  document.getElementById('al-modal-price').textContent = price + ' DH';
-  document.getElementById('al-modal-add').onclick = () => alAddToCart(name, price);
-  document.getElementById('al-product-modal').style.display = 'flex';
-}
-</script>
-
+    <script src="app.js" defer></script>
 </body>
 </html>
