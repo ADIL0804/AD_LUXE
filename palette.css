@@ -1,31 +1,31 @@
-/* AD_LUXE palette — bordeaux / charcoal / warm beige / sage */
+/* AD_LUXE palette — rose poudré / gris anthracite */
 :root {
-    --ink: #1f1f1f;
-    --muted: rgba(31, 31, 31, 0.68);
-    --rose: #8a3b4f;
-    --rose-dark: #8a3b4f;
-    --rose-light: #f4ede4;
-    --blush: #f4ede4;
-    --cream: #f4ede4;
-    --white: #ffffff;
-    --line: rgba(31, 31, 31, 0.14);
-    --sage: #7a8c6f;
-    --shadow: 0 18px 55px rgba(31, 31, 31, 0.12);
+    --ink: #2F2F33;
+    --muted: rgba(47, 47, 51, 0.68);
+    --rose: #D8A7B1;
+    --rose-dark: #C58F9B;
+    --rose-light: #F7F1F3;
+    --blush: #F7F1F3;
+    --cream: #F7F1F3;
+    --white: #FFFFFF;
+    --line: #E8DADD;
+    --sage: #C58F9B;
+    --shadow: 0 18px 55px rgba(47, 47, 51, 0.12);
 }
 
 body {
-    color: #1f1f1f;
-    background: #f4ede4;
+    color: #2F2F33;
+    background: #F7F1F3;
 }
 
 .announcement {
-    color: #f4ede4;
-    background: #1f1f1f;
+    color: #FFFFFF;
+    background: #2F2F33;
 }
 
 .site-header {
-    border-bottom-color: rgba(31, 31, 31, 0.12);
-    background: rgba(244, 237, 228, 0.95);
+    border-bottom-color: #E8DADD;
+    background: rgba(247, 241, 243, 0.95);
 }
 
 .brand,
@@ -35,52 +35,52 @@ body {
 .option-title span,
 .category-number,
 .delivery-price {
-    color: #8a3b4f;
+    color: #D8A7B1;
 }
 
 .nav-links a::after,
 .btn,
 .adluxe-filter.active,
 .adluxe-filter:hover {
-    background: #8a3b4f;
+    background: #D8A7B1;
 }
 
 .btn {
-    border-color: #8a3b4f;
-    box-shadow: 0 10px 25px rgba(138, 59, 79, 0.22);
+    border-color: #D8A7B1;
+    box-shadow: 0 10px 25px rgba(216, 167, 177, 0.25);
 }
 
 .btn:hover {
-    background: #1f1f1f;
-    border-color: #1f1f1f;
-    box-shadow: 0 14px 30px rgba(31, 31, 31, 0.20);
+    background: #C58F9B;
+    border-color: #C58F9B;
+    box-shadow: 0 14px 30px rgba(197, 143, 155, 0.24);
 }
 
 .btn-outline {
-    color: #8a3b4f;
+    color: #D8A7B1;
     background: transparent;
 }
 
 .hero {
     background:
-        radial-gradient(circle at 6% 18%, rgba(122, 140, 111, 0.15) 0 13%, transparent 14%),
-        radial-gradient(circle at 94% 84%, rgba(138, 59, 79, 0.10) 0 16%, transparent 17%),
-        #f4ede4;
+        radial-gradient(circle at 6% 18%, rgba(216, 167, 177, 0.14) 0 13%, transparent 14%),
+        radial-gradient(circle at 94% 84%, rgba(197, 143, 155, 0.10) 0 16%, transparent 17%),
+        #F7F1F3;
 }
 
 .hero-points span::before,
 .benefit-check {
-    color: #7a8c6f;
+    color: #C58F9B;
 }
 
 .hero-image-wrap {
-    border-color: rgba(244, 237, 228, 0.95);
+    border-color: rgba(247, 241, 243, 0.95);
 }
 
 .hero-badge {
-    color: #ffffff;
-    background: #8a3b4f;
-    border-color: #f4ede4;
+    color: #FFFFFF;
+    background: #D8A7B1;
+    border-color: #F7F1F3;
 }
 
 .trust-strip,
@@ -89,117 +89,117 @@ body {
 .faq-list details,
 .adluxe-menu-panel,
 .adluxe-cart-panel {
-    border-color: rgba(31, 31, 31, 0.14);
+    border-color: #E8DADD;
 }
 
 .trust-strip {
-    background: rgba(255, 255, 255, 0.72);
+    background: rgba(255, 255, 255, 0.76);
 }
 
 .trust-item + .trust-item {
-    border-left-color: rgba(31, 31, 31, 0.14);
+    border-left-color: #E8DADD;
 }
 
 .trust-icon,
 .benefit-check,
 .adluxe-menu-icon {
-    color: #7a8c6f;
-    background: rgba(122, 140, 111, 0.12);
+    color: #C58F9B;
+    background: rgba(216, 167, 177, 0.15);
 }
 
 .section-soft {
     background:
-        linear-gradient(rgba(122, 140, 111, 0.06), rgba(122, 140, 111, 0.06)),
-        #f4ede4;
+        linear-gradient(rgba(216, 167, 177, 0.06), rgba(216, 167, 177, 0.06)),
+        #F7F1F3;
 }
 
 .product-card,
 .category-card {
-    background: rgba(255, 255, 255, 0.74);
-    box-shadow: 0 18px 50px rgba(31, 31, 31, 0.10);
+    background: rgba(255, 255, 255, 0.78);
+    box-shadow: 0 18px 50px rgba(47, 47, 51, 0.10);
 }
 
 .gallery {
-    background: rgba(122, 140, 111, 0.08);
+    background: rgba(216, 167, 177, 0.08);
 }
 
 .main-photo,
 .thumb,
 .color-btn {
-    background: rgba(255, 255, 255, 0.82);
+    background: rgba(255, 255, 255, 0.84);
 }
 
 .thumb.is-active {
-    border-color: #8a3b4f;
-    box-shadow: 0 0 0 3px rgba(138, 59, 79, 0.14);
+    border-color: #D8A7B1;
+    box-shadow: 0 0 0 3px rgba(216, 167, 177, 0.16);
 }
 
 .stock {
-    color: #ffffff;
-    background: #7a8c6f;
+    color: #FFFFFF;
+    background: #C58F9B;
 }
 
 .stock::before {
-    background: #f4ede4;
+    background: #F7F1F3;
 }
 
 .color-btn:hover,
 .color-btn.is-active {
-    color: #8a3b4f;
-    border-color: #8a3b4f;
-    background: rgba(138, 59, 79, 0.07);
+    color: #C58F9B;
+    border-color: #D8A7B1;
+    background: rgba(216, 167, 177, 0.10);
 }
 
 .delivery-card {
-    border-color: rgba(31, 31, 31, 0.14);
-    background: rgba(244, 237, 228, 0.72);
+    border-color: #E8DADD;
+    background: rgba(247, 241, 243, 0.78);
 }
 
 .story-mark {
     background:
-        linear-gradient(rgba(31, 31, 31, 0.12), rgba(31, 31, 31, 0.12)),
-        linear-gradient(145deg, #8a3b4f, #7a8c6f);
+        linear-gradient(rgba(47, 47, 51, 0.10), rgba(47, 47, 51, 0.10)),
+        linear-gradient(145deg, #D8A7B1, #2F2F33);
 }
 
 .delivery-panel {
-    background: #1f1f1f;
+    background: #2F2F33;
 }
 
 .delivery-panel .eyebrow,
 .footer-title,
 .footer-brand {
-    color: #f4ede4;
+    color: #FFFFFF;
 }
 
 .site-footer {
-    background: #1f1f1f;
+    background: #2F2F33;
 }
 
 .site-footer,
 .site-footer a,
 .site-footer span,
 .footer-copy {
-    color: rgba(244, 237, 228, 0.86);
+    color: rgba(255, 255, 255, 0.86);
 }
 
 .footer-brand,
 .footer-title {
-    color: #f4ede4;
+    color: #FFFFFF;
 }
 
 .faq-list details[open] {
-    border-color: rgba(138, 59, 79, 0.35);
+    border-color: rgba(216, 167, 177, 0.48);
 }
 
 .floating-whatsapp {
-    background: #7a8c6f;
-    box-shadow: 0 12px 30px rgba(122, 140, 111, 0.30);
+    background: #C58F9B;
+    box-shadow: 0 12px 30px rgba(197, 143, 155, 0.30);
 }
 
 .adluxe-filter.active,
 .adluxe-filter:hover {
-    border-color: #8a3b4f;
-    color: #ffffff;
+    border-color: #D8A7B1;
+    color: #FFFFFF;
 }
 
 .adluxe-search,
@@ -208,14 +208,14 @@ body {
 .adluxe-menu-links a,
 .adluxe-cart-item,
 .adluxe-cart-total {
-    border-color: rgba(31, 31, 31, 0.14);
+    border-color: #E8DADD;
 }
 
 .adluxe-menu-category:hover,
 .adluxe-menu-links a:hover {
-    background: rgba(122, 140, 111, 0.09);
+    background: rgba(216, 167, 177, 0.10);
 }
 
 :focus-visible {
-    outline-color: rgba(122, 140, 111, 0.8);
+    outline-color: rgba(197, 143, 155, 0.85);
 }
