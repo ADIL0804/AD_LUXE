@@ -219,3 +219,19 @@ body {
 :focus-visible {
     outline-color: rgba(197, 143, 155, 0.85);
 }
+
+/* Compact category filter buttons */
+.adluxe-filter {
+    min-height: auto;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    border: 1px solid var(--line);
+}
+
+.adluxe-filter.active {
+    background: var(--ink);
+    color: var(--rose-light);
+    border-color: var(--ink);
+}
