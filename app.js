@@ -213,6 +213,22 @@
     colorButtons.forEach((button) => button.addEventListener("click", () => selectColor(button.dataset.colorTarget)));
   }
 
+  function alFilter(category, btn) {
+    document.querySelectorAll(".adluxe-filter").forEach((button) => {
+      button.classList.remove("active");
+      button.setAttribute("aria-pressed", "false");
+    });
+
+    if (btn) {
+      btn.classList.add("active");
+      btn.setAttribute("aria-pressed", "true");
+    }
+
+    document.querySelectorAll(".product-card").forEach((card) => {
+      card.hidden = !(category === "all" || card.dataset.category === category);
+    });
+  }
+
   function initializeFilters() {
     const input = document.getElementById("adluxe-search");
     const filters = [...document.querySelectorAll(".adluxe-filter")];
@@ -236,12 +252,7 @@
     input?.addEventListener("input", apply);
     filters.forEach((button) => {
       button.addEventListener("click", () => {
-        filters.forEach((item) => {
-          item.classList.remove("active");
-          item.setAttribute("aria-pressed", "false");
-        });
-        button.classList.add("active");
-        button.setAttribute("aria-pressed", "true");
+        alFilter(button.dataset.filter || "all", button);
         apply();
       });
     });
