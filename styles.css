@@ -1319,3 +1319,36 @@
         width: 200px;
     }
 }
+
+.legal-grid {
+    max-width: 960px;
+    margin: 0 auto;
+    display: grid;
+    gap: 18px;
+}
+.legal-card {
+    scroll-margin-top: 100px;
+    padding: clamp(24px, 4vw, 38px);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    background: var(--white);
+    box-shadow: 0 12px 35px rgba(47, 47, 51, 0.06);
+}
+.legal-card h2 {
+    margin: 0 0 15px;
+    color: var(--ink);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(26px, 4vw, 36px);
+}
+.legal-card p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.8;
+}
+.legal-card p + p {
+    margin-top: 12px;
+}
+.legal-card a {
+    color: var(--rose-dark);
+    font-weight: 800;
+}
