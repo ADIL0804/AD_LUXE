@@ -4,7 +4,7 @@
   const PRODUCT = Object.freeze({
     name: "Ensemble Scarf",
     price: 180,
-    image: "WhatsApp Image 2026-08-13 at 16.16.19.jpeg"
+    image: "assets/products/ensemble-scarf/marron.webp"
   });
   const ALLOWED_COLORS = new Set(["Marron", "Bleu", "Noir", "Rose"]);
   const WHATSAPP_BASE = "https://wa.me/212644162453?text=";
