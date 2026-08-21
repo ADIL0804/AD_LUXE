@@ -31,6 +31,76 @@
     if (element) element.href = WHATSAPP_BASE + encodeURIComponent(message);
   }
 
+  function normalizeCity(value) {
+    return value
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .replace(/[_-]+/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function getDelivery() {
+    const input = document.getElementById("deliveryCity");
+    const city = (input?.value || "").trim();
+    if (!city) return null;
+    const normalized = normalizeCity(city);
+    const casablancaNames = new Set(["casablanca", "casa", "dar el beida", "dar al beida", "الدار البيضاء", "الدارالبيضاء", "كازا"]);
+    const isCasablanca = casablancaNames.has(normalized);
+    return {
+      city,
+      price: isCasablanca ? 20 : 35,
+      delay: isCasablanca ? "24h" : "48 à 72h"
+    };
+  }
+
+  function setOrderAvailability(link, available) {
+    if (!link) return;
+    link.setAttribute("aria-disabled", String(!available));
+    link.classList.toggle("is-disabled", !available);
+  }
+
+  function updateDeliveryDisplay() {
+    const delivery = getDelivery();
+    const input = document.getElementById("deliveryCity");
+    if (delivery) input?.removeAttribute("aria-invalid");
+    const price = document.getElementById("deliveryPrice");
+    const delay = document.getElementById("deliveryDelay");
+    const help = document.getElementById("deliveryCityHelp");
+    if (price) price.textContent = delivery ? delivery.price + " DH" : "À calculer";
+    if (delay) delay.textContent = delivery ? delivery.delay : "—";
+    if (help) help.textContent = delivery
+      ? "Livraison calculée pour " + delivery.city + "."
+      : "Écrivez votre ville pour calculer la livraison.";
+    return delivery;
+  }
+
+  function buildDirectOrderMessage(color) {
+    const delivery = updateDeliveryDisplay();
+    const orderButton = document.getElementById("orderButton");
+    setOrderAvailability(orderButton, Boolean(delivery));
+    if (!delivery) {
+      setWhatsappLink(orderButton, "Bonjour AD_LUXE, je souhaite commander l'Ensemble Scarf. Ville : ");
+      return;
+    }
+    const total = PRODUCT.price + delivery.price;
+    const message =
+      "Bonjour AD_LUXE, je souhaite confirmer cette commande :\n\n" +
+      "RÉCAPITULATIF\n" +
+      "Produit : " + PRODUCT.name + "\n" +
+      "Couleur : " + color + "\n" +
+      "Prix : " + PRODUCT.price + " DH\n" +
+      "Ville : " + delivery.city + "\n" +
+      "Livraison : " + delivery.price + " DH\n" +
+      "Total à payer : " + total + " DH\n" +
+      "Délai estimé : " + delivery.delay + "\n" +
+      "Paiement : à la réception\n" +
+      "Échange : sous 48h\n\n" +
+      "Nom : \nAdresse : \nTéléphone : ";
+    setWhatsappLink(orderButton, message);
+  }
+
   function createCartItem(item, index) {
     const row = document.createElement("div");
     row.className = "adluxe-cart-item";
@@ -80,6 +150,7 @@
     const whatsapp = document.getElementById("adluxe-cart-wa");
     if (!box || !totalElement) return;
 
+    const delivery = updateDeliveryDisplay();
     box.replaceChildren();
     if (!cart.length) {
       const empty = document.createElement("div");
@@ -87,21 +158,34 @@
       empty.textContent = "Votre panier est vide.";
       box.append(empty);
       totalElement.textContent = "0 DH";
+      setOrderAvailability(whatsapp, false);
       setWhatsappLink(whatsapp, "Bonjour AD_LUXE, je souhaite avoir plus d'informations.\n\nNom : \nVille : ");
       return;
     }
 
     cart.forEach((item, index) => box.append(createCartItem(item, index)));
-    const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-    totalElement.textContent = total + " DH";
+    const productsTotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+    const finalTotal = productsTotal + (delivery?.price || 0);
+    totalElement.textContent = delivery ? finalTotal + " DH" : productsTotal + " DH + livraison";
+    setOrderAvailability(whatsapp, Boolean(delivery));
+
+    if (!delivery) {
+      setWhatsappLink(whatsapp, "Bonjour AD_LUXE, je souhaite commander ces articles. Ville : ");
+      return;
+    }
+
     const message =
-      "Bonjour AD_LUXE, je souhaite commander :\n" +
-      cart.map((item) => item.name + " (" + item.color + ") x" + item.qty + " — " + (item.price * item.qty) + " DH").join("\n") +
-      "\n\nTotal produits : " + total +
-      " DH\nLivraison : Casablanca 20 DH (24h) / hors Casablanca 35 DH (48 à 72h)" +
-      "\nÉchange possible sous 48h." +
-      "\nPaiement à la livraison." +
-      "\n\nNom : \nVille : \nAdresse : \nTéléphone : ";
+      "Bonjour AD_LUXE, je souhaite confirmer cette commande :\n\n" +
+      "RÉCAPITULATIF\n" +
+      cart.map((item) => item.name + " — " + item.color + " × " + item.qty + " : " + (item.price * item.qty) + " DH").join("\n") +
+      "\n\nTotal produits : " + productsTotal + " DH" +
+      "\nVille : " + delivery.city +
+      "\nLivraison : " + delivery.price + " DH" +
+      "\nTotal à payer : " + finalTotal + " DH" +
+      "\nDélai estimé : " + delivery.delay +
+      "\nPaiement : à la réception" +
+      "\nÉchange : sous 48h" +
+      "\n\nNom : \nAdresse : \nTéléphone : ";
     setWhatsappLink(whatsapp, message);
   }
 
@@ -181,14 +265,13 @@
     const mainImage = document.getElementById("mainProductImage");
     const photoLabel = document.getElementById("photoLabel");
     const selectedColor = document.getElementById("selectedColor");
-    const orderButton = document.getElementById("orderButton");
     const productImages = Object.fromEntries(
       thumbnails.map((button) => [button.dataset.color, button.dataset.image])
     );
 
     function selectColor(color) {
       const image = productImages[color];
-      if (!image || !mainImage || !photoLabel || !selectedColor || !orderButton) return;
+      if (!image || !mainImage || !photoLabel || !selectedColor) return;
 
       mainImage.classList.add("is-switching");
       mainImage.src = image;
@@ -206,15 +289,12 @@
         button.classList.toggle("is-active", button.dataset.colorTarget === color);
       });
 
-      setWhatsappLink(
-        orderButton,
-        "Bonjour AD_LUXE, je souhaite commander l'Ensemble Scarf à 180 DH. Couleur : " + color +
-        "\n\nNom : \nVille : \nAdresse : \nTéléphone : "
-      );
+      buildDirectOrderMessage(color);
     }
 
     thumbnails.forEach((button) => button.addEventListener("click", () => selectColor(button.dataset.color)));
     colorButtons.forEach((button) => button.addEventListener("click", () => selectColor(button.dataset.colorTarget)));
+    selectColor(selectedColor?.textContent || "Marron");
   }
 
   function alFilter(category, btn) {
@@ -268,6 +348,22 @@
     document.querySelector(".adluxe-cart-close")?.addEventListener("click", () => window.ADLUXE_CART.close());
     document.querySelector(".adluxe-menu-trigger")?.addEventListener("click", () => window.ADLUXE_MENU.open());
     document.querySelector(".adluxe-menu-close")?.addEventListener("click", () => window.ADLUXE_MENU.close());
+
+    const cityInput = document.getElementById("deliveryCity");
+    cityInput?.addEventListener("input", () => {
+      buildDirectOrderMessage(document.getElementById("selectedColor")?.textContent || "Marron");
+      renderCart();
+    });
+
+    document.querySelectorAll("#orderButton, #adluxe-cart-wa").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        if (link.getAttribute("aria-disabled") !== "true") return;
+        event.preventDefault();
+        cityInput?.focus();
+        cityInput?.setAttribute("aria-invalid", "true");
+        document.getElementById("deliveryCityHelp").textContent = "Indiquez votre ville avant de confirmer la commande.";
+      });
+    });
 
     const menuOverlay = document.getElementById("adluxe-menu-overlay");
     menuOverlay?.addEventListener("click", (event) => {

@@ -1232,3 +1232,105 @@
         .main-photo img.is-switching { opacity: .25; }
         .adluxe-cart-qty { margin-top: 8px; }
         .product-card[hidden] { display: none !important; }
+
+
+/* AD_LUXE wordmark, care and delivery checkout */
+.brand-logo {
+    width: min(240px, 42vw);
+    display: inline-flex;
+    align-items: center;
+}
+.brand-logo img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.site-header .brand-logo img {
+    max-height: 44px;
+}
+.footer-brand.brand-logo {
+    width: 220px;
+    padding: 5px;
+    border-radius: 12px;
+    background: #FBF5F5;
+}
+.delivery-city {
+    display: grid;
+    gap: 7px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+}
+.delivery-city > span {
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 800;
+}
+.delivery-city input {
+    width: 100%;
+    min-height: 48px;
+    padding: 11px 13px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--white);
+    color: var(--ink);
+    font: inherit;
+}
+.delivery-city input:focus {
+    border-color: var(--rose);
+    outline: 3px solid rgba(217, 139, 158, 0.16);
+}
+.delivery-city input[aria-invalid="true"] {
+    border-color: #b42318;
+}
+.delivery-city small {
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.45;
+}
+.btn.is-disabled,
+.btn[aria-disabled="true"] {
+    opacity: .55;
+    cursor: not-allowed;
+    transform: none;
+}
+@media (max-width: 700px) {
+    .site-header .brand-logo {
+        width: 170px;
+    }
+    .footer-brand.brand-logo {
+        width: 200px;
+    }
+}
+
+.legal-grid {
+    max-width: 960px;
+    margin: 0 auto;
+    display: grid;
+    gap: 18px;
+}
+.legal-card {
+    scroll-margin-top: 100px;
+    padding: clamp(24px, 4vw, 38px);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    background: var(--white);
+    box-shadow: 0 12px 35px rgba(47, 47, 51, 0.06);
+}
+.legal-card h2 {
+    margin: 0 0 15px;
+    color: var(--ink);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(26px, 4vw, 36px);
+}
+.legal-card p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.8;
+}
+.legal-card p + p {
+    margin-top: 12px;
+}
+.legal-card a {
+    color: var(--rose-dark);
+    font-weight: 800;
+}
