@@ -46,7 +46,7 @@
     const city = (input?.value || "").trim();
     if (!city) return null;
     const normalized = normalizeCity(city);
-    const casablancaNames = new Set(["casablanca", "casa", "dar el beida", "dar al beida", "الدار البيضاء"]);
+    const casablancaNames = new Set(["casablanca", "casa", "dar el beida", "dar al beida", "الدار البيضاء", "الدارالبيضاء", "كازا"]);
     const isCasablanca = casablancaNames.has(normalized);
     return {
       city,
@@ -63,6 +63,8 @@
 
   function updateDeliveryDisplay() {
     const delivery = getDelivery();
+    const input = document.getElementById("deliveryCity");
+    if (delivery) input?.removeAttribute("aria-invalid");
     const price = document.getElementById("deliveryPrice");
     const delay = document.getElementById("deliveryDelay");
     const help = document.getElementById("deliveryCityHelp");
