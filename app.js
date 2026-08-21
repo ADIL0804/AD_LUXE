@@ -87,7 +87,7 @@
       empty.textContent = "Votre panier est vide.";
       box.append(empty);
       totalElement.textContent = "0 DH";
-      setWhatsappLink(whatsapp, "Bonjour AD_LUXE, je souhaite avoir plus d'informations.");
+      setWhatsappLink(whatsapp, "Bonjour AD_LUXE, je souhaite avoir plus d'informations.\n\nNom : \nVille : ");
       return;
     }
 
@@ -98,7 +98,10 @@
       "Bonjour AD_LUXE, je souhaite commander :\n" +
       cart.map((item) => item.name + " (" + item.color + ") x" + item.qty + " — " + (item.price * item.qty) + " DH").join("\n") +
       "\n\nTotal produits : " + total +
-      " DH\nLivraison : Casablanca 20 DH / hors Casablanca 35 DH\nPaiement à la livraison.";
+      " DH\nLivraison : Casablanca 20 DH (24h) / hors Casablanca 35 DH (48 à 72h)" +
+      "\nÉchange possible sous 48h." +
+      "\nPaiement à la livraison." +
+      "\n\nNom : \nVille : \nAdresse : \nTéléphone : ";
     setWhatsappLink(whatsapp, message);
   }
 
@@ -205,7 +208,8 @@
 
       setWhatsappLink(
         orderButton,
-        "Bonjour AD_LUXE, je souhaite commander l'Ensemble Scarf à 180 DH. Couleur : " + color
+        "Bonjour AD_LUXE, je souhaite commander l'Ensemble Scarf à 180 DH. Couleur : " + color +
+        "\n\nNom : \nVille : \nAdresse : \nTéléphone : "
       );
     }
 
