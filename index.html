@@ -85,8 +85,38 @@
     }
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=20260821-2">
-    <link rel="stylesheet" href="palette.css?v=20260821-2">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "@id": "https://ad-luxe.ma/#parure-florea",
+      "name": "Parure Floréa — Collier & Bracelet",
+      "description": "Duo collier et bracelet aux motifs floraux, avec finitions dorées et détails lumineux, disponible en six couleurs.",
+      "image": [
+        "https://ad-luxe.ma/assets/products/parure-florea/noir.webp",
+        "https://ad-luxe.ma/assets/products/parure-florea/rouge.webp",
+        "https://ad-luxe.ma/assets/products/parure-florea/vert.webp",
+        "https://ad-luxe.ma/assets/products/parure-florea/rose.webp",
+        "https://ad-luxe.ma/assets/products/parure-florea/bleu.webp"
+      ],
+      "sku": "ADL-BIJ-FLOREA-001",
+      "brand": {"@type": "Brand", "name": "AD_LUXE"},
+      "color": ["Noir", "Rouge", "Marron", "Vert", "Rose", "Bleu"],
+      "offers": {
+        "@type": "Offer",
+        "url": "https://ad-luxe.ma/#produit",
+        "priceCurrency": "MAD",
+        "price": "155",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition",
+        "seller": {"@id": "https://ad-luxe.ma/#store"},
+        "hasMerchantReturnPolicy": {"@type": "MerchantReturnPolicy", "applicableCountry": "MA", "merchantReturnDays": 2, "returnMethod": "https://schema.org/ReturnByMail"}
+      }
+    }
+    </script>
+
+    <link rel="stylesheet" href="styles.css?v=20260821-3">
+    <link rel="stylesheet" href="palette.css?v=20260821-3">
 </head>
 <body>
     <div class="announcement">Livraison partout au Maroc · Paiement à la livraison</div>
@@ -159,15 +189,20 @@
 
         <section class="section" id="produit">
             <div class="container">
-                <div class="section-head"><p class="eyebrow">Notre nouveauté</p><h2>Ensemble Scarf</h2><p>Choisissez votre couleur et commandez directement sur WhatsApp.</p></div>
+                <div class="section-head"><p class="eyebrow">Nos nouveautés</p><h2>La sélection AD_LUXE</h2><p>Choisissez votre article et sa couleur, puis commandez directement sur WhatsApp.</p></div>
                 <div class="adluxe-shop-tools" id="adluxe-shop-tools">
                     <div class="adluxe-search">🔎 <input id="adluxe-search" type="search" placeholder="Rechercher un produit..." aria-label="Rechercher un produit"></div>
                     <div class="adluxe-categories" aria-label="Catégories">
                         <button class="adluxe-filter active" data-filter="all" aria-pressed="true">Tous</button><button class="adluxe-filter" data-filter="vetements" aria-pressed="false">Vêtements</button><button class="adluxe-filter" data-filter="accessoires" aria-pressed="false">Accessoires</button><button class="adluxe-filter" data-filter="bijoux" aria-pressed="false">Bijoux</button><button class="adluxe-filter" data-filter="sacs" aria-pressed="false">Sacs</button><button class="adluxe-filter" data-filter="chaussures" aria-pressed="false">Chaussures</button><button class="adluxe-filter" data-filter="parfumerie" aria-pressed="false">Parfumerie</button>
                     </div>
+                    <div class="delivery-card delivery-card-global">
+                        <label class="delivery-city" for="deliveryCity"><span>Ville de livraison</span><input id="deliveryCity" type="text" placeholder="Ex. Casablanca, Rabat..." autocomplete="address-level2" aria-describedby="deliveryCityHelp"><small id="deliveryCityHelp">Écrivez votre ville pour calculer la livraison de votre commande.</small></label>
+                        <div class="delivery-summary"><div class="delivery-row"><span>Livraison</span><strong id="deliveryPrice">À calculer</strong></div><div class="delivery-row"><span>Délai estimé</span><strong id="deliveryDelay">—</strong></div><div class="delivery-row"><span>Paiement</span><strong>À la livraison</strong></div></div>
+                    </div>
                 </div>
 
-                <article class="product-card" id="adluxe-product" data-category="vetements" data-name="Ensemble Scarf">
+                <div class="product-list">
+                <article class="product-card" data-product-id="ensemble-scarf" data-category="vetements" data-name="Ensemble Scarf" data-price="180" data-default-color="Marron" data-default-image="WhatsApp Image 2026-08-13 at 16.16.19.jpeg">
                     <div class="gallery">
                         <div class="main-photo"><img id="mainProductImage" src="WhatsApp Image 2026-08-13 at 16.16.19.jpeg" alt="Ensemble Scarf marron" width="768" height="1024"><span class="photo-label" id="photoLabel">Marron</span></div>
                         <div class="thumbnails" aria-label="Choisir une photo">
@@ -180,16 +215,33 @@
                     <div class="product-info">
                         <span class="stock">En stock</span><h3>Ensemble Scarf</h3><p class="product-subtitle">Un ensemble qui fait le travail tout seul : facile à enfiler, facile à assortir, et suffisamment élégant pour ne pas avoir à trop réfléchir le matin. Disponible en quatre couleurs — marron, bleu, noir et rose.</p><p class="price">180 DH</p><p class="option-title">Couleur choisie : <span id="selectedColor">Marron</span></p>
                         <div class="color-options" aria-label="Couleurs disponibles"><button class="color-btn is-active" type="button" data-color-target="Marron">Marron</button><button class="color-btn" type="button" data-color-target="Bleu">Bleu</button><button class="color-btn" type="button" data-color-target="Noir">Noir</button><button class="color-btn" type="button" data-color-target="Rose">Rose</button></div>
-                        <div class="delivery-card">
-                            <label class="delivery-city" for="deliveryCity"><span>Ville de livraison</span><input id="deliveryCity" type="text" placeholder="Ex. Casablanca, Rabat..." autocomplete="address-level2" aria-describedby="deliveryCityHelp"><small id="deliveryCityHelp">Écrivez votre ville pour calculer la livraison.</small></label>
-                            <div class="delivery-row"><span>Livraison</span><strong id="deliveryPrice">À calculer</strong></div>
-                            <div class="delivery-row"><span>Délai estimé</span><strong id="deliveryDelay">—</strong></div>
-                            <div class="delivery-row"><span>Paiement</span><strong>À la livraison</strong></div>
-                        </div>
-                        <a class="btn order-btn" id="orderButton" href="https://wa.me/212644162453?text=Bonjour%20AD_LUXE%2C%20je%20souhaite%20commander%20l%27Ensemble%20Scarf%20%C3%A0%20180%20DH.%20Couleur%20%3A%20Marron%0A%0ANom%20%3A%20%0AVille%20%3A%20%0AAdresse%20%3A%20%0AT%C3%A9l%C3%A9phone%20%3A%20" target="_blank" rel="noopener">Commander cette couleur</a>
+                        <div class="product-actions"><button class="btn btn-outline adluxe-add-cart" type="button">🛒 Ajouter au panier</button><a class="btn order-btn" href="#" target="_blank" rel="noopener">Commander cette couleur</a></div>
                         <p class="order-note">La couleur choisie sera ajoutée automatiquement au message.</p>
                     </div>
                 </article>
+
+                <article class="product-card" data-product-id="parure-florea" data-category="bijoux" data-name="Parure Floréa — Collier & Bracelet" data-price="155" data-default-color="Noir" data-default-image="assets/products/parure-florea/noir.webp">
+                    <div class="gallery">
+                        <div class="main-photo"><img class="main-product-image" src="assets/products/parure-florea/noir.webp" alt="Parure Floréa noire — collier et bracelet" width="1080" height="1440" loading="lazy"><span class="photo-label">Noir</span></div>
+                        <div class="thumbnails" aria-label="Choisir une couleur de la Parure Floréa">
+                            <button class="thumb is-active" type="button" data-color="Noir" data-image="assets/products/parure-florea/noir.webp" aria-label="Voir la couleur noire" aria-pressed="true"><img src="assets/products/parure-florea/noir.webp" alt="Noir" loading="lazy"></button>
+                            <button class="thumb" type="button" data-color="Rouge" data-image="assets/products/parure-florea/rouge.webp" aria-label="Voir la couleur rouge" aria-pressed="false"><img src="assets/products/parure-florea/rouge.webp" alt="Rouge" loading="lazy"></button>
+                            <button class="thumb" type="button" data-color="Marron" data-image="assets/products/parure-florea/marron.webp" aria-label="Voir la couleur marron" aria-pressed="false"><img src="assets/products/parure-florea/marron.webp" alt="Marron" loading="lazy"></button>
+                            <button class="thumb" type="button" data-color="Marron" data-image="assets/products/parure-florea/marron-detail.webp" aria-label="Voir le deuxième visuel marron" aria-pressed="false"><img src="assets/products/parure-florea/marron-detail.webp" alt="Marron, deuxième vue" loading="lazy"></button>
+                            <button class="thumb" type="button" data-color="Vert" data-image="assets/products/parure-florea/vert.webp" aria-label="Voir la couleur verte" aria-pressed="false"><img src="assets/products/parure-florea/vert.webp" alt="Vert" loading="lazy"></button>
+                            <button class="thumb" type="button" data-color="Rose" data-image="assets/products/parure-florea/rose.webp" aria-label="Voir la couleur rose" aria-pressed="false"><img src="assets/products/parure-florea/rose.webp" alt="Rose" loading="lazy"></button>
+                            <button class="thumb" type="button" data-color="Rouge" data-image="assets/products/parure-florea/rouge-detail.webp" aria-label="Voir le deuxième visuel rouge" aria-pressed="false"><img src="assets/products/parure-florea/rouge-detail.webp" alt="Rouge, deuxième vue" loading="lazy"></button>
+                            <button class="thumb" type="button" data-color="Bleu" data-image="assets/products/parure-florea/bleu.webp" aria-label="Voir la couleur bleue" aria-pressed="false"><img src="assets/products/parure-florea/bleu.webp" alt="Bleu" loading="lazy"></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="stock">En stock</span><h3>Parure Floréa</h3><p class="product-subtitle">Un duo collier et bracelet aux motifs floraux, rehaussé de finitions dorées et de détails lumineux. Une touche élégante pour habiller aussi bien une tenue de fête qu'un look du quotidien.</p><p class="price">155 DH</p><p class="option-title">Couleur choisie : <span class="selected-color">Noir</span></p>
+                        <div class="color-options" aria-label="Couleurs disponibles"><button class="color-btn is-active" type="button" data-color-target="Noir">Noir</button><button class="color-btn" type="button" data-color-target="Rouge">Rouge</button><button class="color-btn" type="button" data-color-target="Marron">Marron</button><button class="color-btn" type="button" data-color-target="Vert">Vert</button><button class="color-btn" type="button" data-color-target="Rose">Rose</button><button class="color-btn" type="button" data-color-target="Bleu">Bleu</button></div>
+                        <div class="product-actions"><button class="btn btn-outline adluxe-add-cart" type="button">🛒 Ajouter au panier</button><a class="btn order-btn" href="#" target="_blank" rel="noopener">Commander cette couleur</a></div>
+                        <p class="order-note">La couleur choisie sera ajoutée automatiquement au message.</p>
+                    </div>
+                </article>
+                </div>
 
                 <div class="adluxe-empty-category" id="adluxe-empty-category" hidden><span>✦</span><h3>Nouveautés bientôt disponibles</h3><p>Cette catégorie arrive prochainement. Consultez nos articles disponibles dès maintenant.</p><button class="btn btn-outline" type="button" data-menu-filter="all">Voir tous les produits</button></div>
             </div>
@@ -237,6 +289,6 @@
         <aside class="adluxe-cart-panel"><div class="adluxe-cart-head"><h3>Panier</h3><button class="adluxe-cart-close" type="button" aria-label="Fermer le panier">×</button></div><div id="adluxe-cart-items"></div><div class="adluxe-cart-total"><span>Total</span><span id="adluxe-cart-total">0 DH</span></div><a class="btn adluxe-wa" id="adluxe-cart-wa" href="https://wa.me/212644162453" target="_blank" rel="noopener">Commander sur WhatsApp</a></aside>
     </div>
 
-    <script src="app-v2.js" defer></script>
+    <script src="app.js?v=20260821-3" defer></script>
 </body>
 </html>
