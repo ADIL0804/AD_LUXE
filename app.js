@@ -8,8 +8,10 @@
   const selected = (card) => card.querySelector(".selected-color, #selectedColor")?.textContent || card.dataset.defaultColor;
   const setWA = (link, message) => { if (link) link.href = WA + encodeURIComponent(message); };
 
+  const cityInputs = () => [document.getElementById("deliveryCity"), document.getElementById("cartDeliveryCity")].filter(Boolean);
+
   function delivery() {
-    const city = (document.getElementById("deliveryCity")?.value || "").trim();
+    const city = (cityInputs().find((input) => input.value.trim())?.value || "").trim();
     if (!city) return null;
     const normalized = city.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[_-]+/g, " ").replace(/\s+/g, " ").trim();
     const casa = new Set(["casablanca", "casa", "dar el beida", "dar al beida", "الدار البيضاء", "الدارالبيضاء", "كازا"]).has(normalized);
@@ -18,13 +20,10 @@
 
   function showDelivery() {
     const value = delivery();
-    const price = document.getElementById("deliveryPrice");
-    const delay = document.getElementById("deliveryDelay");
-    const help = document.getElementById("deliveryCityHelp");
-    if (price) price.textContent = value ? value.price + " DH" : "À calculer";
-    if (delay) delay.textContent = value ? value.delay : "—";
-    if (help) help.textContent = value ? "Livraison calculée pour " + value.city + "." : "Écrivez votre ville pour calculer la livraison de votre commande.";
-    if (value) document.getElementById("deliveryCity")?.removeAttribute("aria-invalid");
+    [document.getElementById("deliveryPrice"), document.getElementById("cartDeliveryPrice")].forEach((price) => { if (price) price.textContent = value ? value.price + " DH" : "À calculer"; });
+    [document.getElementById("deliveryDelay"), document.getElementById("cartDeliveryDelay")].forEach((delay) => { if (delay) delay.textContent = value ? value.delay : "—"; });
+    [document.getElementById("deliveryCityHelp"), document.getElementById("cartDeliveryCityHelp")].forEach((help) => { if (help) help.textContent = value ? "Livraison calculée pour " + value.city + "." : "Écrivez votre ville pour calculer la livraison."; });
+    if (value) cityInputs().forEach((input) => input.removeAttribute("aria-invalid"));
     return value;
   }
 
@@ -125,8 +124,8 @@
 
   function initControls() {
     document.querySelector(".adluxe-cart-trigger")?.addEventListener("click", window.ADLUXE_CART.open); document.querySelector(".adluxe-cart-close")?.addEventListener("click", window.ADLUXE_CART.close); document.querySelector(".adluxe-menu-trigger")?.addEventListener("click", window.ADLUXE_MENU.open); document.querySelector(".adluxe-menu-close")?.addEventListener("click", window.ADLUXE_MENU.close);
-    document.getElementById("deliveryCity")?.addEventListener("input", () => { cards().forEach(directMessage); renderCart(); });
-    document.querySelectorAll(".order-btn, #adluxe-cart-wa").forEach((link) => link.addEventListener("click", (event) => { if (link.getAttribute("aria-disabled") !== "true") return; event.preventDefault(); const city = document.getElementById("deliveryCity"); city?.focus(); city?.setAttribute("aria-invalid", "true"); const help = document.getElementById("deliveryCityHelp"); if (help) help.textContent = "Indiquez votre ville avant de confirmer la commande."; }));
+    cityInputs().forEach((input) => input.addEventListener("input", () => { cityInputs().forEach((other) => { if (other !== input) other.value = input.value; }); cards().forEach(directMessage); renderCart(); }));
+    document.querySelectorAll(".order-btn, #adluxe-cart-wa").forEach((link) => link.addEventListener("click", (event) => { if (link.getAttribute("aria-disabled") !== "true") return; event.preventDefault(); const card = link.closest(".product-card"); if (card) window.ADLUXE_CART.add(card); const city = document.getElementById("cartDeliveryCity"); city?.focus(); city?.setAttribute("aria-invalid", "true"); const help = document.getElementById("cartDeliveryCityHelp"); if (help) help.textContent = "Indiquez votre ville avant de confirmer la commande."; }));
     document.querySelectorAll("[data-menu-filter]").forEach((button) => button.addEventListener("click", () => window.ADLUXE_MENU.showCategory(button.dataset.menuFilter || "all")));
     document.getElementById("adluxe-cart-items")?.addEventListener("click", (event) => { const button = event.target.closest("[data-cart-index]"); if (button) window.ADLUXE_CART.change(Number(button.dataset.cartIndex), Number(button.dataset.cartDelta)); });
     document.getElementById("adluxe-menu-overlay")?.addEventListener("click", (event) => { if (event.target.id === "adluxe-menu-overlay") window.ADLUXE_MENU.close(); }); document.getElementById("adluxe-cart-overlay")?.addEventListener("click", (event) => { if (event.target.id === "adluxe-cart-overlay") window.ADLUXE_CART.close(); });
