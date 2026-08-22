@@ -25,35 +25,53 @@
     sizes: ["36", "37", "38", "39", "40"]
   });
 
+  const SANDALS = Object.freeze({
+    id: "sandales-elegance",
+    name: "Sandales Élégance Confort",
+    price: 149,
+    defaultColor: "Modèle 1",
+    defaultSize: "37",
+    images: [
+      { color: "Modèle 1", src: "assets/products/sandales-elegance/sandale-01.png" },
+      { color: "Modèle 2", src: "assets/products/sandales-elegance/sandale-02.png" },
+      { color: "Modèle 3", src: "assets/products/sandales-elegance/sandale-03.png" },
+      { color: "Modèle 4", src: "assets/products/sandales-elegance/sandale-04.png" },
+      { color: "Modèle 5", src: "assets/products/sandales-elegance/sandale-05.png" },
+      { color: "Modèle 6", src: "assets/products/sandales-elegance/sandale-06.png" },
+      { color: "Modèle 7", src: "assets/products/sandales-elegance/sandale-07.png" },
+      { color: "Modèle 8", src: "assets/products/sandales-elegance/sandale-08.png" }
+    ],
+    sizes: ["37", "38", "39"]
+  });
+
   function addBasketsStyles() {
     if (document.querySelector('link[href^="baskets.css"]')) return;
     const link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = "baskets.css?v=20260822-2";
+    link.href = "baskets.css?v=20260822-3";
     document.head.append(link);
   }
 
-  function addBasketsSchema() {
-    if (document.getElementById("adluxe-baskets-schema")) return;
+  function addProductSchema(product, id, description, sku) {
+    if (document.getElementById(id)) return;
     const schema = document.createElement("script");
-    schema.id = "adluxe-baskets-schema";
+    schema.id = id;
     schema.type = "application/ld+json";
     schema.textContent = JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Product",
-      "@id": "https://ad-luxe.ma/#baskets-urban-chic",
-      name: BASKETS.name,
-      description: "Baskets femme au design moderne et confortable, disponibles du 36 au 40 en plusieurs coloris.",
-      image: BASKETS.images.map((item) => "https://ad-luxe.ma/" + item.src),
-      sku: "ADL-CHA-URBAN-001",
+      "@id": `https://ad-luxe.ma/#${product.id}`,
+      name: product.name,
+      description,
+      image: product.images.map((item) => "https://ad-luxe.ma/" + item.src),
+      sku,
       brand: { "@type": "Brand", name: "AD_LUXE" },
-      color: BASKETS.images.map((item) => item.color),
-      size: BASKETS.sizes,
+      size: product.sizes,
       offers: {
         "@type": "Offer",
         url: "https://ad-luxe.ma/#produit",
         priceCurrency: "MAD",
-        price: String(BASKETS.price),
+        price: String(product.price),
         availability: "https://schema.org/InStock",
         itemCondition: "https://schema.org/NewCondition",
         seller: { "@id": "https://ad-luxe.ma/#store" }
@@ -62,71 +80,70 @@
     document.head.append(schema);
   }
 
-  function createBasketsProduct() {
+  function createShoeProduct(product, domId, description, width, height) {
     const list = document.querySelector(".product-list");
-    if (!list || document.getElementById("adluxe-baskets-urban")) return;
+    if (!list || document.getElementById(domId)) return;
 
     const article = document.createElement("article");
     article.className = "product-card shoe-product";
-    article.id = "adluxe-baskets-urban";
-    article.dataset.productId = BASKETS.id;
+    article.id = domId;
+    article.dataset.productId = product.id;
     article.dataset.category = "chaussures";
-    article.dataset.name = BASKETS.name;
-    article.dataset.price = String(BASKETS.price);
-    article.dataset.defaultColor = BASKETS.defaultColor;
-    article.dataset.defaultImage = BASKETS.images[0].src;
+    article.dataset.name = product.name;
+    article.dataset.price = String(product.price);
+    article.dataset.defaultColor = product.defaultColor;
+    article.dataset.defaultImage = product.images[0].src;
 
-    const thumbnails = BASKETS.images.map((item, index) => `
-      <button class="shoe-thumb${index === 0 ? " is-active" : ""}" type="button" data-shoe-color="${item.color}" data-shoe-image="${item.src}" aria-label="Voir le modèle ${item.color}" aria-pressed="${index === 0}">
-        <img src="${item.src}" alt="Baskets Urban Chic ${item.color}" loading="lazy" decoding="async">
+    const thumbnails = product.images.map((item, index) => `
+      <button class="shoe-thumb${index === 0 ? " is-active" : ""}" type="button" data-shoe-color="${item.color}" data-shoe-image="${item.src}" aria-label="Voir ${item.color}" aria-pressed="${index === 0}">
+        <img src="${item.src}" alt="${product.name} ${item.color}" loading="lazy" decoding="async">
       </button>`).join("");
 
-    const sizes = BASKETS.sizes.map((size, index) => `
+    const sizes = product.sizes.map((size, index) => `
       <button class="shoe-size-btn${index === 0 ? " is-active" : ""}" type="button" data-shoe-size="${size}" aria-pressed="${index === 0}">${size}</button>`).join("");
 
     article.innerHTML = `
       <div class="gallery shoe-gallery">
         <div class="main-photo">
-          <img class="main-product-image shoe-main-image" src="${BASKETS.images[0].src}" alt="Baskets Urban Chic ${BASKETS.defaultColor}" width="1122" height="1402">
-          <span class="photo-label shoe-photo-label">${BASKETS.defaultColor}</span>
+          <img class="main-product-image shoe-main-image" src="${product.images[0].src}" alt="${product.name} ${product.defaultColor}" width="${width}" height="${height}">
+          <span class="photo-label shoe-photo-label">${product.defaultColor}</span>
         </div>
-        <div class="shoe-thumbnails" aria-label="Choisir un coloris">${thumbnails}</div>
+        <div class="shoe-thumbnails" aria-label="Choisir un modèle">${thumbnails}</div>
       </div>
       <div class="product-info">
         <span class="stock">En stock</span>
-        <h3>Baskets Urban Chic</h3>
-        <p class="product-subtitle">Un modèle tendance et facile à porter au quotidien, avec une semelle confortable et un design moderne qui s’adapte aussi bien à un look casual qu’à une tenue plus habillée. Disponibles en plusieurs coloris pour matcher facilement avec votre style.</p>
-        <p class="price">180 DH</p>
-        <p class="option-title">Pointure choisie : <span class="shoe-selected-size">36</span></p>
+        <h3>${product.name}</h3>
+        <p class="product-subtitle">${description}</p>
+        <p class="price">${product.price} DH</p>
+        <p class="option-title">Pointure choisie : <span class="shoe-selected-size">${product.defaultSize}</span></p>
         <div class="shoe-size-options" aria-label="Choisir la pointure">${sizes}</div>
         <div class="product-actions">
           <a class="btn order-btn shoe-order-btn" href="https://wa.me/212644162453" target="_blank" rel="noopener">Commander sur WhatsApp</a>
         </div>
-        <p class="order-note">Pointures disponibles : 36 · 37 · 38 · 39 · 40</p>
+        <p class="order-note">Pointures disponibles : ${product.sizes.join(" · ")}</p>
       </div>`;
 
     list.append(article);
-    initBasketsProduct(article);
-    addBasketsSchema();
+    initShoeProduct(article, product);
   }
 
-  function initBasketsProduct(card) {
+  function initShoeProduct(card, product) {
     const main = card.querySelector(".shoe-main-image");
     const label = card.querySelector(".shoe-photo-label");
     const selectedSize = card.querySelector(".shoe-selected-size");
     const order = card.querySelector(".shoe-order-btn");
     const thumbs = [...card.querySelectorAll(".shoe-thumb")];
     const sizes = [...card.querySelectorAll(".shoe-size-btn")];
-    let color = BASKETS.defaultColor;
-    let size = BASKETS.defaultSize;
+    let color = product.defaultColor;
+    let size = product.defaultSize;
 
     const updateOrder = () => {
       if (!order) return;
       const city = (document.getElementById("deliveryCity")?.value || "").trim();
       const message =
-        "Bonjour AD_LUXE, je souhaite commander les Baskets Urban Chic.\n\n" +
-        "Prix : 180 DH\n" +
-        "Couleur : " + color + "\n" +
+        `Bonjour AD_LUXE, je souhaite commander ${product.name}.\n\n` +
+        `Prix : ${product.price} DH\n` +
+        "Modèle : " + color + "\n" +
         "Pointure : " + size + "\n" +
         "Ville : " + city + "\n\n" +
         "Nom : \nAdresse : \nTéléphone : ";
@@ -135,11 +152,11 @@
 
     thumbs.forEach((button) => {
       button.addEventListener("click", () => {
-        color = button.dataset.shoeColor || BASKETS.defaultColor;
-        const image = button.dataset.shoeImage || BASKETS.images[0].src;
+        color = button.dataset.shoeColor || product.defaultColor;
+        const image = button.dataset.shoeImage || product.images[0].src;
         if (main) {
           main.src = image;
-          main.alt = BASKETS.name + " — " + color;
+          main.alt = product.name + " — " + color;
         }
         if (label) label.textContent = color;
         thumbs.forEach((item) => {
@@ -147,21 +164,21 @@
           item.classList.toggle("is-active", active);
           item.setAttribute("aria-pressed", String(active));
         });
-        window.gtag("event", "select_item", { item_id: BASKETS.id, item_name: BASKETS.name, item_variant: color });
+        window.gtag("event", "select_item", { item_id: product.id, item_name: product.name, item_variant: color });
         updateOrder();
       });
     });
 
     sizes.forEach((button) => {
       button.addEventListener("click", () => {
-        size = button.dataset.shoeSize || BASKETS.defaultSize;
+        size = button.dataset.shoeSize || product.defaultSize;
         if (selectedSize) selectedSize.textContent = size;
         sizes.forEach((item) => {
           const active = item === button;
           item.classList.toggle("is-active", active);
           item.setAttribute("aria-pressed", String(active));
         });
-        window.gtag("event", "select_item", { item_id: BASKETS.id, item_name: BASKETS.name, item_variant: "Pointure " + size });
+        window.gtag("event", "select_item", { item_id: product.id, item_name: product.name, item_variant: "Pointure " + size });
         updateOrder();
       });
     });
@@ -170,8 +187,28 @@
     updateOrder();
   }
 
+  function createProducts() {
+    createShoeProduct(
+      BASKETS,
+      "adluxe-baskets-urban",
+      "Un modèle tendance et facile à porter au quotidien, avec une semelle confortable et un design moderne qui s’adapte aussi bien à un look casual qu’à une tenue plus habillée. Disponibles en plusieurs coloris pour matcher facilement avec votre style.",
+      1122,
+      1402
+    );
+    addProductSchema(BASKETS, "adluxe-baskets-schema", "Baskets femme au design moderne et confortable, disponibles du 36 au 40 en plusieurs coloris.", "ADL-CHA-URBAN-001");
+
+    createShoeProduct(
+      SANDALS,
+      "adluxe-sandales-elegance",
+      "Un modèle chic et confortable, parfait pour les sorties de tous les jours comme pour les looks plus habillés. Sa semelle légère, sa finition élégante et ses détails raffinés apportent une touche féminine facile à assortir à vos tenues.",
+      1080,
+      1350
+    );
+    addProductSchema(SANDALS, "adluxe-sandales-schema", "Sandales femme chic et confortables, disponibles en pointures 37, 38 et 39.", "ADL-CHA-SAND-001");
+  }
+
   addBasketsStyles();
   document.readyState === "loading"
-    ? document.addEventListener("DOMContentLoaded", createBasketsProduct, { once: true })
-    : createBasketsProduct();
+    ? document.addEventListener("DOMContentLoaded", createProducts, { once: true })
+    : createProducts();
 })();
