@@ -373,8 +373,19 @@
         }
 
         .delivery-card-global {
-            max-width: 820px;
-            margin: 24px auto 0;
+            width: 100%;
+            max-width: none;
+            grid-template-columns: minmax(280px, 1.15fr) minmax(0, 2fr);
+            align-items: end;
+            gap: 24px;
+            margin: 20px 0 0;
+            padding: 20px 22px;
+        }
+
+        .delivery-card-global .delivery-city {
+            padding: 0 24px 0 0;
+            border-right: 1px solid var(--line);
+            border-bottom: 0;
         }
 
         .delivery-summary {
@@ -1119,6 +1130,18 @@
             .delivery-summary {
                 grid-template-columns: 1fr;
                 gap: 10px;
+            }
+
+            .delivery-card-global {
+                grid-template-columns: 1fr;
+                align-items: stretch;
+                gap: 16px;
+            }
+
+            .delivery-card-global .delivery-city {
+                padding: 0 0 16px;
+                border-right: 0;
+                border-bottom: 1px solid var(--line);
             }
 
             .delivery-row {
