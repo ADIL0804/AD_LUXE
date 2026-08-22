@@ -17,10 +17,10 @@
     defaultColor: "Gris",
     defaultSize: "36",
     images: [
-      { color: "Gris", src: "assets/products/baskets-urban-chic/gris.webp" },
-      { color: "Blanc & noir", src: "assets/products/baskets-urban-chic/blanc-noir.webp" },
-      { color: "Beige", src: "assets/products/baskets-urban-chic/beige.webp" },
-      { color: "Noir", src: "assets/products/baskets-urban-chic/noir.webp" }
+      { color: "Gris", src: "assets/products/baskets-urban-chic/2d06b7b9-3733-4dbe-a02e-e836bdf7f3b3.png" },
+      { color: "Blanc & noir", src: "assets/products/baskets-urban-chic/dff913f0-1f5a-46bd-8ec1-e632c97b4b06.png" },
+      { color: "Beige", src: "assets/products/baskets-urban-chic/f7421536-b5f4-47c9-b4e4-7eb2d1d2a521.png" },
+      { color: "Noir", src: "assets/products/baskets-urban-chic/ecae56a3-1074-4609-ac62-8c3b2a683401.png" }
     ],
     sizes: ["36", "37", "38", "39", "40"]
   });
@@ -29,7 +29,7 @@
     if (document.querySelector('link[href^="baskets.css"]')) return;
     const link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = "baskets.css?v=20260822-1";
+    link.href = "baskets.css?v=20260822-2";
     document.head.append(link);
   }
 
@@ -87,7 +87,7 @@
     article.innerHTML = `
       <div class="gallery shoe-gallery">
         <div class="main-photo">
-          <img class="main-product-image shoe-main-image" src="${BASKETS.images[0].src}" alt="Baskets Urban Chic ${BASKETS.defaultColor}" width="768" height="960">
+          <img class="main-product-image shoe-main-image" src="${BASKETS.images[0].src}" alt="Baskets Urban Chic ${BASKETS.defaultColor}" width="1122" height="1402">
           <span class="photo-label shoe-photo-label">${BASKETS.defaultColor}</span>
         </div>
         <div class="shoe-thumbnails" aria-label="Choisir un coloris">${thumbnails}</div>
