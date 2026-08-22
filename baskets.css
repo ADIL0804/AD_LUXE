@@ -1,0 +1,75 @@
+.shoe-product .shoe-thumbnails {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.shoe-product .shoe-thumb {
+  min-height: 82px;
+  overflow: hidden;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 14px;
+  background: var(--white);
+  cursor: pointer;
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.shoe-product .shoe-thumb:hover {
+  transform: translateY(-2px);
+}
+
+.shoe-product .shoe-thumb.is-active {
+  border-color: var(--rose-dark);
+  box-shadow: 0 0 0 3px rgba(188, 108, 132, .15);
+}
+
+.shoe-product .shoe-thumb img {
+  width: 100%;
+  height: 112px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.shoe-product .shoe-size-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-bottom: 6px;
+}
+
+.shoe-product .shoe-size-btn {
+  min-width: 52px;
+  min-height: 48px;
+  padding: 10px 15px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  background: var(--white);
+  font-weight: 800;
+  cursor: pointer;
+  transition: border-color .2s ease, color .2s ease, background .2s ease, transform .2s ease;
+}
+
+.shoe-product .shoe-size-btn:hover,
+.shoe-product .shoe-size-btn.is-active {
+  border-color: var(--rose-dark);
+  color: var(--rose-dark);
+  background: var(--blush);
+  transform: translateY(-1px);
+}
+
+.shoe-product .shoe-main-image {
+  object-position: center;
+}
+
+@media (max-width: 700px) {
+  .shoe-product .shoe-thumbnails {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .shoe-product .shoe-thumb img {
+    height: 150px;
+  }
+}
