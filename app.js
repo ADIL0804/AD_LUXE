@@ -13,6 +13,10 @@
   const setWA = (link, message) => { if (link) link.href = WA + encodeURIComponent(message); };
 
   function track(event, details = {}) {
+    if (typeof window.gtag === "function") {
+      window.gtag("event", event, details);
+      return;
+    }
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ event, ...details });
   }

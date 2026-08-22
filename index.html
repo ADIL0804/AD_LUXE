@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'sha256-NC3gjT/mah3VPfSs8frT043SDtykDCD2bEeQaxZ/lHE=' 'sha256-grUNqUw5IDfpXIvqwUTAk9Z9L6R+s5ZNIO94ffvUs6U=' 'sha256-QAdS74qasZl54L/yzkUe5u+Yva19u5yImsAgSH5oqMA=' 'sha256-G+cUY9gIjSV4Nc3I72wkwFqjUFLlR6eDjycNi9fjUVs=' 'sha256-vuWD3UpQQTzSwlmEX3rPWZ3+RCJ0FOSCXp3np02qs+s='; style-src 'self'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; frame-src 'none'; worker-src 'none'; manifest-src 'self'; form-action 'none'; upgrade-insecure-requests">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' https://www.googletagmanager.com 'sha256-NC3gjT/mah3VPfSs8frT043SDtykDCD2bEeQaxZ/lHE=' 'sha256-grUNqUw5IDfpXIvqwUTAk9Z9L6R+s5ZNIO94ffvUs6U=' 'sha256-QAdS74qasZl54L/yzkUe5u+Yva19u5yImsAgSH5oqMA=' 'sha256-G+cUY9gIjSV4Nc3I72wkwFqjUFLlR6eDjycNi9fjUVs=' 'sha256-vuWD3UpQQTzSwlmEX3rPWZ3+RCJ0FOSCXp3np02qs+s='; style-src 'self'; img-src 'self' data: https://www.google-analytics.com https://*.google-analytics.com; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com; frame-src 'none'; worker-src 'none'; manifest-src 'self'; form-action 'none'; upgrade-insecure-requests">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="AD_LUXE sélectionne une mode féminine qui a du style sans se ruiner, avec livraison partout au Maroc et paiement à la réception.">
@@ -27,6 +27,9 @@
     <meta name="twitter:description" content="Des pièces choisies une par une, livrées partout au Maroc, avec paiement à la réception.">
     <meta name="twitter:image" content="https://ad-luxe.ma/social-card.jpg">
     <title>AD_LUXE | Boutique de mode féminine au Maroc</title>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2T1YXQQBLF"></script>
+    <script src="analytics.js"></script>
 
     <script type="application/ld+json">
     {
@@ -354,6 +357,6 @@
         <aside class="adluxe-cart-panel"><div class="adluxe-cart-head"><h3>Panier</h3><button class="adluxe-cart-close" type="button" aria-label="Fermer le panier">×</button></div><div id="adluxe-cart-items"></div><div class="delivery-card adluxe-cart-delivery"><label class="delivery-city" for="cartDeliveryCity"><span>Ville de livraison</span><input id="cartDeliveryCity" type="text" placeholder="Ex. Casablanca, Rabat..." autocomplete="address-level2" aria-describedby="cartDeliveryCityHelp"><small id="cartDeliveryCityHelp" aria-live="polite">Écrivez votre ville pour calculer la livraison.</small></label><div class="delivery-row"><span>Livraison</span><strong id="cartDeliveryPrice">À calculer</strong></div><div class="delivery-row"><span>Délai estimé</span><strong id="cartDeliveryDelay">—</strong></div></div><div class="adluxe-order-reference" id="adluxe-order-reference-wrap" hidden><span>Référence préparée</span><strong id="adluxe-order-reference"></strong></div><div class="adluxe-cart-total" aria-live="polite"><span>Total</span><span id="adluxe-cart-total">0 DH</span></div><a class="btn adluxe-wa" id="adluxe-cart-wa" href="https://wa.me/212644162453" target="_blank" rel="noopener">Envoyer le récapitulatif sur WhatsApp</a><p class="adluxe-cart-note">La commande est confirmée après validation du récapitulatif sur WhatsApp.</p></aside>
     </div>
 
-    <script src="app.js?v=20260822-1" defer></script>
+    <script src="app.js?v=20260822-2" defer></script>
 </body>
 </html>
