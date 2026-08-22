@@ -29,44 +29,61 @@
     id: "sandales-elegance",
     name: "Sandales Élégance Confort",
     price: 149,
-    defaultColor: "Modèle 1",
+    defaultColor: "Camel",
     defaultSize: "37",
     images: [
-      { color: "Modèle 1", src: "assets/products/sandales-elegance/sandale-01.png" },
-      { color: "Modèle 2", src: "assets/products/sandales-elegance/sandale-02.png" },
-      { color: "Modèle 3", src: "assets/products/sandales-elegance/sandale-03.png" },
-      { color: "Modèle 4", src: "assets/products/sandales-elegance/sandale-04.png" },
-      { color: "Modèle 5", src: "assets/products/sandales-elegance/sandale-05.png" },
-      { color: "Modèle 6", src: "assets/products/sandales-elegance/sandale-06.png" },
-      { color: "Modèle 7", src: "assets/products/sandales-elegance/sandale-07.png" },
-      { color: "Modèle 8", src: "assets/products/sandales-elegance/sandale-08.png" }
+      { color: "Camel", src: "assets/products/sandales-elegance/sandale-01.png" },
+      { color: "Marron", src: "assets/products/sandales-elegance/sandale-02.png" },
+      { color: "Camel", src: "assets/products/sandales-elegance/sandale-03.png" },
+      { color: "Noir", src: "assets/products/sandales-elegance/sandale-04.png" },
+      { color: "Marron", src: "assets/products/sandales-elegance/sandale-05.png" },
+      { color: "Camel", src: "assets/products/sandales-elegance/sandale-06.png" },
+      { color: "Beige", src: "assets/products/sandales-elegance/sandale-07.png" },
+      { color: "Beige", src: "assets/products/sandales-elegance/sandale-08.png" }
     ],
     sizes: ["37", "38", "39"]
   });
+
+  const PARFUMERIE = Object.freeze([
+    {
+      id: "rose-berry-trio",
+      name: "Rose Berry Trio",
+      price: 100,
+      image: "assets/products/parfumerie/rose-berry-trio.jpg",
+      description: "Un coffret beauté complet signé Rose Berry réunissant blush liquide, highlighter lumineux et lipgloss mat. Idéal pour créer un look frais et harmonieux en quelques gestes, avec trois essentiels faciles à glisser dans votre routine."
+    },
+    {
+      id: "rose-berry-nude-pink",
+      name: "Rose Berry Nude Pink Lip Duo",
+      price: 100,
+      image: "assets/products/parfumerie/rose-berry-nude-pink.jpg",
+      description: "Un coffret lèvres nude pink élégant qui réunit crayon contour, gloss et rouge à lèvres mat. Parfait pour dessiner, définir et sublimer les lèvres avec un fini chic et naturel, du quotidien aux occasions."
+    }
+  ]);
 
   function addBasketsStyles() {
     if (document.querySelector('link[href^="baskets.css"]')) return;
     const link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = "baskets.css?v=20260822-3";
+    link.href = "baskets.css?v=20260822-2";
     document.head.append(link);
   }
 
-  function addProductSchema(product, id, description, sku) {
-    if (document.getElementById(id)) return;
+  function addProductSchema(product, type) {
+    const schemaId = "adluxe-" + product.id + "-schema";
+    if (document.getElementById(schemaId)) return;
     const schema = document.createElement("script");
-    schema.id = id;
+    schema.id = schemaId;
     schema.type = "application/ld+json";
+    const images = product.images ? product.images.map((item) => "https://ad-luxe.ma/" + item.src) : ["https://ad-luxe.ma/" + product.image];
     schema.textContent = JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Product",
-      "@id": `https://ad-luxe.ma/#${product.id}`,
+      "@id": "https://ad-luxe.ma/#" + product.id,
       name: product.name,
-      description,
-      image: product.images.map((item) => "https://ad-luxe.ma/" + item.src),
-      sku,
+      description: product.description || (type === "shoe" ? "Chaussures femme tendance disponibles chez AD_LUXE." : "Produit beauté Rose Berry disponible chez AD_LUXE."),
+      image: images,
       brand: { "@type": "Brand", name: "AD_LUXE" },
-      size: product.sizes,
       offers: {
         "@type": "Offer",
         url: "https://ad-luxe.ma/#produit",
@@ -80,13 +97,14 @@
     document.head.append(schema);
   }
 
-  function createShoeProduct(product, domId, description, width, height) {
+  function createShoeProduct(product) {
     const list = document.querySelector(".product-list");
-    if (!list || document.getElementById(domId)) return;
+    const articleId = "adluxe-" + product.id;
+    if (!list || document.getElementById(articleId)) return;
 
     const article = document.createElement("article");
     article.className = "product-card shoe-product";
-    article.id = domId;
+    article.id = articleId;
     article.dataset.productId = product.id;
     article.dataset.category = "chaussures";
     article.dataset.name = product.name;
@@ -95,20 +113,24 @@
     article.dataset.defaultImage = product.images[0].src;
 
     const thumbnails = product.images.map((item, index) => `
-      <button class="shoe-thumb${index === 0 ? " is-active" : ""}" type="button" data-shoe-color="${item.color}" data-shoe-image="${item.src}" aria-label="Voir ${item.color}" aria-pressed="${index === 0}">
+      <button class="shoe-thumb${index === 0 ? " is-active" : ""}" type="button" data-shoe-color="${item.color}" data-shoe-image="${item.src}" aria-label="Voir le modèle ${item.color}" aria-pressed="${index === 0}">
         <img src="${item.src}" alt="${product.name} ${item.color}" loading="lazy" decoding="async">
       </button>`).join("");
 
     const sizes = product.sizes.map((size, index) => `
       <button class="shoe-size-btn${index === 0 ? " is-active" : ""}" type="button" data-shoe-size="${size}" aria-pressed="${index === 0}">${size}</button>`).join("");
 
+    const description = product.id === "baskets-urban-chic"
+      ? "Un modèle tendance et facile à porter au quotidien, avec une semelle confortable et un design moderne qui s’adapte aussi bien à un look casual qu’à une tenue plus habillée. Disponibles en plusieurs coloris pour matcher facilement avec votre style."
+      : "Un modèle chic et confortable, parfait pour les sorties de tous les jours comme pour les looks plus habillés. Sa semelle légère, sa finition élégante et ses couleurs faciles à assortir apportent une touche féminine et raffinée à toutes vos tenues.";
+
     article.innerHTML = `
       <div class="gallery shoe-gallery">
         <div class="main-photo">
-          <img class="main-product-image shoe-main-image" src="${product.images[0].src}" alt="${product.name} ${product.defaultColor}" width="${width}" height="${height}">
+          <img class="main-product-image shoe-main-image" src="${product.images[0].src}" alt="${product.name} ${product.defaultColor}" width="1122" height="1402">
           <span class="photo-label shoe-photo-label">${product.defaultColor}</span>
         </div>
-        <div class="shoe-thumbnails" aria-label="Choisir un modèle">${thumbnails}</div>
+        <div class="shoe-thumbnails" aria-label="Choisir un coloris">${thumbnails}</div>
       </div>
       <div class="product-info">
         <span class="stock">En stock</span>
@@ -125,6 +147,7 @@
 
     list.append(article);
     initShoeProduct(article, product);
+    addProductSchema(product, "shoe");
   }
 
   function initShoeProduct(card, product) {
@@ -141,9 +164,9 @@
       if (!order) return;
       const city = (document.getElementById("deliveryCity")?.value || "").trim();
       const message =
-        `Bonjour AD_LUXE, je souhaite commander ${product.name}.\n\n` +
-        `Prix : ${product.price} DH\n` +
-        "Modèle : " + color + "\n" +
+        "Bonjour AD_LUXE, je souhaite commander " + product.name + ".\n\n" +
+        "Prix : " + product.price + " DH\n" +
+        "Couleur : " + color + "\n" +
         "Pointure : " + size + "\n" +
         "Ville : " + city + "\n\n" +
         "Nom : \nAdresse : \nTéléphone : ";
@@ -187,24 +210,57 @@
     updateOrder();
   }
 
-  function createProducts() {
-    createShoeProduct(
-      BASKETS,
-      "adluxe-baskets-urban",
-      "Un modèle tendance et facile à porter au quotidien, avec une semelle confortable et un design moderne qui s’adapte aussi bien à un look casual qu’à une tenue plus habillée. Disponibles en plusieurs coloris pour matcher facilement avec votre style.",
-      1122,
-      1402
-    );
-    addProductSchema(BASKETS, "adluxe-baskets-schema", "Baskets femme au design moderne et confortable, disponibles du 36 au 40 en plusieurs coloris.", "ADL-CHA-URBAN-001");
+  function createParfumerieProduct(product) {
+    const list = document.querySelector(".product-list");
+    const articleId = "adluxe-" + product.id;
+    if (!list || document.getElementById(articleId)) return;
 
-    createShoeProduct(
-      SANDALS,
-      "adluxe-sandales-elegance",
-      "Un modèle chic et confortable, parfait pour les sorties de tous les jours comme pour les looks plus habillés. Sa semelle légère, sa finition élégante et ses détails raffinés apportent une touche féminine facile à assortir à vos tenues.",
-      1080,
-      1350
-    );
-    addProductSchema(SANDALS, "adluxe-sandales-schema", "Sandales femme chic et confortables, disponibles en pointures 37, 38 et 39.", "ADL-CHA-SAND-001");
+    const article = document.createElement("article");
+    article.className = "product-card";
+    article.id = articleId;
+    article.dataset.productId = product.id;
+    article.dataset.category = "parfumerie";
+    article.dataset.name = product.name;
+    article.dataset.price = String(product.price);
+    article.dataset.defaultImage = product.image;
+
+    article.innerHTML = `
+      <div class="gallery">
+        <div class="main-photo">
+          <img class="main-product-image" src="${product.image}" alt="${product.name}" width="300" height="300" loading="lazy" decoding="async">
+        </div>
+      </div>
+      <div class="product-info">
+        <span class="stock">En stock</span>
+        <h3>${product.name}</h3>
+        <p class="product-subtitle">${product.description}</p>
+        <p class="price">${product.price} DH</p>
+        <div class="product-actions">
+          <a class="btn order-btn perfume-order-btn" href="https://wa.me/212644162453" target="_blank" rel="noopener">Commander sur WhatsApp</a>
+        </div>
+      </div>`;
+
+    list.append(article);
+    const order = article.querySelector(".perfume-order-btn");
+    const updateOrder = () => {
+      if (!order) return;
+      const city = (document.getElementById("deliveryCity")?.value || "").trim();
+      const message =
+        "Bonjour AD_LUXE, je souhaite commander " + product.name + ".\n\n" +
+        "Prix : " + product.price + " DH\n" +
+        "Ville : " + city + "\n\n" +
+        "Nom : \nAdresse : \nTéléphone : ";
+      order.href = WA + encodeURIComponent(message);
+    };
+    document.getElementById("deliveryCity")?.addEventListener("input", updateOrder);
+    updateOrder();
+    addProductSchema(product, "beauty");
+  }
+
+  function createProducts() {
+    createShoeProduct(BASKETS);
+    createShoeProduct(SANDALS);
+    PARFUMERIE.forEach(createParfumerieProduct);
   }
 
   addBasketsStyles();
