@@ -193,6 +193,8 @@
       ["eliane", "eliane"],
       ["baskets urban", "baskets urban chic"],
       ["urban chic", "baskets urban chic"],
+      ["sac signature", "sac elegance signature"],
+      ["mosest", "sac elegance signature"],
       ["rose berry trio", "rose berry trio"],
       ["nude pink", "nude pink"],
       ["sandales elegance", "sandales elegance confort"],

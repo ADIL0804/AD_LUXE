@@ -61,6 +61,26 @@
     }
   ]);
 
+  const BAG = Object.freeze({
+    id: "sac-elegance-signature",
+    name: "Sac Élégance Signature",
+    price: 200,
+    defaultColor: "Noir",
+    description: "Un sac à main structuré au style chic et intemporel, rehaussé de finitions dorées et accompagné d’une bandoulière amovible. Spacieux et élégant, il accompagne facilement vos journées, vos sorties et vos tenues habillées.",
+    images: [
+      { color: "Noir", src: "assets/products/sac-elegance-signature/noir.jpg" },
+      { color: "Crème", src: "assets/products/sac-elegance-signature/creme.jpg" },
+      { color: "Bleu ciel", src: "assets/products/sac-elegance-signature/bleu-ciel.jpg" },
+      { color: "Bordeaux", src: "assets/products/sac-elegance-signature/bordeaux.jpg" },
+      { color: "Marron", src: "assets/products/sac-elegance-signature/marron.jpg" },
+      { color: "Beige", src: "assets/products/sac-elegance-signature/beige.jpg" },
+      { color: "Gris", src: "assets/products/sac-elegance-signature/gris.jpg" },
+      { color: "Blanc", src: "assets/products/sac-elegance-signature/blanc.jpg" },
+      { color: "Rose poudré", src: "assets/products/sac-elegance-signature/rose-poudre.jpg" },
+      { color: "Camel", src: "assets/products/sac-elegance-signature/camel.jpg" }
+    ]
+  });
+
   function addBasketsStyles() {
     if (document.querySelector('link[href^="baskets.css"]')) return;
     const link = document.createElement("link");
@@ -260,9 +280,89 @@
     addProductSchema(product, "beauty");
   }
 
+  function createBagProduct(product) {
+    const list = document.querySelector(".product-list");
+    const articleId = "adluxe-" + product.id;
+    if (!list || document.getElementById(articleId)) return;
+
+    const article = document.createElement("article");
+    article.className = "product-card shoe-product";
+    article.id = articleId;
+    article.dataset.productId = product.id;
+    article.dataset.category = "sacs";
+    article.dataset.name = product.name;
+    article.dataset.price = String(product.price);
+    article.dataset.defaultColor = product.defaultColor;
+    article.dataset.defaultImage = product.images[0].src;
+
+    const thumbnails = product.images.map((item, index) => `
+      <button class="shoe-thumb${index === 0 ? " is-active" : ""}" type="button" data-shoe-color="${item.color}" data-shoe-image="${item.src}" aria-label="Voir le sac ${item.color}" aria-pressed="${index === 0}">
+        <img src="${item.src}" alt="${product.name} ${item.color}" loading="lazy" decoding="async">
+      </button>`).join("");
+
+    article.innerHTML = `
+      <div class="gallery shoe-gallery">
+        <div class="main-photo">
+          <img class="main-product-image shoe-main-image" src="${product.images[0].src}" alt="${product.name} ${product.defaultColor}" width="1117" height="1408">
+          <span class="photo-label shoe-photo-label">${product.defaultColor}</span>
+        </div>
+        <div class="shoe-thumbnails" aria-label="Choisir une couleur">${thumbnails}</div>
+      </div>
+      <div class="product-info">
+        <span class="stock">En stock</span>
+        <h3>${product.name}</h3>
+        <p class="product-subtitle">${product.description}</p>
+        <p class="price">${product.price} DH</p>
+        <p class="option-title">10 couleurs disponibles</p>
+        <div class="product-actions">
+          <button class="btn btn-outline adluxe-add-cart" type="button">🛒 Ajouter au panier</button>
+          <a class="btn order-btn bag-order-btn" href="https://wa.me/212644162453" target="_blank" rel="noopener">Commander sur WhatsApp</a>
+        </div>
+        <p class="order-note">Choisissez la couleur souhaitée avant de commander.</p>
+      </div>`;
+
+    list.append(article);
+    const main = article.querySelector(".shoe-main-image");
+    const label = article.querySelector(".shoe-photo-label");
+    const order = article.querySelector(".bag-order-btn");
+    const thumbs = [...article.querySelectorAll(".shoe-thumb")];
+    let color = product.defaultColor;
+
+    const updateOrder = () => {
+      if (!order) return;
+      const city = (document.getElementById("deliveryCity")?.value || "").trim();
+      const message =
+        "Bonjour AD_LUXE, je souhaite commander " + product.name + ".\n\n" +
+        "Prix : " + product.price + " DH\n" +
+        "Couleur : " + color + "\n" +
+        "Ville : " + city + "\n\n" +
+        "Nom : \nAdresse : \nTéléphone : ";
+      order.href = WA + encodeURIComponent(message);
+    };
+
+    thumbs.forEach((button) => button.addEventListener("click", () => {
+      color = button.dataset.shoeColor || product.defaultColor;
+      const image = button.dataset.shoeImage || product.images[0].src;
+      if (main) { main.src = image; main.alt = product.name + " — " + color; }
+      if (label) label.textContent = color;
+      thumbs.forEach((item) => {
+        const active = item === button;
+        item.classList.toggle("is-active", active);
+        item.setAttribute("aria-pressed", String(active));
+      });
+      window.gtag("event", "select_item", { item_id: product.id, item_name: product.name, item_variant: color });
+      updateOrder();
+    }));
+
+    document.getElementById("deliveryCity")?.addEventListener("input", updateOrder);
+    updateOrder();
+    addProductSchema(product, "bag");
+  }
+
   function createProducts() {
     createShoeProduct(BASKETS);
     createShoeProduct(SANDALS);
+    createBagProduct(BAG);
     PARFUMERIE.forEach(createParfumerieProduct);
   }
 
