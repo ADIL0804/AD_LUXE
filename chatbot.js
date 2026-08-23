@@ -114,6 +114,17 @@
     parfumerie: "Parfumerie",
   };
 
+  const knownColors = uniqueValues(products.flatMap((item) => item.colors)).sort(
+    (a, b) => b.length - a.length
+  );
+
+  const findRequestedColor = (text) =>
+    knownColors.find((color) => {
+      const searchColor = normalise(color);
+      return text.includes(searchColor) ||
+        (searchColor.includes(" ") && text.includes(searchColor.split(" ")[0]));
+    }) || null;
+
   const categoryPatterns = [
     { id: "vetements", pattern: /(vetement|habit|robe|ensemble|top|pantalon|lbsa|7wayj|ملابس|لباس)/ },
     { id: "accessoires", pattern: /(accessoire|lunette|ceinture|montre|اكسسوار|نظارات|ساعة)/ },
@@ -194,16 +205,19 @@
 
   const buildKnowledgeAnswer = (value) => {
     const text = normalise(value);
+    const requestedColor = findRequestedColor(text);
     const wantsPrice = /(prix|price|coute|combien|tman|taman|thaman|chhal|الثمن|ثمن)/.test(text);
-    const wantsColor = /(couleur|color|loun|لون|الوان|الألوان)/.test(text);
+    const wantsColor = /(couleur|color|loun|لون|الوان|الألوان)/.test(text) || Boolean(requestedColor);
     const wantsSize = /(pointure|taille|size|numero|nmra|قياس|مقاس)/.test(text);
     const wantsStock = /(dispo|disponible|stock|mazal|متوفر|موجود)/.test(text);
     const wantsDescription = /(description|detail|information|c est quoi|chno howa|شنو هو|تفاصيل)/.test(text);
     const wantsOrder = /(commander|commande|acheter|ncommandi|nkomondi|nchri|طلب|كوموند|نشري)/.test(text);
     const logisticsIntent = /(livraison|livrer|frais|transport|delai|katwslo|katoslo|tawsil|التوصيل)/.test(text);
+    const genericCatalogQuery = /(chi haja|article|produit|3ndkom|عندكم|شي حاجة)/.test(text);
     const productIntent = wantsPrice || wantsColor || wantsSize || wantsStock || wantsDescription || wantsOrder;
     const explicitProduct = findProduct(text);
-    const product = explicitProduct || (productIntent && !logisticsIntent ? activeProduct : null);
+    const product = explicitProduct ||
+      (productIntent && !logisticsIntent && !genericCatalogQuery ? activeProduct : null);
 
     const city = cityPatterns.find((item) => item.pattern.test(text));
     if (city && /(livraison|livrer|frais|delai|katwslo|katoslo|tawsil|التوصيل|شحال)/.test(text)) {
@@ -221,6 +235,18 @@
         };
       }
       if (wantsColor) {
+        if (requestedColor) {
+          const colorName = normalise(requestedColor);
+          const isAvailable = product.colors.some((color) => {
+            const available = normalise(color);
+            return available.includes(colorName) || colorName.includes(available);
+          });
+          return {
+            text: isAvailable
+              ? `Oui, ${product.name} est disponible en ${requestedColor}.`
+              : `${product.name} n’est pas affiché en ${requestedColor}. Couleurs disponibles : ${product.colors.join(", ")}.`,
+          };
+        }
         return {
           text: product.colors.length
             ? `${product.name} est disponible en : ${product.colors.join(", ")}.`
@@ -239,12 +265,6 @@
       return { text: productSummary(product), actions: productActions(product) };
     }
 
-    const knownColors = uniqueValues(products.flatMap((item) => item.colors))
-      .sort((a, b) => b.length - a.length);
-    const requestedColor = knownColors.find((color) => {
-      const searchColor = normalise(color);
-      return text.includes(searchColor) || (searchColor.includes(" ") && text.includes(searchColor.split(" ")[0]));
-    });
     if (requestedColor) {
       const colorName = normalise(requestedColor);
       const matches = products.filter((item) =>
