@@ -152,7 +152,7 @@
     };
     thumbs.forEach((button) => button.addEventListener("click", () => { pick(button.dataset.color, button.dataset.image); track("select_item", { item_id: card.dataset.productId, item_name: card.dataset.name, item_variant: button.dataset.color }); })); colors.forEach((button) => button.addEventListener("click", () => { pick(button.dataset.colorTarget); track("select_item", { item_id: card.dataset.productId, item_name: card.dataset.name, item_variant: button.dataset.colorTarget }); }));
     sizes.forEach((button) => button.addEventListener("click", () => { if (!sizeChoice) return; const size = button.dataset.size; sizeChoice.textContent = size; sizes.forEach((other) => { const active = other === button; other.classList.toggle("is-active", active); other.setAttribute("aria-pressed", String(active)); }); directMessage(card); track("select_item", { item_id: card.dataset.productId, item_name: card.dataset.name, item_variant: "Pointure " + size }); }));
-    card.querySelector(".adluxe-add-cart")?.addEventListener("click", () => window.ADLUXE_CART.add(card)); pick(card.dataset.defaultColor);
+    pick(card.dataset.defaultColor);
   }
 
   function initFilters() {
@@ -175,6 +175,7 @@
 
   function initControls() {
     document.querySelector(".adluxe-cart-trigger")?.addEventListener("click", window.ADLUXE_CART.open); document.querySelector(".adluxe-cart-close")?.addEventListener("click", window.ADLUXE_CART.close); document.querySelector(".adluxe-menu-trigger")?.addEventListener("click", window.ADLUXE_MENU.open); document.querySelector(".adluxe-menu-close")?.addEventListener("click", window.ADLUXE_MENU.close);
+    document.querySelector(".product-list")?.addEventListener("click", (event) => { const button = event.target.closest(".adluxe-add-cart"); if (!button) return; const card = button.closest(".product-card"); if (card) window.ADLUXE_CART.add(card); });
     cityInputs().forEach((input) => input.addEventListener("input", () => { cityInputs().forEach((other) => { if (other !== input) other.value = input.value; }); cards().forEach(directMessage); renderCart(); }));
     document.querySelectorAll(".order-btn, #adluxe-cart-wa").forEach((link) => link.addEventListener("click", (event) => {
       if (link.getAttribute("aria-disabled") !== "true") {
