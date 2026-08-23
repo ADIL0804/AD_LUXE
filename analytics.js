@@ -81,6 +81,25 @@
     ]
   });
 
+  const CROSSBODY_BAG = Object.freeze({
+    id: "sac-bandouliere-elegance",
+    name: "Sac Bandoulière Élégance",
+    price: 170,
+    defaultColor: "Rouge",
+    description: "Un sac bandoulière compact et raffiné, doté d’un fermoir doré, d’une sangle large réglable et d’une seconde anse pour varier les portés. Son format pratique accueille vos essentiels tout en ajoutant une touche chic à vos tenues du quotidien.",
+    images: [
+      { color: "Rouge", src: "assets/products/sac-bandouliere-elegance/rouge.jpg" },
+      { color: "Bordeaux", src: "assets/products/sac-bandouliere-elegance/bordeaux.jpg" },
+      { color: "Cognac", src: "assets/products/sac-bandouliere-elegance/cognac.jpg" },
+      { color: "Crème", src: "assets/products/sac-bandouliere-elegance/creme.jpg" },
+      { color: "Blanc", src: "assets/products/sac-bandouliere-elegance/blanc.jpg" },
+      { color: "Noir", src: "assets/products/sac-bandouliere-elegance/noir.jpg" },
+      { color: "Marron", src: "assets/products/sac-bandouliere-elegance/marron.jpg" },
+      { color: "Beige", src: "assets/products/sac-bandouliere-elegance/beige.jpg" },
+      { color: "Camel", src: "assets/products/sac-bandouliere-elegance/camel.jpg" }
+    ]
+  });
+
   function addBasketsStyles() {
     if (document.querySelector('link[href^="baskets.css"]')) return;
     const link = document.createElement("link");
@@ -313,7 +332,7 @@
         <h3>${product.name}</h3>
         <p class="product-subtitle">${product.description}</p>
         <p class="price">${product.price} DH</p>
-        <p class="option-title">10 couleurs disponibles</p>
+        <p class="option-title">${product.images.length} couleurs disponibles</p>
         <div class="product-actions">
           <button class="btn btn-outline adluxe-add-cart" type="button">🛒 Ajouter au panier</button>
           <a class="btn order-btn bag-order-btn" href="https://wa.me/212644162453" target="_blank" rel="noopener">Commander sur WhatsApp</a>
@@ -363,6 +382,7 @@
     createShoeProduct(BASKETS);
     createShoeProduct(SANDALS);
     createBagProduct(BAG);
+    createBagProduct(CROSSBODY_BAG);
     PARFUMERIE.forEach(createParfumerieProduct);
   }
 
