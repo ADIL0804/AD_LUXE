@@ -140,6 +140,7 @@
 
     <link rel="stylesheet" href="styles.css?v=20260822-4">
     <link rel="stylesheet" href="palette.css?v=20260822-3">
+    <link rel="stylesheet" href="chatbot.css?v=20260823-1">
 </head>
 <body>
     <a class="skip-link" href="#contenu">Aller au contenu principal</a>
@@ -405,6 +406,40 @@
         <div class="copyright container">© 2026 AD_LUXE — Tous droits réservés</div>
     </footer>
 
+    <section class="adluxe-chatbot" data-adluxe-chatbot aria-label="Assistance AD_LUXE">
+        <button class="adluxe-chat-launcher" type="button" aria-controls="adluxe-chat-panel" aria-expanded="false" aria-label="Ouvrir l'assistante AD_LUXE">
+            <span class="adluxe-chat-launcher-icon" aria-hidden="true">✦</span>
+            <span>Besoin d'aide ?</span>
+        </button>
+        <div class="adluxe-chat-panel" id="adluxe-chat-panel" role="dialog" aria-labelledby="adluxe-chat-title" hidden>
+            <header class="adluxe-chat-head">
+                <div class="adluxe-chat-identity">
+                    <span class="adluxe-chat-avatar" aria-hidden="true">AD</span>
+                    <span><strong id="adluxe-chat-title">Assistante AD_LUXE</strong><small><i class="adluxe-chat-status" aria-hidden="true"></i>Réponse immédiate</small></span>
+                </div>
+                <button class="adluxe-chat-close" type="button" aria-label="Fermer l'assistante">×</button>
+            </header>
+            <div class="adluxe-chat-messages" role="log" aria-live="polite" aria-relevant="additions"></div>
+            <div class="adluxe-chat-quick">
+                <p>Réponses rapides</p>
+                <div class="adluxe-chat-topics">
+                    <button class="adluxe-chat-topic" type="button" data-chat-topic="order">Passer commande</button>
+                    <button class="adluxe-chat-topic" type="button" data-chat-topic="delivery">Frais de livraison</button>
+                    <button class="adluxe-chat-topic" type="button" data-chat-topic="delay">Délais</button>
+                    <button class="adluxe-chat-topic" type="button" data-chat-topic="payment">Paiement</button>
+                    <button class="adluxe-chat-topic" type="button" data-chat-topic="exchange">Échange</button>
+                    <button class="adluxe-chat-topic" type="button" data-chat-topic="tracking">Suivre ma commande</button>
+                    <button class="adluxe-chat-topic" type="button" data-chat-topic="categories">Catégories</button>
+                    <button class="adluxe-chat-topic" type="button" data-chat-topic="human">Parler à l'équipe</button>
+                </div>
+            </div>
+            <form class="adluxe-chat-form">
+                <input class="adluxe-chat-input" type="text" inputmode="text" autocomplete="off" maxlength="240" aria-label="Écrivez votre question" placeholder="Écrivez votre question…">
+                <button class="adluxe-chat-send" type="submit" aria-label="Envoyer la question">➜</button>
+            </form>
+        </div>
+    </section>
+
     <a class="floating-whatsapp" href="https://wa.me/212644162453?text=Bonjour%20AD_LUXE%2C%20je%20souhaite%20avoir%20plus%20d%27informations.%0A%0ANom%20%3A%20%0AVille%20%3A%20" target="_blank" rel="noopener" aria-label="Contacter AD_LUXE sur WhatsApp" title="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.149-.173.198-.297.298-.495.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479s1.065 2.875 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.002-5.45 4.438-9.887 9.892-9.887a9.82 9.82 0 0 1 6.987 2.897 9.83 9.83 0 0 1 2.901 6.994c-.003 5.45-4.439 9.888-9.896 9.888M20.464 3.488A11.82 11.82 0 0 0 12.055 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.304-1.654a11.9 11.9 0 0 0 5.69 1.448h.005c6.554 0 11.89-5.335 11.894-11.893a11.82 11.82 0 0 0-3.486-8.413Z"/></svg></a>
 
     <div class="adluxe-cart-overlay" id="adluxe-cart-overlay" role="dialog" aria-modal="true" aria-label="Panier" aria-hidden="true">
@@ -412,5 +447,6 @@
     </div>
 
     <script src="app.js?v=20260822-2" defer></script>
+    <script src="chatbot.js?v=20260823-1" defer></script>
 </body>
 </html>
