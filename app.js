@@ -9,8 +9,8 @@
   let menuReturnFocus = null;
   const cards = () => [...document.querySelectorAll(".product-card[data-product-id]")];
   const product = (card) => ({ id: card.dataset.productId, name: card.dataset.name, price: Number(card.dataset.price), image: card.dataset.defaultImage });
-  const selected = (card) => card.querySelector(".selected-color, #selectedColor")?.textContent || card.dataset.defaultColor;
-  const selectedSize = (card) => card.querySelector(".selected-size")?.textContent || card.dataset.defaultSize || "";
+  const selected = (card) => card.querySelector(".selected-color, #selectedColor, .shoe-photo-label")?.textContent?.trim() || card.dataset.defaultColor || "";
+  const selectedSize = (card) => card.querySelector(".selected-size, .shoe-selected-size")?.textContent?.trim() || card.dataset.defaultSize || "";
   const setWA = (link, message) => { if (link) link.href = WA + encodeURIComponent(message); };
 
   function track(event, details = {}) {
@@ -67,13 +67,14 @@
     const item = product(card);
     const color = selected(card);
     const size = selectedSize(card);
+    const colorLine = color ? "\nCouleur : " + color : "";
     const sizeLine = size ? "\nPointure : " + size : "";
     const link = card.querySelector(".order-btn");
     const ship = showDelivery();
     availability(link, Boolean(ship));
-    if (!ship) return setWA(link, "Bonjour AD_LUXE, je souhaite commander " + item.name + ".\nCouleur : " + color + sizeLine + "\nVille : ");
+    if (!ship) return setWA(link, "Bonjour AD_LUXE, je souhaite commander " + item.name + "." + colorLine + sizeLine + "\nVille : ");
     setWA(link, "Bonjour AD_LUXE, je souhaite confirmer cette commande :\n\nRÉCAPITULATIF\n" +
-      "Référence : " + orderReference() + "\nProduit : " + item.name + "\nCouleur : " + color + sizeLine + "\nPrix : " + item.price + " DH\nVille : " + ship.city +
+      "Référence : " + orderReference() + "\nProduit : " + item.name + colorLine + sizeLine + "\nPrix : " + item.price + " DH\nVille : " + ship.city +
       "\nLivraison : " + ship.price + " DH\nTotal à payer : " + (item.price + ship.price) + " DH\nDélai estimé : " + ship.delay +
       "\nPaiement : à la réception\nÉchange : sous 48h\n\nNom : \nAdresse : \nTéléphone : ");
   }
@@ -83,16 +84,16 @@
       const catalog = new Map(cards().map((card) => [card.dataset.productId, product(card)]));
       const saved = JSON.parse(localStorage.getItem(KEY) || "[]");
       if (!Array.isArray(saved)) return [];
-      return saved.flatMap((item) => catalog.has(item?.id) && item.color ? [{ ...catalog.get(item.id), color: String(item.color), size: item.size ? String(item.size) : "", image: item.image || catalog.get(item.id).image, qty: Math.min(99, Math.max(1, parseInt(item.qty, 10) || 1)) }] : []);
+      return saved.flatMap((item) => catalog.has(item?.id) ? [{ ...catalog.get(item.id), color: item.color ? String(item.color) : "", size: item.size ? String(item.size) : "", image: item.image || catalog.get(item.id).image, qty: Math.min(99, Math.max(1, parseInt(item.qty, 10) || 1)) }] : []);
     } catch { localStorage.removeItem(KEY); return []; }
   }
 
   function cartRow(item, index) {
     const row = document.createElement("div"); row.className = "adluxe-cart-item";
-    const image = document.createElement("img"); image.src = item.image; image.alt = item.name + " — " + item.color + (item.size ? " — pointure " + item.size : "");
+    const image = document.createElement("img"); image.src = item.image; image.alt = item.name + (item.color ? " — " + item.color : "") + (item.size ? " — pointure " + item.size : "");
     const info = document.createElement("div");
     const name = document.createElement("strong"); name.textContent = item.name;
-    const variant = document.createElement("div"); variant.textContent = "Couleur : " + item.color + (item.size ? " · Pointure : " + item.size : "");
+    const variant = document.createElement("div"); variant.textContent = (item.color ? "Couleur : " + item.color : "") + (item.size ? (item.color ? " · " : "") + "Pointure : " + item.size : "");
     const price = document.createElement("div"); price.textContent = item.price + " DH × " + item.qty;
     const qty = document.createElement("div"); qty.className = "adluxe-cart-qty";
     const minus = document.createElement("button"); minus.type = "button"; minus.dataset.cartIndex = index; minus.dataset.cartDelta = -1; minus.ariaLabel = "Diminuer la quantité"; minus.textContent = "−";
@@ -123,7 +124,7 @@
     total.textContent = ship ? productsTotal + ship.price + " DH" : productsTotal + " DH + livraison";
     availability(link, Boolean(ship));
     if (!ship) return setWA(link, "Bonjour AD_LUXE, je souhaite commander ces articles. Ville : ");
-    setWA(link, "Bonjour AD_LUXE, je souhaite confirmer cette commande :\n\nRÉCAPITULATIF\nRéférence : " + reference + "\n" + cart.map((item) => item.name + " — " + item.color + (item.size ? " · Pointure " + item.size : "") + " × " + item.qty + " : " + item.price * item.qty + " DH").join("\n") +
+    setWA(link, "Bonjour AD_LUXE, je souhaite confirmer cette commande :\n\nRÉCAPITULATIF\nRéférence : " + reference + "\n" + cart.map((item) => item.name + (item.color ? " — " + item.color : "") + (item.size ? " · Pointure " + item.size : "") + " × " + item.qty + " : " + item.price * item.qty + " DH").join("\n") +
       "\n\nTotal produits : " + productsTotal + " DH\nVille : " + ship.city + "\nLivraison : " + ship.price + " DH\nTotal à payer : " + (productsTotal + ship.price) + " DH\nDélai estimé : " + ship.delay + "\nPaiement : à la réception\nÉchange : sous 48h\n\nNom : \nAdresse : \nTéléphone : ");
   }
 

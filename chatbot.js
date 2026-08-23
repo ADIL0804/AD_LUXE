@@ -85,25 +85,47 @@
 
   const uniqueValues = (values) => [...new Set(values.filter(Boolean))];
 
-  const products = Array.from(document.querySelectorAll(".product-card"))
-    .map((card) => ({
+  const readProducts = () => Array.from(document.querySelectorAll(".product-card"))
+    .map((card) => {
+      const colors = uniqueValues([
+        ...Array.from(card.querySelectorAll(".color-btn[data-color-target]"), (button) =>
+          button.dataset.colorTarget?.trim()
+        ),
+        ...Array.from(card.querySelectorAll(".shoe-thumb[data-shoe-color]"), (button) =>
+          button.dataset.shoeColor?.trim()
+        ),
+      ]);
+      const sizes = uniqueValues([
+        ...Array.from(card.querySelectorAll(".size-btn[data-size]"), (button) =>
+          button.dataset.size?.trim()
+        ),
+        ...Array.from(card.querySelectorAll(".shoe-size-btn[data-shoe-size]"), (button) =>
+          button.dataset.shoeSize?.trim()
+        ),
+      ]);
+      return {
       name: card.dataset.name || card.querySelector("h3")?.textContent.trim() || "Article AD_LUXE",
       category: card.dataset.category || "",
       price: Number(card.dataset.price || 0),
       description: card.querySelector(".product-subtitle")?.textContent.trim() || "",
-      colors: uniqueValues(
-        Array.from(card.querySelectorAll(".color-btn[data-color-target]"), (button) =>
-          button.dataset.colorTarget?.trim()
-        )
-      ),
-      sizes: uniqueValues(
-        Array.from(card.querySelectorAll(".size-btn[data-size]"), (button) =>
-          button.dataset.size?.trim()
-        )
-      ),
-    }))
+      colors: colors.length ? colors : uniqueValues([card.dataset.defaultColor]),
+      sizes: sizes.length ? sizes : uniqueValues([card.dataset.defaultSize]),
+    };
+    })
     .filter((product) => product.name && product.price > 0)
     .map((product) => ({ ...product, searchName: normalise(product.name) }));
+
+  let products = [];
+  let knownColors = [];
+
+  const refreshCatalog = () => {
+    products = readProducts();
+    knownColors = uniqueValues(products.flatMap((item) => item.colors)).sort(
+      (a, b) => b.length - a.length
+    );
+  };
+
+  refreshCatalog();
 
   const categoryLabels = {
     vetements: "Vêtements",
@@ -113,10 +135,6 @@
     chaussures: "Chaussures",
     parfumerie: "Parfumerie",
   };
-
-  const knownColors = uniqueValues(products.flatMap((item) => item.colors)).sort(
-    (a, b) => b.length - a.length
-  );
 
   const findRequestedColor = (text) =>
     knownColors.find((color) => {
@@ -159,7 +177,7 @@
     {
       label: `Commander ${product.name}`,
       href: whatsappUrl(
-        `Bonjour AD_LUXE, je souhaite commander : ${product.name}.\n\nCouleur : \nPointure (si nécessaire) : \nNom : \nVille : `
+        `Bonjour AD_LUXE, je souhaite commander : ${product.name}.\n\n${product.colors.length ? "Couleur : \n" : ""}${product.sizes.length ? "Pointure : \n" : ""}Nom : \nVille : `
       ),
       external: true,
     },
@@ -173,8 +191,12 @@
       ["scarf", "scarf"],
       ["florea", "florea"],
       ["eliane", "eliane"],
-      ["sandales confort", "sandales confort"],
-      ["sandale", "sandales confort"],
+      ["baskets urban", "baskets urban chic"],
+      ["urban chic", "baskets urban chic"],
+      ["rose berry trio", "rose berry trio"],
+      ["nude pink", "nude pink"],
+      ["sandales elegance", "sandales elegance confort"],
+      ["sandales confort", "sandales confort elegance"],
       ["perla", "perla"],
       ["velours", "velours"],
       ["croisees", "croisees"],
@@ -204,6 +226,7 @@
   };
 
   const buildKnowledgeAnswer = (value) => {
+    refreshCatalog();
     const text = normalise(value);
     const requestedColor = findRequestedColor(text);
     const wantsPrice = /(prix|price|coute|combien|tman|taman|thaman|chhal|الثمن|ثمن)/.test(text);

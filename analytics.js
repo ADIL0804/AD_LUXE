@@ -110,6 +110,7 @@
     article.dataset.name = product.name;
     article.dataset.price = String(product.price);
     article.dataset.defaultColor = product.defaultColor;
+    article.dataset.defaultSize = product.defaultSize;
     article.dataset.defaultImage = product.images[0].src;
 
     const thumbnails = product.images.map((item, index) => `
@@ -140,6 +141,7 @@
         <p class="option-title">Pointure choisie : <span class="shoe-selected-size">${product.defaultSize}</span></p>
         <div class="shoe-size-options" aria-label="Choisir la pointure">${sizes}</div>
         <div class="product-actions">
+          <button class="btn btn-outline adluxe-add-cart" type="button">🛒 Ajouter au panier</button>
           <a class="btn order-btn shoe-order-btn" href="https://wa.me/212644162453" target="_blank" rel="noopener">Commander sur WhatsApp</a>
         </div>
         <p class="order-note">Pointures disponibles : ${product.sizes.join(" · ")}</p>
@@ -236,6 +238,7 @@
         <p class="product-subtitle">${product.description}</p>
         <p class="price">${product.price} DH</p>
         <div class="product-actions">
+          <button class="btn btn-outline adluxe-add-cart" type="button">🛒 Ajouter au panier</button>
           <a class="btn order-btn perfume-order-btn" href="https://wa.me/212644162453" target="_blank" rel="noopener">Commander sur WhatsApp</a>
         </div>
       </div>`;
