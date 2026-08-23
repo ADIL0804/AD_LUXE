@@ -84,15 +84,15 @@
 
   const detectTopic = (value) => {
     const text = normalise(value);
-    if (/\b(salam|bonjour|bonsoir|hello|slt|سلام|مرحبا)\b/.test(text)) return "hello";
-    if (/\b(suivi|suivre|colis|reference|فين.*كوموند|commande.*fin)\b/.test(text)) return "tracking";
-    if (/\b(echange|echanger|retour|rembour|بدل|تبديل|رجع)\b/.test(text)) return "exchange";
-    if (/\b(delai|duree|temps|combien.*jour|24h|48h|72h|شحال.*وقت|فوقاش)\b/.test(text)) return "delay";
-    if (/\b(livraison|livrer|frais|transport|casablanca|المدينة|التوصيل)\b/.test(text)) return "delivery";
-    if (/\b(paiement|payer|cash|especes|reception|نخلص|الدفع|الخلاص)\b/.test(text)) return "payment";
-    if (/\b(categorie|produit|article|vetement|bijou|sac|chaussure|parfum|شنو.*كاين|المنتوج)\b/.test(text)) return "categories";
-    if (/\b(commander|commande|acheter|panier|طلب|كوموند|نشري)\b/.test(text)) return "order";
-    if (/\b(conseiller|vendeur|equipe|personne|whatsapp|انسان|نهضر)\b/.test(text)) return "human";
+    if (/(salam|bonjour|bonsoir|hello|slt|sbah|سلام|مرحبا)/.test(text)) return "hello";
+    if (/(suivi|suivre|colis|reference|fin.*(commande|komond)|فين.*كوموند|commande.*fin)/.test(text)) return "tracking";
+    if (/(echange|echanger|retour|rembour|nbdel|nbedel|nrj3|بدل|تبديل|رجع)/.test(text)) return "exchange";
+    if (/(delai|duree|temps|combien.*jour|chhal.*(wa9t|waqt|nhar)|imta|24h|48h|72h|شحال.*وقت|فوقاش)/.test(text)) return "delay";
+    if (/(livraison|livrer|frais|transport|casablanca|tawsil|المدينة|التوصيل)/.test(text)) return "delivery";
+    if (/(paiement|payer|cash|especes|reception|nkhls|nkheles|nkhlles|khalas|flous|n?خلص|الدفع|الخلاص)/.test(text)) return "payment";
+    if (/(categorie|produit|article|vetement|bijou|sac|chaussure|parfum|chno.*kayn|achno.*kayn|شنو.*كاين|المنتوج)/.test(text)) return "categories";
+    if (/(commander|commande|acheter|panier|ncommandi|nkomondi|nchri|bghit.*(commande|komond)|طلب|كوموند|نشري)/.test(text)) return "order";
+    if (/(conseiller|vendeur|equipe|personne|whatsapp|nhedr|nhdr|انسان|نهضر)/.test(text)) return "human";
     return null;
   };
 
