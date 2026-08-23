@@ -378,3 +378,125 @@
     if (/(categorie|produit|article|vetement|bijou|sac|chaussure|parfum|chno.*kayn|achno.*kayn|شنو.*كاين|المنتوج)/.test(text)) return "categories";
     if (/(commander|commande|acheter|panier|ncommandi|nkomondi|nchri|bghit.*(commande|komond)|طلب|كوموند|نشري)/.test(text)) return "order";
     if (/(conseiller|vendeur|equipe|personne|whatsapp|nhedr|nhdr|انسان|نهضر)/.test(text)) return "human";
+    if (/(salam|bonjour|bonsoir|hello|slt|sbah|سلام|مرحبا)/.test(text)) return "hello";
+    return null;
+  };
+
+  const addMessage = (type, text, actions = []) => {
+    const message = document.createElement("div");
+    message.className = `adluxe-chat-message is-${type}`;
+
+    const bubble = document.createElement("div");
+    bubble.className = "adluxe-chat-bubble";
+    bubble.textContent = text;
+    message.appendChild(bubble);
+
+    if (actions.length) {
+      const actionList = document.createElement("div");
+      actionList.className = "adluxe-chat-actions";
+      actions.forEach((action) => {
+        const link = document.createElement("a");
+        link.className = "adluxe-chat-action";
+        link.href = action.href;
+        link.textContent = action.label;
+        if (action.external) {
+          link.target = "_blank";
+          link.rel = "noopener";
+        }
+        link.addEventListener("click", () => {
+          if (!action.external) closeChat();
+        });
+        actionList.appendChild(link);
+      });
+      message.appendChild(actionList);
+    }
+
+    messages.appendChild(message);
+    messages.scrollTop = messages.scrollHeight;
+  };
+
+  const answerTopic = (topic, userLabel = "") => {
+    if (userLabel) addMessage("user", userLabel);
+    const answer = topics[topic];
+    window.setTimeout(() => addMessage("assistant", answer.text, answer.actions || []), 180);
+  };
+
+  const openChat = () => {
+    panel.hidden = false;
+    launcher.setAttribute("aria-expanded", "true");
+    root.classList.add("is-open");
+    window.setTimeout(() => input.focus(), 80);
+  };
+
+  const closeChat = () => {
+    launcher.setAttribute("aria-expanded", "false");
+    root.classList.remove("is-open");
+    window.setTimeout(() => {
+      if (!root.classList.contains("is-open")) panel.hidden = true;
+    }, 180);
+    launcher.focus();
+  };
+
+  launcher.addEventListener("click", () => {
+    if (root.classList.contains("is-open")) closeChat();
+    else openChat();
+  });
+
+  closeButton.addEventListener("click", closeChat);
+
+  topicButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      answerTopic(button.dataset.chatTopic, button.textContent.trim());
+    });
+  });
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const value = input.value.trim();
+    if (!value) return;
+
+    addMessage("user", value);
+    input.value = "";
+
+    const knowledgeAnswer = buildKnowledgeAnswer(value);
+    if (knowledgeAnswer) {
+      window.setTimeout(
+        () => addMessage("assistant", knowledgeAnswer.text, knowledgeAnswer.actions || []),
+        180
+      );
+      return;
+    }
+
+    const topic = detectTopic(value);
+    if (topic) {
+      const answer = topics[topic];
+      window.setTimeout(() => addMessage("assistant", answer.text, answer.actions || []), 180);
+      return;
+    }
+
+    window.setTimeout(
+      () =>
+        addMessage(
+          "assistant",
+          "Je n’ai pas encore la réponse exacte. Essayez avec le nom d’un article, par exemple : « prix Scarf », « couleurs Floréa », « pointure 39 », « articles à moins de 160 DH » ou écrivez à l’équipe AD_LUXE.",
+          [
+            {
+              label: "Continuer sur WhatsApp",
+              href: whatsappUrl(`Bonjour AD_LUXE, j’ai une question : ${value}`),
+              external: true,
+            },
+          ]
+        ),
+      180
+    );
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && root.classList.contains("is-open")) closeChat();
+  });
+
+  addMessage(
+    "assistant",
+    "Salam 👋 Je suis l’assistante AD_LUXE. Demandez-moi le prix, les couleurs, les pointures ou la disponibilité d’un article. Vous pouvez aussi choisir une réponse rapide."
+  );
+})();
