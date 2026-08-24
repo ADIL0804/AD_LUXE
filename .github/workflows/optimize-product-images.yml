@@ -87,13 +87,27 @@ jobs:
               if text != original:
                   path.write_text(text, encoding='utf-8')
 
+          # Dynamic catalogue cards: thumbnails use the tiny -thumb.webp files,
+          # while data-image continues to point at the full optimized WebP.
+          loader = Path('analytics-core.js')
+          if loader.exists():
+              text = loader.read_text(encoding='utf-8')
+              if 'function thumbSrc(src)' not in text:
+                  marker = "  function uniqueColors(images) {\n    return [...new Set(images.map((item) => item.color))];\n  }\n"
+                  helper = marker + "\n  function thumbSrc(src) {\n    return src.endsWith('.webp') ? src.replace(/\\.webp$/, '-thumb.webp') : src;\n  }\n"
+                  text = text.replace(marker, helper)
+              text = text.replace('<img src="${esc(item.src)}" alt="${esc(product.name)} — ${esc(item.color)}"', '<img src="${esc(thumbSrc(item.src))}" alt="${esc(product.name)} — ${esc(item.color)}"')
+              loader.write_text(text, encoding='utf-8')
+
           print(f'Converted {len(converted)} heavy product images to WebP.')
           PY
 
       - name: Show image savings
         run: |
-          echo 'Largest remaining product images:'
-          find assets/products -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) -printf '%s %p\n' | sort -nr | head -25
+          echo 'Largest active optimized product images:'
+          find assets/products -type f -name '*.webp' ! -name '*-thumb.webp' -printf '%s %p\n' | sort -nr | head -25
+          echo 'Largest thumbnail files:'
+          find assets/products -type f -name '*-thumb.webp' -printf '%s %p\n' | sort -nr | head -15
 
       - name: Commit optimized images
         run: |
@@ -104,5 +118,5 @@ jobs:
             echo 'No optimization changes to commit.'
             exit 0
           fi
-          git commit -m 'Optimize product images for faster mobile loading'
+          git commit -m 'Use lightweight product thumbnails'
           git push
