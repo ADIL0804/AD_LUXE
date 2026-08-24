@@ -39,6 +39,10 @@
     return [...new Set(images.map((item) => item.color))];
   }
 
+  function thumbSrc(src) {
+    return src.endsWith('.webp') ? src.replace(/\.webp$/, '-thumb.webp') : src;
+  }
+
   function createCard(product) {
     const list = document.querySelector(".product-list");
     const articleId = "adluxe-" + product.id;
@@ -61,7 +65,7 @@
       <button class="thumb${index === 0 ? " is-active" : ""}" type="button"
         data-color="${esc(item.color)}" data-image="${esc(item.src)}"
         aria-label="Voir ${esc(item.color)}" aria-pressed="${index === 0}">
-        <img src="${esc(item.src)}" alt="${esc(product.name)} — ${esc(item.color)}"
+        <img src="${esc(thumbSrc(item.src))}" alt="${esc(product.name)} — ${esc(item.color)}"
           loading="lazy" decoding="async" fetchpriority="low">
       </button>`).join("");
 
