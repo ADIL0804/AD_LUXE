@@ -1,21 +1,155 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://ad-luxe.ma/</loc>
-    <lastmod>2026-08-23</lastmod>
+    <lastmod>2026-08-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://ad-luxe.ma/social-card.jpg</image:loc>
+      <image:title>AD_LUXE — Boutique de mode féminine au Maroc</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://ad-luxe.ma/legal.html</loc>
-    <lastmod>2026-08-23</lastmod>
+    <lastmod>2026-08-24</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ad-luxe.ma/instagram.html</loc>
-    <lastmod>2026-08-23</lastmod>
+    <lastmod>2026-08-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://ad-luxe.ma/products/ensemble-scarf.html</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ad-luxe.ma/assets/products/ensemble-scarf/marron.webp</image:loc>
+      <image:title>Ensemble Scarf</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ad-luxe.ma/products/parure-florea.html</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ad-luxe.ma/assets/products/parure-florea/noir.webp</image:loc>
+      <image:title>Parure Floréa — Collier &amp; Bracelet</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ad-luxe.ma/products/parure-eliane.html</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ad-luxe.ma/assets/products/parure-eliane/vert-emeraude.webp</image:loc>
+      <image:title>Parure Éliane — Collier &amp; Bracelet</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ad-luxe.ma/products/sandales-confort-elegance.html</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ad-luxe.ma/assets/products/sandales-confort-elegance/noir.webp</image:loc>
+      <image:title>Sandales Confort Élégance</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ad-luxe.ma/products/mules-perla-elegance.html</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ad-luxe.ma/assets/products/mules-perla-elegance/marron.webp</image:loc>
+      <image:title>Mules Perla Élégance</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ad-luxe.ma/products/mules-velours-croisees.html</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ad-luxe.ma/assets/products/mules-velours-croisees/noir.webp</image:loc>
+      <image:title>Mules Velours Croisées</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ad-luxe.ma/products/baskets-urban-chic.html</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ad-luxe.ma/assets/products/baskets-urban-chic/gris.webp</image:loc>
+      <image:title>Baskets Urban Chic</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ad-luxe.ma/products/sandales-elegance.html</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ad-luxe.ma/assets/products/sandales-elegance/sandale-01.png</image:loc>
+      <image:title>Sandales Élégance Confort</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ad-luxe.ma/products/rose-berry-trio.html</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ad-luxe.ma/assets/products/parfumerie/rose-berry-trio.jpg</image:loc>
+      <image:title>Rose Berry Trio</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ad-luxe.ma/products/rose-berry-nude-pink.html</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ad-luxe.ma/assets/products/parfumerie/rose-berry-nude-pink.jpg</image:loc>
+      <image:title>Rose Berry Nude Pink Lip Duo</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ad-luxe.ma/products/sac-elegance-signature.html</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ad-luxe.ma/assets/products/sac-elegance-signature/noir.jpg</image:loc>
+      <image:title>Sac Élégance Signature</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ad-luxe.ma/products/sac-bandouliere-elegance.html</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ad-luxe.ma/assets/products/sac-bandouliere-elegance/rouge.jpg</image:loc>
+      <image:title>Sac Bandoulière Élégance</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ad-luxe.ma/products/sac-trio-elegance.html</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ad-luxe.ma/assets/products/sac-trio-elegance/noir-bordeaux.jpeg</image:loc>
+      <image:title>Sac Trio Élégance</image:title>
+    </image:image>
   </url>
 </urlset>
