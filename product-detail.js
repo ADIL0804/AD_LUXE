@@ -91,6 +91,7 @@ const P = {
 const p = P[document.body.dataset.productId];
 if (!p) return;
 
+const CART_KEY = "adluxe_cart";
 const e = (s) => String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;");
 const slug = (s) => String(s).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/&/g," ").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
 const imageFor = (color) => {
@@ -125,6 +126,58 @@ function buildWhatsApp() {
 function syncWA() {
   const wa = document.querySelector("[data-wa]");
   if (wa) wa.href = buildWhatsApp();
+}
+
+function addToCart() {
+  let cart = [];
+  try {
+    const saved = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+    if (Array.isArray(saved)) cart = saved;
+  } catch {}
+
+  const color = selectedColor || "";
+  const size = selectedSize || "";
+  const found = cart.find((item) => item?.id === p.id && (item.color || "") === color && (item.size || "") === size);
+
+  if (found) {
+    found.qty = Math.min(99, (parseInt(found.qty, 10) || 1) + 1);
+    found.image = imageFor(color);
+  } else {
+    cart.push({
+      id: p.id,
+      name: p.name,
+      price: p.price,
+      image: imageFor(color),
+      color,
+      size,
+      qty: 1
+    });
+  }
+
+  try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch {}
+
+  window.gtag?.("event", "add_to_cart", {
+    currency: "MAD",
+    value: p.price,
+    items: [{
+      item_id: p.id,
+      item_name: p.name,
+      item_brand: "AD_LUXE",
+      item_category: p.category,
+      item_variant: [color, size ? `${sizeLabel} ${size}` : ""].filter(Boolean).join(" · "),
+      price: p.price,
+      quantity: 1
+    }]
+  });
+
+  const button = document.querySelector("[data-add-cart]");
+  if (button) {
+    const original = "+ Ajouter au panier";
+    button.textContent = "✓ Ajouté au panier";
+    button.setAttribute("aria-live", "polite");
+    clearTimeout(button._resetTimer);
+    button._resetTimer = setTimeout(() => { button.textContent = original; }, 1400);
+  }
 }
 
 function selectColor(color) {
@@ -194,10 +247,11 @@ const mount = () => {
         </div>
 
         <div class="adluxe-product-cta">
+          <button class="btn btn-outline" type="button" data-add-cart>+ Ajouter au panier</button>
           <a class="btn" data-wa target="_blank" rel="noopener noreferrer">Commander sur WhatsApp</a>
           <a class="btn btn-outline" href="/#produit">Retour à la boutique</a>
         </div>
-        <p class="adluxe-product-small">Votre couleur${p.sizes.length ? ` et votre ${sizeLabel.toLowerCase()}` : ""} seront ajoutées automatiquement au message WhatsApp.</p>
+        <p class="adluxe-product-small">Votre couleur${p.sizes.length ? ` et votre ${sizeLabel.toLowerCase()}` : ""} seront ajoutées automatiquement au panier et au message WhatsApp.</p>
       </div>
     </article>
   </div>`;
@@ -206,6 +260,7 @@ const mount = () => {
 
   document.querySelectorAll("[data-color]").forEach((button) => button.addEventListener("click", () => selectColor(button.dataset.color)));
   document.querySelectorAll("[data-size]").forEach((button) => button.addEventListener("click", () => selectSize(button.dataset.size)));
+  document.querySelector("[data-add-cart]")?.addEventListener("click", addToCart);
   syncWA();
 
   const wa = document.querySelector("[data-wa]");
