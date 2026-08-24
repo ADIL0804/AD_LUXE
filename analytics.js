@@ -29,7 +29,8 @@
 
   addStylesheet("/catalog-compact.css?v=20260824-1");
   addScript("/analytics-core.js?v=20260824-3")
-    .then(() => addScript("/upgrade.js?v=20260824-3"))
+    .then(() => addScript("/upgrade.js?v=20260824-2"))
+    .then(() => addScript("/site-fixes.js?v=20260824-1"))
     .then(() => addScript("/seo-runtime.js?v=20260824-3"))
     .catch(() => {});
 })();
