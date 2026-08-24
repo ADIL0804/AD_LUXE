@@ -17,7 +17,7 @@ jobs:
           curl -sS -D /tmp/headers.txt -o /dev/null https://ad-luxe.ma/
           cat /tmp/headers.txt
           echo '=== SECURITY HEADER SUMMARY ==='
-          for h in strict-transport-security content-security-policy x-frame-options x-content-type-options referrer-policy permissions-policy; do
+          for h in strict-transport-security content-security-policy x-frame-options x-content-type-options referrer-policy permissions-policy x-permitted-cross-domain-policies; do
             printf '%s: ' "$h"
             grep -i "^$h:" /tmp/headers.txt || true
           done
