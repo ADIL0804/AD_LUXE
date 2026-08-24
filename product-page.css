@@ -16,7 +16,7 @@
 }
 .adluxe-product-shell {
   display: grid;
-  grid-template-columns: minmax(0, 1.02fr) minmax(320px, .98fr);
+  grid-template-columns: minmax(0, 1.02fr) minmax(360px, .98fr);
   gap: clamp(1.5rem, 4vw, 4rem);
   align-items: start;
 }
@@ -156,6 +156,7 @@
   display: contents;
 }
 .adluxe-product-fact {
+  min-width: 0;
   padding: .85rem;
   border-radius: 14px;
   background: var(--al-pink-light, #F5E4E4);
@@ -166,6 +167,7 @@
   font-size: .88rem;
 }
 .adluxe-product-fact span {
+  display: block;
   color: #635a5d;
   font-size: .82rem;
   line-height: 1.4;
@@ -189,6 +191,25 @@
 .adluxe-product-small a {
   color: inherit;
   text-underline-offset: .2em;
+}
+@media (min-width: 821px) and (max-width: 1120px) {
+  .adluxe-product-shell {
+    grid-template-columns: 1fr;
+    max-width: 900px;
+    margin-inline: auto;
+  }
+  .adluxe-product-media {
+    position: static;
+  }
+  .adluxe-product-main-image {
+    max-height: 680px;
+    object-fit: contain;
+  }
+  .adluxe-product-copy {
+    max-width: 760px;
+    width: 100%;
+    margin-inline: auto;
+  }
 }
 @media (max-width: 820px) {
   .adluxe-product-shell { grid-template-columns: 1fr; }
