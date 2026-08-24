@@ -1,0 +1,25 @@
+name: Security Header Check
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/security-header-check.yml']
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check HTTPS response headers
+        run: |
+          set -e
+          echo '=== HTTPS HEADERS ==='
+          curl -sS -D /tmp/headers.txt -o /dev/null https://ad-luxe.ma/
+          cat /tmp/headers.txt
+          echo '=== SECURITY HEADER SUMMARY ==='
+          for h in strict-transport-security content-security-policy x-frame-options x-content-type-options referrer-policy permissions-policy; do
+            printf '%s: ' "$h"
+            grep -i "^$h:" /tmp/headers.txt || true
+          done
+          echo '=== HTTP REDIRECT ==='
+          curl -sS -I http://ad-luxe.ma/ | sed -n '1,12p'
