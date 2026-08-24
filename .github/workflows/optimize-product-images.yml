@@ -27,6 +27,7 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           from PIL import Image, ImageOps
+          import re
 
           root = Path('assets/products')
           target_dirs = [
@@ -58,7 +59,6 @@ jobs:
                   save_webp(src, dst)
                   converted[src.as_posix()] = dst.as_posix()
 
-          # Create lightweight thumbnail variants for every product WebP.
           for src in root.rglob('*.webp'):
               if src.name.endswith('-thumb.webp'):
                   continue
@@ -70,7 +70,6 @@ jobs:
                       im = im.convert('RGBA' if 'A' in im.getbands() else 'RGB')
                   im.save(thumb, 'WEBP', quality=72, method=6, exact=True)
 
-          # Replace only converted product-image references in text assets.
           text_exts = {'.html', '.js', '.xml', '.css', '.json'}
           for path in Path('.').rglob('*'):
               if not path.is_file() or path.suffix.lower() not in text_exts:
@@ -84,11 +83,11 @@ jobs:
                   text = text.replace(old, new)
                   text = text.replace('/' + old, '/' + new)
                   text = text.replace('https://ad-luxe.ma/' + old, 'https://ad-luxe.ma/' + new)
+              if path.suffix.lower() == '.html':
+                  text = re.sub(r'analytics\.js\?v=[0-9-]+', 'analytics.js?v=20260824-3', text)
               if text != original:
                   path.write_text(text, encoding='utf-8')
 
-          # Dynamic catalogue cards: thumbnails use the tiny -thumb.webp files,
-          # while data-image continues to point at the full optimized WebP.
           loader = Path('analytics-core.js')
           if loader.exists():
               text = loader.read_text(encoding='utf-8')
@@ -98,6 +97,14 @@ jobs:
                   text = text.replace(marker, helper)
               text = text.replace('<img src="${esc(item.src)}" alt="${esc(product.name)} — ${esc(item.color)}"', '<img src="${esc(thumbSrc(item.src))}" alt="${esc(product.name)} — ${esc(item.color)}"')
               loader.write_text(text, encoding='utf-8')
+
+          facade = Path('analytics.js')
+          if facade.exists():
+              text = facade.read_text(encoding='utf-8')
+              text = re.sub(r'analytics-core\.js\?v=[0-9-]+', 'analytics-core.js?v=20260824-3', text)
+              text = re.sub(r'upgrade\.js\?v=[0-9-]+', 'upgrade.js?v=20260824-2', text)
+              text = re.sub(r'seo-runtime\.js\?v=[0-9-]+', 'seo-runtime.js?v=20260824-3', text)
+              facade.write_text(text, encoding='utf-8')
 
           print(f'Converted {len(converted)} heavy product images to WebP.')
           PY
@@ -113,10 +120,10 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add assets/products analytics-core.js product-detail.js trio.js sitemap.xml products index.html 2>/dev/null || true
+          git add assets/products analytics-core.js analytics.js product-detail.js trio.js sitemap.xml products index.html legal.html instagram.html 404.html 2>/dev/null || true
           if git diff --cached --quiet; then
             echo 'No optimization changes to commit.'
             exit 0
           fi
-          git commit -m 'Use lightweight product thumbnails'
+          git commit -m 'Refresh optimized product assets'
           git push
