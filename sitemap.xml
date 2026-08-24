@@ -98,7 +98,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://ad-luxe.ma/assets/products/sandales-elegance/sandale-01.png</image:loc>
+      <image:loc>https://ad-luxe.ma/assets/products/sandales-elegance/sandale-01.webp</image:loc>
       <image:title>Sandales Élégance Confort</image:title>
     </image:image>
   </url>
@@ -108,7 +108,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://ad-luxe.ma/assets/products/parfumerie/rose-berry-trio.jpg</image:loc>
+      <image:loc>https://ad-luxe.ma/assets/products/parfumerie/rose-berry-trio.webp</image:loc>
       <image:title>Rose Berry Trio</image:title>
     </image:image>
   </url>
@@ -118,7 +118,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://ad-luxe.ma/assets/products/parfumerie/rose-berry-nude-pink.jpg</image:loc>
+      <image:loc>https://ad-luxe.ma/assets/products/parfumerie/rose-berry-nude-pink.webp</image:loc>
       <image:title>Rose Berry Nude Pink Lip Duo</image:title>
     </image:image>
   </url>
@@ -128,7 +128,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://ad-luxe.ma/assets/products/sac-elegance-signature/noir.jpg</image:loc>
+      <image:loc>https://ad-luxe.ma/assets/products/sac-elegance-signature/noir.webp</image:loc>
       <image:title>Sac Élégance Signature</image:title>
     </image:image>
   </url>
@@ -138,7 +138,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://ad-luxe.ma/assets/products/sac-bandouliere-elegance/rouge.jpg</image:loc>
+      <image:loc>https://ad-luxe.ma/assets/products/sac-bandouliere-elegance/rouge.webp</image:loc>
       <image:title>Sac Bandoulière Élégance</image:title>
     </image:image>
   </url>
@@ -148,7 +148,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://ad-luxe.ma/assets/products/sac-trio-elegance/noir-bordeaux.jpeg</image:loc>
+      <image:loc>https://ad-luxe.ma/assets/products/sac-trio-elegance/noir-bordeaux.webp</image:loc>
       <image:title>Sac Trio Élégance</image:title>
     </image:image>
   </url>

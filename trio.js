@@ -9,13 +9,13 @@
     defaultColor: "Noir & bordeaux",
     description: "Ensemble élégant 3 pièces avec grand sac à main structuré, pochette assortie et portefeuille. Finitions dorées, bandoulière amovible et plusieurs coloris disponibles.",
     images: [
-      { color: "Noir & bordeaux", src: "assets/products/sac-trio-elegance/noir-bordeaux.jpeg" },
-      { color: "Blanc & noir", src: "assets/products/sac-trio-elegance/blanc-noir.jpeg" },
-      { color: "Bleu marine & crème", src: "assets/products/sac-trio-elegance/bleu-marine-creme.jpeg" },
-      { color: "Bordeaux & noir", src: "assets/products/sac-trio-elegance/bordeaux-noir.jpeg" },
-      { color: "Crème & bleu marine", src: "assets/products/sac-trio-elegance/creme-bleu-marine.jpeg" },
-      { color: "Camel & noir", src: "assets/products/sac-trio-elegance/camel-noir.jpeg" },
-      { color: "Rose & noir", src: "assets/products/sac-trio-elegance/rose-noir.jpeg" }
+      { color: "Noir & bordeaux", src: "assets/products/sac-trio-elegance/noir-bordeaux.webp" },
+      { color: "Blanc & noir", src: "assets/products/sac-trio-elegance/blanc-noir.webp" },
+      { color: "Bleu marine & crème", src: "assets/products/sac-trio-elegance/bleu-marine-creme.webp" },
+      { color: "Bordeaux & noir", src: "assets/products/sac-trio-elegance/bordeaux-noir.webp" },
+      { color: "Crème & bleu marine", src: "assets/products/sac-trio-elegance/creme-bleu-marine.webp" },
+      { color: "Camel & noir", src: "assets/products/sac-trio-elegance/camel-noir.webp" },
+      { color: "Rose & noir", src: "assets/products/sac-trio-elegance/rose-noir.webp" }
     ]
   };
 
