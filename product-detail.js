@@ -6,7 +6,7 @@ const P = {
     id:"ensemble-scarf", name:"Ensemble Scarf", price:180, category:"Vêtements", sku:"ADL-SCARF-001",
     desc:"Un ensemble féminin facile à porter et à assortir, disponible en marron, bleu, noir et rose.",
     image:"/assets/products/ensemble-scarf/marron.webp",
-    colors:["Marron","Bleu","Noir","Rose"], sizes:[]
+    colors:["Marron","Bleu","Noir","Rose"], sizes:["S","M","L","XL"]
   },
   "parure-florea": {
     id:"parure-florea", name:"Parure Floréa — Collier & Bracelet", price:155, category:"Bijoux", sku:"ADL-BIJ-FLOREA-001",
@@ -98,6 +98,7 @@ const imageFor = (color) => {
   if (p.fixedImage) return p.image;
   return `/assets/products/${p.id}/${slug(color)}.webp`;
 };
+const sizeLabel = p.category === "Chaussures" ? "Pointure" : "Taille";
 
 let selectedColor = p.colors[0] || "";
 let selectedSize = p.sizes[0] || "";
@@ -116,7 +117,7 @@ function buildWhatsApp() {
     "",
     `Couleur / variante : ${selectedColor || "À préciser"}`
   ];
-  if (p.sizes.length) lines.push(`Pointure : ${selectedSize || "À préciser"}`);
+  if (p.sizes.length) lines.push(`${sizeLabel} : ${selectedSize || "À préciser"}`);
   lines.push("Ville : ", "Nom : ", "Adresse : ", "Téléphone : ");
   return "https://wa.me/212644162453?text=" + encodeURIComponent(lines.join("\n"));
 }
@@ -181,7 +182,7 @@ const mount = () => {
         </div>
 
         ${p.sizes.length ? `<div class="adluxe-product-block">
-          <h2>Pointure : <span data-selected-size>${e(selectedSize)}</span></h2>
+          <h2>${sizeLabel} : <span data-selected-size>${e(selectedSize)}</span></h2>
           <div class="adluxe-choice-list">${choiceButtons(p.sizes, "size")}</div>
         </div>` : ""}
 
@@ -196,7 +197,7 @@ const mount = () => {
           <a class="btn" data-wa target="_blank" rel="noopener noreferrer">Commander sur WhatsApp</a>
           <a class="btn btn-outline" href="/#produit">Retour à la boutique</a>
         </div>
-        <p class="adluxe-product-small">Votre couleur${p.sizes.length ? " et votre pointure" : ""} seront ajoutées automatiquement au message WhatsApp.</p>
+        <p class="adluxe-product-small">Votre couleur${p.sizes.length ? ` et votre ${sizeLabel.toLowerCase()}` : ""} seront ajoutées automatiquement au message WhatsApp.</p>
       </div>
     </article>
   </div>`;
@@ -210,7 +211,7 @@ const mount = () => {
   const wa = document.querySelector("[data-wa]");
   wa?.addEventListener("click", () => window.gtag?.("event","begin_checkout",{
     checkout_type:"product_page", currency:"MAD", value:p.price,
-    items:[{item_id:p.id,item_name:p.name,item_brand:"AD_LUXE",item_category:p.category,item_variant:[selectedColor, selectedSize ? "Pointure "+selectedSize : ""].filter(Boolean).join(" · "),price:p.price,quantity:1}]
+    items:[{item_id:p.id,item_name:p.name,item_brand:"AD_LUXE",item_category:p.category,item_variant:[selectedColor, selectedSize ? sizeLabel+" "+selectedSize : ""].filter(Boolean).join(" · "),price:p.price,quantity:1}]
   }));
   window.gtag?.("event","view_item",{currency:"MAD",value:p.price,items:[{item_id:p.id,item_name:p.name,item_brand:"AD_LUXE",item_category:p.category,price:p.price,quantity:1}]});
 };
