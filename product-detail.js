@@ -104,6 +104,15 @@ const sizeLabel = p.category === "Chaussures" ? "Pointure" : "Taille";
 let selectedColor = p.colors[0] || "";
 let selectedSize = p.sizes[0] || "";
 
+function syncCartCount() {
+  let count = 0;
+  try {
+    const saved = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+    if (Array.isArray(saved)) count = saved.reduce((sum, item) => sum + Math.min(99, Math.max(1, parseInt(item?.qty, 10) || 1)), 0);
+  } catch {}
+  document.querySelectorAll("[data-cart-count]").forEach((node) => { node.textContent = String(count); });
+}
+
 const choiceButtons = (values, kind) => values.map((value, i) =>
   `<button class="adluxe-choice${i===0 ? " is-active" : ""}" type="button" data-${kind}="${e(value)}" aria-pressed="${i===0 ? "true" : "false"}">${e(value)}</button>`
 ).join("");
@@ -155,6 +164,7 @@ function addToCart() {
   }
 
   try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch {}
+  syncCartCount();
 
   window.gtag?.("event", "add_to_cart", {
     currency: "MAD",
@@ -210,7 +220,7 @@ function selectSize(size) {
 }
 
 const mount = () => {
-  document.body.insertAdjacentHTML("afterbegin", `<a class="skip-link" href="#contenu">Aller au contenu principal</a><div class="announcement">Livraison partout au Maroc · Paiement à la livraison</div><header class="site-header"><nav class="nav container" aria-label="Navigation principale"><a class="brand brand-logo" href="/"><img src="/ad-luxe-logo.svg" alt="AD_LUXE" width="240" height="50"></a><div class="nav-links"><a href="/#produit">Boutique</a><a href="/#livraison">Livraison</a><a href="/legal.html">Conditions</a></div></nav></header>`);
+  document.body.insertAdjacentHTML("afterbegin", `<a class="skip-link" href="#contenu">Aller au contenu principal</a><div class="announcement">Livraison partout au Maroc · Paiement à la livraison</div><header class="site-header"><nav class="nav container" aria-label="Navigation principale"><a class="brand brand-logo" href="/"><img src="/ad-luxe-logo.svg" alt="AD_LUXE" width="240" height="50"></a><div class="nav-links"><a href="/#produit">Boutique</a><a href="/#livraison">Livraison</a><a href="/legal.html">Conditions</a></div><a class="btn btn-small adluxe-product-cart-link" href="/#panier" aria-label="Voir le panier">🛒 Panier <span data-cart-count>0</span></a></nav></header>`);
 
   const main = document.getElementById("contenu");
   main.className = "adluxe-product-page";
@@ -249,6 +259,7 @@ const mount = () => {
         <div class="adluxe-product-cta">
           <button class="btn btn-outline" type="button" data-add-cart>+ Ajouter au panier</button>
           <a class="btn" data-wa target="_blank" rel="noopener noreferrer">Commander sur WhatsApp</a>
+          <a class="btn btn-outline" href="/#panier">Voir le panier</a>
           <a class="btn btn-outline" href="/#produit">Retour à la boutique</a>
         </div>
         <p class="adluxe-product-small">Votre couleur${p.sizes.length ? ` et votre ${sizeLabel.toLowerCase()}` : ""} seront ajoutées automatiquement au panier et au message WhatsApp.</p>
@@ -262,12 +273,17 @@ const mount = () => {
   document.querySelectorAll("[data-size]").forEach((button) => button.addEventListener("click", () => selectSize(button.dataset.size)));
   document.querySelector("[data-add-cart]")?.addEventListener("click", addToCart);
   syncWA();
+  syncCartCount();
 
   const wa = document.querySelector("[data-wa]");
-  wa?.addEventListener("click", () => window.gtag?.("event","begin_checkout",{
-    checkout_type:"product_page", currency:"MAD", value:p.price,
-    items:[{item_id:p.id,item_name:p.name,item_brand:"AD_LUXE",item_category:p.category,item_variant:[selectedColor, selectedSize ? sizeLabel+" "+selectedSize : ""].filter(Boolean).join(" · "),price:p.price,quantity:1}]
-  }));
+  wa?.addEventListener("click", () => {
+    const details = {
+      checkout_type:"product_page", currency:"MAD", value:p.price,
+      items:[{item_id:p.id,item_name:p.name,item_brand:"AD_LUXE",item_category:p.category,item_variant:[selectedColor, selectedSize ? sizeLabel+" "+selectedSize : ""].filter(Boolean).join(" · "),price:p.price,quantity:1}]
+    };
+    window.gtag?.("event","begin_checkout",details);
+    window.gtag?.("event","order_whatsapp",details);
+  });
   window.gtag?.("event","view_item",{currency:"MAD",value:p.price,items:[{item_id:p.id,item_name:p.name,item_brand:"AD_LUXE",item_category:p.category,price:p.price,quantity:1}]});
 };
 
