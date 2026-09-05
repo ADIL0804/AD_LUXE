@@ -84,7 +84,25 @@
       const catalog = new Map(cards().map((card) => [card.dataset.productId, product(card)]));
       const saved = JSON.parse(localStorage.getItem(KEY) || "[]");
       if (!Array.isArray(saved)) return [];
-      return saved.flatMap((item) => catalog.has(item?.id) ? [{ ...catalog.get(item.id), color: item.color ? String(item.color) : "", size: item.size ? String(item.size) : "", image: item.image || catalog.get(item.id).image, qty: Math.min(99, Math.max(1, parseInt(item.qty, 10) || 1)) }] : []);
+      return saved.flatMap((item) => {
+        if (!item || typeof item !== "object" || !item.id) return [];
+        const catalogItem = catalog.get(String(item.id));
+        const fallback = {
+          id: String(item.id),
+          name: String(item.name || ""),
+          price: Number(item.price || 0),
+          image: String(item.image || "")
+        };
+        const base = catalogItem || fallback;
+        if (!base.name || !Number.isFinite(base.price) || base.price <= 0) return [];
+        return [{
+          ...base,
+          color: item.color ? String(item.color) : "",
+          size: item.size ? String(item.size) : "",
+          image: String(item.image || base.image || ""),
+          qty: Math.min(99, Math.max(1, parseInt(item.qty, 10) || 1))
+        }];
+      });
     } catch { localStorage.removeItem(KEY); return []; }
   }
 
@@ -132,7 +150,7 @@
   window.ADLUXE_CART = {
     open() { const overlay = document.getElementById("adluxe-cart-overlay"); if (!overlay) return; cartReturnFocus = document.activeElement; overlay.classList.add("open"); overlay.setAttribute("aria-hidden", "false"); document.body.classList.add("cart-open"); document.querySelector(".adluxe-cart-trigger")?.setAttribute("aria-expanded", "true"); renderCart(); document.querySelector(".adluxe-cart-close")?.focus(); },
     close() { const overlay = document.getElementById("adluxe-cart-overlay"); if (!overlay) return; const wasOpen = overlay.classList.contains("open"); overlay.classList.remove("open"); overlay.setAttribute("aria-hidden", "true"); document.body.classList.remove("cart-open"); document.querySelector(".adluxe-cart-trigger")?.setAttribute("aria-expanded", "false"); if (wasOpen && cartReturnFocus instanceof HTMLElement) cartReturnFocus.focus(); },
-    add(card) { const item = product(card); const color = selected(card); const size = selectedSize(card); const image = card.querySelector(".main-product-image, #mainProductImage")?.src || item.image; const found = cart.find((line) => line.id === item.id && line.color === color && (line.size || "") === size); if (found) found.qty = Math.min(99, found.qty + 1); else cart.push({ ...item, color, size, image, qty: 1 }); track("add_to_cart", { item_id: item.id, item_name: item.name, item_variant: color + (size ? " · " + size : ""), price: item.price, currency: "MAD" }); save(); this.open(); },
+    add(card) { const item = product(card); const color = selected(card); const size = selectedSize(card); const image = card.querySelector(".main-product-image, #mainProductImage")?.src || item.image; const found = cart.find((line) => line.id === item.id && line.color === color && (line.size || "") === size); if (found) found.qty = Math.min(99, found.qty + 1); else cart.push({ ...item, color, size, image, qty: 1 }); track("add_to_cart", { currency: "MAD", value: item.price, items: [{ item_id: item.id, item_name: item.name, item_brand: "AD_LUXE", item_variant: color + (size ? " · " + size : ""), price: item.price, quantity: 1 }] }); save(); this.open(); },
     change(index, delta) { if (!cart[index] || ![-1, 1].includes(delta)) return; const item = cart[index]; item.qty += delta; track(delta > 0 ? "add_to_cart" : "remove_from_cart", { item_id: item.id, item_name: item.name, item_variant: item.color + (item.size ? " · " + item.size : ""), price: item.price, currency: "MAD" }); if (item.qty <= 0) cart.splice(index, 1); save(); }
   };
 
@@ -180,7 +198,9 @@
     document.querySelectorAll(".order-btn, #adluxe-cart-wa").forEach((link) => link.addEventListener("click", (event) => {
       if (link.getAttribute("aria-disabled") !== "true") {
         const card = link.closest(".product-card");
-        track("begin_checkout", { checkout_type: card ? "direct" : "cart", order_reference: orderReference(), item_count: card ? 1 : cart.reduce((sum, item) => sum + item.qty, 0), currency: "MAD" });
+        const checkoutDetails = { checkout_type: card ? "direct" : "cart", order_reference: orderReference(), item_count: card ? 1 : cart.reduce((sum, item) => sum + item.qty, 0), currency: "MAD" };
+        track("begin_checkout", checkoutDetails);
+        track("order_whatsapp", checkoutDetails);
         return;
       }
       event.preventDefault(); const card = link.closest(".product-card"); if (card) window.ADLUXE_CART.add(card); const city = document.getElementById("cartDeliveryCity"); city?.focus(); city?.setAttribute("aria-invalid", "true"); const help = document.getElementById("cartDeliveryCityHelp"); if (help) help.textContent = "Indiquez votre ville avant de confirmer la commande.";
@@ -191,6 +211,15 @@
     document.getElementById("adluxe-menu-overlay")?.addEventListener("click", (event) => { if (event.target.id === "adluxe-menu-overlay") window.ADLUXE_MENU.close(); }); document.getElementById("adluxe-cart-overlay")?.addEventListener("click", (event) => { if (event.target.id === "adluxe-cart-overlay") window.ADLUXE_CART.close(); });
     document.addEventListener("keydown", (event) => { trapFocus(event); if (event.key === "Escape") { window.ADLUXE_CART.close(); window.ADLUXE_MENU.close(); } });
   }
-  function init() { cart = loadCart(); cards().forEach(initProduct); initFilters(); initControls(); renderCart(); }
+  function init() {
+    cart = loadCart();
+    cards().forEach(initProduct);
+    initFilters();
+    initControls();
+    renderCart();
+    if (window.location.hash === "#panier") {
+      window.setTimeout(() => window.ADLUXE_CART.open(), 0);
+    }
+  }
   document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", init, { once: true }) : init();
 })();
