@@ -214,3 +214,41 @@
 .adluxe-category-copy h2 {
   margin-top: 0;
 }
+
+.adluxe-seo-catalog {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.adluxe-seo-card {
+  display: grid;
+  gap: .45rem;
+  overflow: hidden;
+  padding: .75rem;
+  border: 1px solid rgba(44, 39, 40, .1);
+  border-radius: 18px;
+  background: #fff;
+  color: #2c2728;
+  text-decoration: none;
+}
+
+.adluxe-seo-card img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.adluxe-seo-card span { color: #8d626c; font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; }
+.adluxe-seo-card strong { font-size: 1rem; }
+.adluxe-seo-card b { color: #8f4f60; }
+.adluxe-seo-card:hover { transform: translateY(-2px); border-color: rgba(143, 79, 96, .35); }
+
+@media (max-width: 760px) {
+  .adluxe-seo-catalog { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 420px) {
+  .adluxe-seo-catalog { grid-template-columns: 1fr; }
+}
