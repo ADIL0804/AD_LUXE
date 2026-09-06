@@ -158,3 +158,36 @@
     animation: none !important;
   }
 }
+.adluxe-product-directory {
+  margin-top: 2rem;
+  padding: 1.25rem;
+  border: 1px solid rgba(44, 39, 40, .12);
+  border-radius: 18px;
+  background: #fff;
+}
+
+.adluxe-product-directory h3 {
+  margin: 0 0 .85rem;
+  font-size: 1rem;
+}
+
+.adluxe-product-directory div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem;
+}
+
+.adluxe-product-directory a {
+  padding: .55rem .8rem;
+  border-radius: 999px;
+  background: #f8eef0;
+  color: #2c2728;
+  font-size: .88rem;
+  text-decoration: none;
+}
+
+.adluxe-product-directory a:hover,
+.adluxe-product-directory a:focus-visible {
+  background: #2c2728;
+  color: #fff;
+}
