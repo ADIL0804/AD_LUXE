@@ -191,3 +191,26 @@
   background: #2c2728;
   color: #fff;
 }
+
+.adluxe-category-hero h1 {
+  max-width: 780px;
+  margin: .35rem 0 1rem;
+}
+
+.adluxe-category-hero p:not(.eyebrow),
+.adluxe-category-copy {
+  max-width: 780px;
+}
+
+.adluxe-category-product {
+  max-width: 960px;
+  margin-inline: auto;
+}
+
+.adluxe-category-product .main-photo a {
+  display: block;
+}
+
+.adluxe-category-copy h2 {
+  margin-top: 0;
+}
