@@ -31,33 +31,9 @@
     });
   }
 
-  function fixProductCopy(root = document) {
-    root.querySelectorAll?.(".adluxe-product-small").forEach((node) => {
-      const text = node.textContent.trim();
-      if (text.startsWith("Votre couleur seront ajoutées")) {
-        node.textContent = "Votre couleur sera ajoutée automatiquement au panier et au message WhatsApp.";
-      }
-    });
-  }
-
-  function observeProductCopy() {
-    fixProductCopy();
-    const observer = new MutationObserver((mutations) => {
-      for (const mutation of mutations) {
-        for (const node of mutation.addedNodes) {
-          if (node.nodeType !== Node.ELEMENT_NODE) continue;
-          if (node.matches?.(".adluxe-product-small")) fixProductCopy(node.parentElement || document);
-          else fixProductCopy(node);
-        }
-      }
-    });
-    observer.observe(document.documentElement, { childList: true, subtree: true });
-  }
-
   function init() {
     fixProductLinks();
     hideEmptyCategories();
-    observeProductCopy();
   }
 
   if (document.readyState === "loading") {

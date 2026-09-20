@@ -84,7 +84,7 @@ jobs:
                   text = text.replace('/' + old, '/' + new)
                   text = text.replace('https://ad-luxe.ma/' + old, 'https://ad-luxe.ma/' + new)
               if path.suffix.lower() == '.html':
-                  text = re.sub(r'analytics\.js\?v=[0-9-]+', 'analytics.js?v=20260824-3', text)
+                  text = re.sub(r'analytics\.js\?v=[0-9-]+', 'analytics.js?v=20260920-1', text)
               if text != original:
                   path.write_text(text, encoding='utf-8')
 
@@ -101,9 +101,9 @@ jobs:
           facade = Path('analytics.js')
           if facade.exists():
               text = facade.read_text(encoding='utf-8')
-              text = re.sub(r'analytics-core\.js\?v=[0-9-]+', 'analytics-core.js?v=20260824-3', text)
-              text = re.sub(r'upgrade\.js\?v=[0-9-]+', 'upgrade.js?v=20260824-2', text)
-              text = re.sub(r'seo-runtime\.js\?v=[0-9-]+', 'seo-runtime.js?v=20260824-3', text)
+              text = re.sub(r'analytics-core\.js\?v=[0-9-]+', 'analytics-core.js?v=20260920-1', text)
+              text = re.sub(r'upgrade\.js\?v=[0-9-]+', 'upgrade.js?v=20260920-1', text)
+              text = re.sub(r'seo-runtime\.js\?v=[0-9-]+', 'seo-runtime.js?v=20260920-1', text)
               facade.write_text(text, encoding='utf-8')
 
           print(f'Converted {len(converted)} heavy product images to WebP.')

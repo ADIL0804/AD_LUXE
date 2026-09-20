@@ -262,7 +262,9 @@ const mount = () => {
           <a class="btn btn-outline" href="/#panier">Voir le panier</a>
           <a class="btn btn-outline" href="/#produit">Retour à la boutique</a>
         </div>
-        <p class="adluxe-product-small">Votre couleur${p.sizes.length ? ` et votre ${sizeLabel.toLowerCase()}` : ""} seront ajoutées automatiquement au panier et au message WhatsApp.</p>
+        <p class="adluxe-product-small">${p.sizes.length
+          ? `Votre couleur et votre ${sizeLabel.toLowerCase()} seront ajoutées automatiquement au panier et au message WhatsApp.`
+          : "Votre couleur sera ajoutée automatiquement au panier et au message WhatsApp."}</p>
       </div>
     </article>
   </div>`;

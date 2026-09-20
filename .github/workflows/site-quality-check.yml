@@ -1,0 +1,25 @@
+name: Site Quality Check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.html'
+      - '**.js'
+      - 'sitemap.xml'
+      - 'google-merchant-feed.xml'
+      - 'scripts/validate_site.py'
+      - '.github/workflows/site-quality-check.yml'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate JavaScript syntax
+        run: |
+          for file in *.js; do node --check "$file"; done
+      - name: Validate SEO, catalog and local links
+        run: python scripts/validate_site.py
