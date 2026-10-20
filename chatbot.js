@@ -57,7 +57,7 @@
       ],
     },
     categories: {
-      text: "Vous trouverez des vêtements, accessoires, bijoux, sacs, chaussures et parfumerie. Les articles disponibles sont regroupés dans la section Nouveautés.",
+      text: "Vous trouverez des vêtements, accessoires, bijoux, chaussures et parfumerie. Les articles disponibles sont regroupés dans la section Nouveautés.",
       actions: [{ label: "Découvrir les articles", href: "#produit" }],
     },
     human: {
@@ -131,7 +131,6 @@
     vetements: "Vêtements",
     accessoires: "Accessoires",
     bijoux: "Bijoux",
-    sacs: "Sacs",
     chaussures: "Chaussures",
     parfumerie: "Parfumerie",
   };
@@ -147,7 +146,6 @@
     { id: "vetements", pattern: /(vetement|habit|robe|ensemble|top|pantalon|lbsa|7wayj|ملابس|لباس)/ },
     { id: "accessoires", pattern: /(accessoire|lunette|ceinture|montre|اكسسوار|نظارات|ساعة)/ },
     { id: "bijoux", pattern: /(bijou|collier|bracelet|parure|chaine|خاتم|قلادة|سوار|مجوهرات)/ },
-    { id: "sacs", pattern: /(sac|cabas|bandouliere|شنطة|حقيبة)/ },
     { id: "chaussures", pattern: /(chaussure|sandale|mule|basket|talon|sbat|صندل|حذاء)/ },
     { id: "parfumerie", pattern: /(parfum|brume|coffret|3طر|عطر|عطور)/ },
   ];
