@@ -57,7 +57,7 @@
       ],
     },
     categories: {
-      text: "Vous trouverez des vêtements, accessoires, bijoux, chaussures et parfumerie. Les articles disponibles sont regroupés dans la section Nouveautés.",
+      text: "Vous trouverez des vêtements et accessoires. Les articles disponibles sont regroupés dans la section Nouveautés.",
       actions: [{ label: "Découvrir les articles", href: "#produit" }],
     },
     human: {
@@ -130,9 +130,6 @@
   const categoryLabels = {
     vetements: "Vêtements",
     accessoires: "Accessoires",
-    bijoux: "Bijoux",
-    chaussures: "Chaussures",
-    parfumerie: "Parfumerie",
   };
 
   const findRequestedColor = (text) =>
@@ -145,9 +142,6 @@
   const categoryPatterns = [
     { id: "vetements", pattern: /(vetement|habit|robe|ensemble|top|pantalon|lbsa|7wayj|ملابس|لباس)/ },
     { id: "accessoires", pattern: /(accessoire|lunette|ceinture|montre|اكسسوار|نظارات|ساعة)/ },
-    { id: "bijoux", pattern: /(bijou|collier|bracelet|parure|chaine|خاتم|قلادة|سوار|مجوهرات)/ },
-    { id: "chaussures", pattern: /(chaussure|sandale|mule|basket|talon|sbat|صندل|حذاء)/ },
-    { id: "parfumerie", pattern: /(parfum|brume|coffret|3طر|عطر|عطور)/ },
   ];
 
   const cityPatterns = [
@@ -312,7 +306,7 @@
       return matches.length
         ? {
             text: `La pointure ${sizeMatch[1]} est disponible pour :\n${listProducts(matches)}`,
-            actions: [{ label: "Voir les chaussures", href: "#produit" }],
+            actions: [{ label: "Voir les vêtements", href: "#produit" }],
           }
         : { text: `Je ne vois aucun article disponible en pointure ${sizeMatch[1]} pour le moment.` };
     }
