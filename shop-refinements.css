@@ -1,0 +1,7 @@
+[hidden]{display:none!important}
+.catalog-tools{display:grid;grid-template-columns:2fr 1fr 1fr;gap:16px;margin-bottom:20px}
+.catalog-tools label{display:grid;gap:8px;font-weight:600}
+.catalog-tools input,.catalog-tools select{width:100%;min-height:48px;padding:12px;border:1px solid #cdbac0;border-radius:10px;background:#fff;color:#292129;font:inherit}
+.catalog-result{margin:12px 0 24px}
+.adluxe-product-main-image{width:100%;height:auto}
+@media(max-width:640px){.catalog-tools{grid-template-columns:1fr}.nav-links{display:none}}
