@@ -1,1 +1,0 @@
-(() => {"use strict"; try {localStorage.removeItem("adluxe_cart");sessionStorage.removeItem("adluxe_order_reference");} catch {} })();
