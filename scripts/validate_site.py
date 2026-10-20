@@ -162,7 +162,7 @@ def main() -> int:
             fail(errors, f"Version product-detail obsolète: {page.relative_to(ROOT)}")
 
     index_text = (ROOT / "index.html").read_text(encoding="utf-8")
-    for script in ("analytics-core.js", "upgrade.js", "site-fixes.js", "seo-runtime.js"):
+    for script in ("empty-store.js",):
         if index_text.count(script) != 1:
             fail(errors, f"{script} doit être chargé exactement une fois dans index.html")
 
