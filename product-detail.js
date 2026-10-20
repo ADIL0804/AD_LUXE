@@ -165,6 +165,7 @@ function addToCart() {
 
   try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch {}
   syncCartCount();
+  window.dispatchEvent(new Event("adluxe:cart-changed"));
 
   window.gtag?.("event", "add_to_cart", {
     currency: "MAD",
@@ -274,6 +275,7 @@ const mount = () => {
   document.querySelectorAll("[data-color]").forEach((button) => button.addEventListener("click", () => selectColor(button.dataset.color)));
   document.querySelectorAll("[data-size]").forEach((button) => button.addEventListener("click", () => selectSize(button.dataset.size)));
   document.querySelector("[data-add-cart]")?.addEventListener("click", addToCart);
+  document.querySelectorAll('a[href="/#panier"]').forEach(link => link.addEventListener("click", event => { if (window.ADLUXE_CART) { event.preventDefault(); window.ADLUXE_CART.open(); } }));
   syncWA();
   syncCartCount();
 
