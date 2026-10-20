@@ -1,11 +1,6 @@
 (() => {
   "use strict";
 
-  function fixProductLinks() {
-    document.querySelectorAll('a[href="/products/ensemble-scarf-v2.html"], a[href$="/products/ensemble-scarf-v2.html"]').forEach((link) => {
-      link.setAttribute("href", "/products/ensemble-scarf.html");
-    });
-  }
 
   function hideEmptyCategories() {
     const available = new Set(
@@ -32,7 +27,6 @@
   }
 
   function init() {
-    fixProductLinks();
     hideEmptyCategories();
   }
 

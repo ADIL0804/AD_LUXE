@@ -2,14 +2,14 @@
   "use strict";
 
   const CONSENT_KEY = "adluxe_analytics_consent";
-  const PRODUCT_PAGES = {"ensemble-scarf":"/products/ensemble-scarf.html","parure-florea":"/products/parure-florea.html","parure-eliane":"/products/parure-eliane.html","sandales-confort-elegance":"/products/sandales-confort-elegance.html","mules-perla-elegance":"/products/mules-perla-elegance.html","mules-velours-croisees":"/products/mules-velours-croisees.html","baskets-urban-chic":"/products/baskets-urban-chic.html","sandales-elegance":"/products/sandales-elegance.html","rose-berry-trio":"/products/rose-berry-trio.html","rose-berry-nude-pink":"/products/rose-berry-nude-pink.html","sac-elegance-signature":"/products/sac-elegance-signature.html","sac-bandouliere-elegance":"/products/sac-bandouliere-elegance.html","sac-trio-elegance":"/products/sac-trio-elegance.html"};
+  const PRODUCT_PAGES = {"ensemble-scarf":"/products/ensemble-scarf.html"};
 
   function track(name, params = {}) {
     if (typeof window.gtag === "function") window.gtag("event", name, params);
   }
 
   function ensureStyles() {
-    if (document.querySelector('link[data-adluxe-upgrade]')) return;
+    if (document.querySelector('link[data-adluxe-upgrade], link[href^="/upgrade.css"], link[href^="upgrade.css"]')) return;
     const link = document.createElement("link");
     link.rel = "stylesheet";
     link.href = "/upgrade.css?v=20260824-1";

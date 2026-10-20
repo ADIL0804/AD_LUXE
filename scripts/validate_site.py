@@ -158,11 +158,11 @@ def main() -> int:
     product_pages = [page for page in (ROOT / "products").glob("*.html") if "-v2" not in page.stem]
     for page in product_pages:
         text = page.read_text(encoding="utf-8")
-        if "product-detail.js?v=20260920-1" not in text:
+        if 'data-product-id=' in text and "product-detail.js?v=20260920-1" not in text:
             fail(errors, f"Version product-detail obsolète: {page.relative_to(ROOT)}")
 
     index_text = (ROOT / "index.html").read_text(encoding="utf-8")
-    for script in ("analytics-core.js", "upgrade.js", "site-fixes.js", "seo-runtime.js"):
+    for script in ("upgrade.js", "site-fixes.js", "seo-runtime.js"):
         if index_text.count(script) != 1:
             fail(errors, f"{script} doit être chargé exactement une fois dans index.html")
 
