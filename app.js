@@ -81,25 +81,23 @@
 
   function loadCart() {
     try {
-      const catalog = new Map(cards().map((card) => [card.dataset.productId, product(card)]));
+      // Keep the persisted cart limited to articles still offered by the store.
+      // Add new official products here when they are launched.
+      const activeProducts = new Map([
+        ["ensemble-scarf", { id: "ensemble-scarf", name: "Ensemble Scarf", price: 180, image: "/assets/products/ensemble-scarf/marron.webp" }]
+      ]);
+      const catalog = new Map([...activeProducts, ...cards().map((card) => [card.dataset.productId, product(card)])]);
       const saved = JSON.parse(localStorage.getItem(KEY) || "[]");
       if (!Array.isArray(saved)) return [];
       return saved.flatMap((item) => {
         if (!item || typeof item !== "object" || !item.id) return [];
-        const catalogItem = catalog.get(String(item.id));
-        const fallback = {
-          id: String(item.id),
-          name: String(item.name || ""),
-          price: Number(item.price || 0),
-          image: String(item.image || "")
-        };
-        const base = catalogItem || fallback;
-        if (!base.name || !Number.isFinite(base.price) || base.price <= 0) return [];
+        const base = catalog.get(String(item.id));
+        if (!base || !base.name || !Number.isFinite(base.price) || base.price <= 0) return [];
         return [{
           ...base,
           color: item.color ? String(item.color) : "",
           size: item.size ? String(item.size) : "",
-          image: String(item.image || base.image || ""),
+          image: String(base.image || ""),
           qty: Math.min(99, Math.max(1, parseInt(item.qty, 10) || 1))
         }];
       });
