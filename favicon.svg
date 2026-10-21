@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="AD_LUXE">
+  <rect width="96" height="96" rx="22" fill="#2E2E2E"/>
+  <rect x="7" y="7" width="82" height="82" rx="17" fill="#FBF5F5" stroke="#D98B9E" stroke-width="3"/>
+  <text x="48" y="56" text-anchor="middle" font-family="Georgia, serif" font-size="29" font-weight="700" letter-spacing="2" fill="#2E2E2E">AD</text>
+  <path d="M27 67H69" stroke="#D98B9E" stroke-width="3"/>
+</svg>

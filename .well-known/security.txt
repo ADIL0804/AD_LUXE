@@ -1,0 +1,5 @@
+Contact: https://wa.me/212644162453
+Canonical: https://ad-luxe.ma/.well-known/security.txt
+Policy: https://ad-luxe.ma/legal.html#securite
+Preferred-Languages: fr, ar
+Expires: 2027-08-24T00:00:00Z

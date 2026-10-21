@@ -1,0 +1,1 @@
+Trigger external live security header verification after Cloudflare deployment.

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 150" role="img" aria-labelledby="title desc">
+  <title id="title">AD_LUXE</title>
+  <desc id="desc">Logo typographique AD_LUXE rose poudré et anthracite</desc>
+  <rect width="720" height="150" rx="22" fill="#FBF5F5"/>
+  <text x="360" y="91" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="68" letter-spacing="15" fill="#2E2E2E">AD<tspan fill="#D98B9E">_</tspan>LUXE</text>
+  <path d="M175 116H545" stroke="#D98B9E" stroke-width="2"/>
+</svg>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://ad-luxe.ma/</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://ad-luxe.ma/social-card.jpg</image:loc>
+      <image:title>AD_LUXE — Boutique de mode féminine au Maroc</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ad-luxe.ma/legal.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://ad-luxe.ma/vetements-femme.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://ad-luxe.ma/assets/products/ensemble-scarf/rose.webp</image:loc>
+      <image:title>Vêtements femme AD_LUXE au Maroc</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ad-luxe.ma/catalogue.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://ad-luxe.ma/social-card.jpg</image:loc>
+      <image:title>Catalogue mode femme AD_LUXE Maroc</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ad-luxe.ma/products/ensemble-scarf.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ad-luxe.ma/assets/products/ensemble-scarf/marron.webp</image:loc>
+      <image:title>Ensemble Scarf</image:title>
+    </image:image>
+  </url>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</urlset>
