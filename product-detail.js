@@ -1,29 +1,7 @@
 (() => {
 "use strict";
 
-const P = {
-  "ensemble-scarf": {
-    "id": "ensemble-scarf",
-    "name": "Ensemble Scarf",
-    "price": 180,
-    "category": "Vêtements",
-    "sku": "ADL-SCARF-001",
-    "desc": "Un ensemble féminin facile à porter et à assortir, disponible en marron, bleu, noir et rose.",
-    "image": "/assets/products/ensemble-scarf/marron.webp",
-    "colors": [
-      "Marron",
-      "Bleu",
-      "Noir",
-      "Rose"
-    ],
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ]
-  }
-};
+const P = {};
 
 const p = P[document.body.dataset.productId];
 if (!p) return;

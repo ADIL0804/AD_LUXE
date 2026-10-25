@@ -83,9 +83,7 @@
     try {
       // Keep the persisted cart limited to articles still offered by the store.
       // Add new official products here when they are launched.
-      const activeProducts = new Map([
-        ["ensemble-scarf", { id: "ensemble-scarf", name: "Ensemble Scarf", price: 180, image: "/assets/products/ensemble-scarf/marron.webp" }]
-      ]);
+      const activeProducts = new Map();
       const catalog = new Map([...activeProducts, ...cards().map((card) => [card.dataset.productId, product(card)])]);
       const saved = JSON.parse(localStorage.getItem(KEY) || "[]");
       if (!Array.isArray(saved)) return [];

@@ -101,3 +101,7 @@
 @media (prefers-reduced-motion: reduce) {
   #produit .product-card { transition: none; }
 }
+
+/* Collection previews keep descriptions and detail links visible. */
+#produit .product-card .product-subtitle,#produit .product-card .product-actions{display:block}
+#produit .product-card .product-subtitle{font-size:.9rem;line-height:1.65}

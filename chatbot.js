@@ -180,7 +180,6 @@
     if (direct) return direct;
 
     const aliases = [
-      ["scarf", "scarf"],
       ["florea", "florea"],
       ["eliane", "eliane"],
       ["baskets urban", "baskets urban chic"],
@@ -473,7 +472,7 @@
       () =>
         addMessage(
           "assistant",
-          "Je n’ai pas encore la réponse exacte. Essayez avec le nom d’un article, par exemple : « prix Scarf », « couleurs Floréa », « pointure 39 », « articles à moins de 160 DH » ou écrivez à l’équipe AD_LUXE.",
+          "Je n’ai pas encore la réponse exacte. Essayez avec le nom d’un article, par exemple : « trench beige », « ensemble denim », « jupe longue » ou écrivez à l’équipe AD_LUXE.",
           [
             {
               label: "Continuer sur WhatsApp",

@@ -2,7 +2,7 @@
   "use strict";
 
   const CONSENT_KEY = "adluxe_analytics_consent";
-  const PRODUCT_PAGES = {"ensemble-scarf":"/products/ensemble-scarf.html"};
+  const PRODUCT_PAGES = {};
 
   function track(name, params = {}) {
     if (typeof window.gtag === "function") window.gtag("event", name, params);
