@@ -171,7 +171,7 @@
 
   function initFilters() {
     const input = document.getElementById("adluxe-search"); const buttons = [...document.querySelectorAll(".adluxe-filter")]; const empty = document.getElementById("adluxe-empty-category");
-    const apply = () => { const query = (input?.value || "").toLowerCase().trim(); const filter = document.querySelector(".adluxe-filter.active")?.dataset.filter || "all"; let visible = 0; document.querySelectorAll(".product-card[data-name]").forEach((card) => { const match = (!query || card.dataset.name.toLowerCase().includes(query)) && (filter === "all" || card.dataset.category === filter); card.hidden = !match; if (match) visible++; }); if (empty) empty.hidden = visible > 0; };
+    const apply = () => { const normalize = value => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(); const query = normalize(input?.value || "").trim(); const filter = document.querySelector(".adluxe-filter.active")?.dataset.filter || "all"; let visible = 0; document.querySelectorAll(".product-card[data-name]").forEach((card) => { const match = (!query || normalize(card.dataset.search || card.dataset.name).includes(query)) && (filter === "all" || filter === "vetements" || card.dataset.category === filter); card.hidden = !match; if (match) visible++; }); if (empty) empty.hidden = visible > 0; };
     input?.addEventListener("input", apply); buttons.forEach((button) => button.addEventListener("click", () => { buttons.forEach((other) => { other.classList.remove("active"); other.setAttribute("aria-pressed", "false"); }); button.classList.add("active"); button.setAttribute("aria-pressed", "true"); track("select_category", { category: button.dataset.filter || "all" }); apply(); })); apply();
   }
 
@@ -221,3 +221,4 @@
   }
   document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", init, { once: true }) : init();
 })();
+

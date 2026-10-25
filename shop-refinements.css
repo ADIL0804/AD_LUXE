@@ -5,3 +5,10 @@
 .catalog-result{margin:12px 0 24px}
 .adluxe-product-main-image{width:100%;height:auto}
 @media(max-width:640px){.catalog-tools{grid-template-columns:1fr}.nav-links{display:none}}
+
+
+.adluxe-categories{display:flex;flex-wrap:wrap;gap:8px}
+.adluxe-choice-list{display:flex;flex-wrap:wrap;gap:8px}
+.collection-colors{font-size:.85rem;color:#63575c}
+.adluxe-seo-card p{overflow-wrap:anywhere}
+.adluxe-product-main-image{object-fit:contain}

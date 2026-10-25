@@ -11,7 +11,7 @@ const ordered = [...cards];
 if(sort.value !== "default") ordered.sort((a,b) => (a.dataset.price === undefined ? (b.dataset.price === undefined ? 0 : 1) : b.dataset.price === undefined ? -1 : (Number(a.dataset.price)-Number(b.dataset.price))*(sort.value==="asc"?1:-1)));
 let count=0;
 ordered.forEach(card => {
-card.hidden = !(normalize(card.textContent).includes(query) && (category.value==="all" || category.value===card.dataset.category));
+card.hidden = !(normalize(card.textContent).includes(query) && (category.value==="all" || category.value==="vetements" || category.value===card.dataset.category));
 if(!card.hidden) count++;
 grid.append(card);
 });

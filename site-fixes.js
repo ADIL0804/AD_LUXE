@@ -12,7 +12,7 @@
     document.querySelectorAll(".adluxe-filter[data-filter]").forEach((control) => {
       const category = control.dataset.filter;
       if (!category || category === "all") return;
-      const hasProducts = available.has(category);
+      const hasProducts = category === "vetements" ? available.size > 0 : available.has(category);
       control.hidden = !hasProducts;
       control.setAttribute("aria-hidden", String(!hasProducts));
     });
@@ -20,7 +20,7 @@
     document.querySelectorAll("[data-menu-filter]").forEach((control) => {
       const category = control.dataset.menuFilter;
       if (!category || category === "all") return;
-      const hasProducts = available.has(category);
+      const hasProducts = category === "vetements" ? available.size > 0 : available.has(category);
       control.hidden = !hasProducts;
       control.setAttribute("aria-hidden", String(!hasProducts));
     });
@@ -36,3 +36,4 @@
     init();
   }
 })();
+

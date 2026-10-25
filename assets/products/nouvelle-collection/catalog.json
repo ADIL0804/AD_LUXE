@@ -7,7 +7,17 @@
     "price": null,
     "sizes": [],
     "composition": null,
-    "status": "preview"
+    "status": "preview",
+    "variants": [
+      {
+        "color": "Écru & marron",
+        "image": "/assets/products/nouvelle-collection/pull-polo-ecru-marron.webp"
+      }
+    ],
+    "colors": [
+      "Écru & marron"
+    ],
+    "category": "tops"
   },
   {
     "id": "pull-polo-bleu-ciel",
@@ -17,37 +27,47 @@
     "price": null,
     "sizes": [],
     "composition": null,
-    "status": "preview"
+    "status": "preview",
+    "variants": [
+      {
+        "color": "Bleu ciel",
+        "image": "/assets/products/nouvelle-collection/pull-polo-bleu-ciel.webp"
+      }
+    ],
+    "colors": [
+      "Bleu ciel"
+    ],
+    "category": "tops"
   },
   {
-    "id": "trench-long-beige",
-    "name": "Trench long ceinturé — Beige",
-    "description": "Une pièce élégante qui accompagne toutes vos envies. Ce trench long se distingue par son col à revers, ses empiècements aux épaules et sa ceinture à nouer. Sa teinte beige se marie facilement avec des tons clairs ou du denim.",
+    "id": "trench-long-ceinture",
+    "name": "Trench long ceinturé",
+    "description": "Une pièce élégante à porter ouverte ou ceinturée. Ce trench long présente un col à revers, des empiècements aux épaules et une ceinture à nouer pour souligner la taille.",
     "image": "/assets/products/nouvelle-collection/trench-long-beige.webp",
     "price": null,
     "sizes": [],
     "composition": null,
-    "status": "preview"
-  },
-  {
-    "id": "trench-long-taupe",
-    "name": "Trench long ceinturé — Taupe",
-    "description": "Une nuance profonde pour une allure raffinée. Ce trench à col à revers présente une coupe longue, des détails aux poignets et une ceinture qui souligne la taille. À porter ouvert ou ceinturé selon votre style.",
-    "image": "/assets/products/nouvelle-collection/trench-long-taupe.webp",
-    "price": null,
-    "sizes": [],
-    "composition": null,
-    "status": "preview"
-  },
-  {
-    "id": "trench-long-bordeaux",
-    "name": "Trench long ceinturé — Bordeaux",
-    "description": "Donnez du caractère à votre tenue avec ce trench bordeaux. Sa coupe longue, ses empiècements structurés et sa ceinture à nouer dessinent une silhouette affirmée. Une pièce à associer à des tons neutres pour mettre sa couleur en valeur.",
-    "image": "/assets/products/nouvelle-collection/trench-long-bordeaux.webp",
-    "price": null,
-    "sizes": [],
-    "composition": null,
-    "status": "preview"
+    "status": "preview",
+    "variants": [
+      {
+        "color": "Beige",
+        "image": "/assets/products/nouvelle-collection/trench-long-beige.webp"
+      },
+      {
+        "color": "Taupe",
+        "image": "/assets/products/nouvelle-collection/trench-long-taupe.webp"
+      },
+      {
+        "color": "Bordeaux",
+        "image": "/assets/products/nouvelle-collection/trench-long-bordeaux.webp"
+      }
+    ],
+    "colors": [
+      "Beige",
+      "Taupe",
+      "Bordeaux"
+    ],
+    "category": "vestes"
   },
   {
     "id": "veste-denim-officier",
@@ -57,7 +77,17 @@
     "price": null,
     "sizes": [],
     "composition": null,
-    "status": "preview"
+    "status": "preview",
+    "variants": [
+      {
+        "color": "Bleu délavé",
+        "image": "/assets/products/nouvelle-collection/veste-denim-officier.webp"
+      }
+    ],
+    "colors": [
+      "Bleu délavé"
+    ],
+    "category": "vestes"
   },
   {
     "id": "blouson-court-marron",
@@ -67,7 +97,17 @@
     "price": null,
     "sizes": [],
     "composition": null,
-    "status": "preview"
+    "status": "preview",
+    "variants": [
+      {
+        "color": "Marron",
+        "image": "/assets/products/nouvelle-collection/blouson-court-marron.webp"
+      }
+    ],
+    "colors": [
+      "Marron"
+    ],
+    "category": "vestes"
   },
   {
     "id": "pantalon-palazzo-taupe",
@@ -77,7 +117,17 @@
     "price": null,
     "sizes": [],
     "composition": null,
-    "status": "preview"
+    "status": "preview",
+    "variants": [
+      {
+        "color": "Taupe",
+        "image": "/assets/products/nouvelle-collection/pantalon-palazzo-taupe.webp"
+      }
+    ],
+    "colors": [
+      "Taupe"
+    ],
+    "category": "jupes"
   },
   {
     "id": "pantalon-large-marine",
@@ -87,7 +137,17 @@
     "price": null,
     "sizes": [],
     "composition": null,
-    "status": "preview"
+    "status": "preview",
+    "variants": [
+      {
+        "color": "Bleu marine",
+        "image": "/assets/products/nouvelle-collection/pantalon-large-marine.webp"
+      }
+    ],
+    "colors": [
+      "Bleu marine"
+    ],
+    "category": "pantalons"
   },
   {
     "id": "trench-effet-cuir-cognac",
@@ -97,17 +157,42 @@
     "price": null,
     "sizes": [],
     "composition": null,
-    "status": "preview"
+    "status": "preview",
+    "variants": [
+      {
+        "color": "Cognac",
+        "image": "/assets/products/nouvelle-collection/trench-effet-cuir-cognac.webp"
+      }
+    ],
+    "colors": [
+      "Cognac"
+    ],
+    "category": "vestes"
   },
   {
-    "id": "jupe-longue-marron",
-    "name": "Jupe longue évasée ceinturée — Marron",
-    "description": "Une ligne féminine et épurée. Cette jupe longue se déploie dans une coupe évasée, avec une taille soulignée par une ceinture assortie à boucle rectangulaire. À porter avec un t-shirt rentré ou une chemise pour varier les styles.",
+    "id": "jupe-longue-evasee",
+    "name": "Jupe longue évasée ceinturée",
+    "description": "Une silhouette féminine et épurée. Cette jupe longue à coupe évasée présente une ceinture assortie à boucle rectangulaire. À associer à un t-shirt rentré ou à une chemise.",
     "image": "/assets/products/nouvelle-collection/jupe-longue-marron.webp",
     "price": null,
     "sizes": [],
     "composition": null,
-    "status": "preview"
+    "status": "preview",
+    "variants": [
+      {
+        "color": "Marron",
+        "image": "/assets/products/nouvelle-collection/jupe-longue-marron.webp"
+      },
+      {
+        "color": "Bleu denim",
+        "image": "/assets/products/nouvelle-collection/jupe-longue-denim.webp"
+      }
+    ],
+    "colors": [
+      "Marron",
+      "Bleu denim"
+    ],
+    "category": "jupes"
   },
   {
     "id": "veste-boutons-dores-marine",
@@ -117,37 +202,42 @@
     "price": null,
     "sizes": [],
     "composition": null,
-    "status": "preview"
+    "status": "preview",
+    "variants": [
+      {
+        "color": "Bleu marine",
+        "image": "/assets/products/nouvelle-collection/veste-boutons-dores-marine.webp"
+      }
+    ],
+    "colors": [
+      "Bleu marine"
+    ],
+    "category": "vestes"
   },
   {
-    "id": "jupe-longue-denim",
-    "name": "Jupe longue évasée ceinturée — Bleu denim",
-    "description": "L’esprit denim dans une silhouette ample et féminine. Cette jupe longue présente une coupe évasée et une ceinture assortie qui marque la taille. Un modèle à associer à un haut blanc pour un look frais et facile à composer.",
-    "image": "/assets/products/nouvelle-collection/jupe-longue-denim.webp",
-    "price": null,
-    "sizes": [],
-    "composition": null,
-    "status": "preview"
-  },
-  {
-    "id": "ensemble-denim-clair",
-    "name": "Ensemble en denim — Bleu clair",
-    "description": "Un total look décontracté aux lignes généreuses. Cet ensemble associe une chemise à col classique et grandes poches poitrine à un pantalon large assorti. Portez les deux pièces ensemble, ou séparément pour multiplier les associations.",
+    "id": "ensemble-denim",
+    "name": "Ensemble en denim",
+    "description": "Un total look denim aux lignes décontractées. La chemise à col classique et grandes poches poitrine se coordonne à un pantalon large assorti. Les deux pièces peuvent également se porter séparément.",
     "image": "/assets/products/nouvelle-collection/ensemble-denim-clair.webp",
     "price": null,
     "sizes": [],
     "composition": null,
-    "status": "preview"
-  },
-  {
-    "id": "ensemble-denim-indigo",
-    "name": "Ensemble en denim — Bleu indigo",
-    "description": "Une version profonde et affirmée du total look denim. La chemise boutonnée à grandes poches poitrine s’associe à un pantalon large dans une teinte indigo coordonnée. Une silhouette à compléter avec des accessoires sobres.",
-    "image": "/assets/products/nouvelle-collection/ensemble-denim-indigo.webp",
-    "price": null,
-    "sizes": [],
-    "composition": null,
-    "status": "preview"
+    "status": "preview",
+    "variants": [
+      {
+        "color": "Bleu clair",
+        "image": "/assets/products/nouvelle-collection/ensemble-denim-clair.webp"
+      },
+      {
+        "color": "Bleu indigo",
+        "image": "/assets/products/nouvelle-collection/ensemble-denim-indigo.webp"
+      }
+    ],
+    "colors": [
+      "Bleu clair",
+      "Bleu indigo"
+    ],
+    "category": "ensembles"
   },
   {
     "id": "body-noir-manches-longues",
@@ -157,27 +247,42 @@
     "price": null,
     "sizes": [],
     "composition": null,
-    "status": "preview"
+    "status": "preview",
+    "variants": [
+      {
+        "color": "Noir",
+        "image": "/assets/products/nouvelle-collection/body-noir-manches-longues.webp"
+      }
+    ],
+    "colors": [
+      "Noir"
+    ],
+    "category": "tops"
   },
   {
-    "id": "top-drape-bordeaux",
-    "name": "Top drapé à col montant — Bordeaux",
-    "description": "Une teinte profonde et une silhouette féminine. Ce top à manches longues associe un col montant à un drapé diagonal et des fronces sur les côtés. Portez-le avec un jean pour une allure décontractée ou un pantalon habillé.",
+    "id": "top-drape-col-montant",
+    "name": "Top drapé à col montant",
+    "description": "Une pièce élégante aux lignes travaillées. Ce top à manches longues associe un col montant, un drapé diagonal et des fronces sur les côtés. À porter avec un jean ou un pantalon habillé.",
     "image": "/assets/products/nouvelle-collection/top-drape-bordeaux.webp",
     "price": null,
     "sizes": [],
     "composition": null,
-    "status": "preview"
-  },
-  {
-    "id": "top-drape-noir",
-    "name": "Top drapé à col montant — Noir",
-    "description": "Une pièce élégante aux lignes travaillées. Son col montant, ses manches longues et son drapé asymétrique apportent du relief à une coupe près du corps. Un modèle facile à associer à vos essentiels.",
-    "image": "/assets/products/nouvelle-collection/top-drape-noir.webp",
-    "price": null,
-    "sizes": [],
-    "composition": null,
-    "status": "preview"
+    "status": "preview",
+    "variants": [
+      {
+        "color": "Bordeaux",
+        "image": "/assets/products/nouvelle-collection/top-drape-bordeaux.webp"
+      },
+      {
+        "color": "Noir",
+        "image": "/assets/products/nouvelle-collection/top-drape-noir.webp"
+      }
+    ],
+    "colors": [
+      "Bordeaux",
+      "Noir"
+    ],
+    "category": "tops"
   },
   {
     "id": "jupe-denim-fendue",
@@ -187,7 +292,17 @@
     "price": null,
     "sizes": [],
     "composition": null,
-    "status": "preview"
+    "status": "preview",
+    "variants": [
+      {
+        "color": "Bleu clair",
+        "image": "/assets/products/nouvelle-collection/jupe-denim-fendue.webp"
+      }
+    ],
+    "colors": [
+      "Bleu clair"
+    ],
+    "category": "jupes"
   },
   {
     "id": "salopette-denim-clair",
@@ -197,7 +312,17 @@
     "price": null,
     "sizes": [],
     "composition": null,
-    "status": "preview"
+    "status": "preview",
+    "variants": [
+      {
+        "color": "Bleu clair",
+        "image": "/assets/products/nouvelle-collection/salopette-denim-clair.webp"
+      }
+    ],
+    "colors": [
+      "Bleu clair"
+    ],
+    "category": "ensembles"
   },
   {
     "id": "top-asymetrique-ivoire",
@@ -207,7 +332,17 @@
     "price": null,
     "sizes": [],
     "composition": null,
-    "status": "preview"
+    "status": "preview",
+    "variants": [
+      {
+        "color": "Ivoire",
+        "image": "/assets/products/nouvelle-collection/top-asymetrique-ivoire.webp"
+      }
+    ],
+    "colors": [
+      "Ivoire"
+    ],
+    "category": "tops"
   },
   {
     "id": "body-echancre-noir",
@@ -217,7 +352,17 @@
     "price": null,
     "sizes": [],
     "composition": null,
-    "status": "preview"
+    "status": "preview",
+    "variants": [
+      {
+        "color": "Noir",
+        "image": "/assets/products/nouvelle-collection/body-echancre-noir.webp"
+      }
+    ],
+    "colors": [
+      "Noir"
+    ],
+    "category": "tops"
   },
   {
     "id": "gilet-bijoux-marron",
@@ -227,7 +372,17 @@
     "price": null,
     "sizes": [],
     "composition": null,
-    "status": "preview"
+    "status": "preview",
+    "variants": [
+      {
+        "color": "Marron",
+        "image": "/assets/products/nouvelle-collection/gilet-bijoux-marron.webp"
+      }
+    ],
+    "colors": [
+      "Marron"
+    ],
+    "category": "vestes"
   },
   {
     "id": "ensemble-sport-chocolat",
@@ -237,7 +392,17 @@
     "price": null,
     "sizes": [],
     "composition": null,
-    "status": "preview"
+    "status": "preview",
+    "variants": [
+      {
+        "color": "Chocolat",
+        "image": "/assets/products/nouvelle-collection/ensemble-sport-chocolat.webp"
+      }
+    ],
+    "colors": [
+      "Chocolat"
+    ],
+    "category": "ensembles"
   },
   {
     "id": "pantalon-large-cordon",
@@ -281,7 +446,8 @@
       }
     ],
     "composition": null,
-    "status": "preview"
+    "status": "preview",
+    "category": "pantalons"
   },
   {
     "id": "blouson-effet-cuir-revers",
@@ -310,7 +476,8 @@
       }
     ],
     "composition": null,
-    "status": "preview"
+    "status": "preview",
+    "category": "vestes"
   },
   {
     "id": "ensemble-zippe-evase",
@@ -349,6 +516,7 @@
       }
     ],
     "composition": null,
-    "status": "preview"
+    "status": "preview",
+    "category": "ensembles"
   }
 ]
