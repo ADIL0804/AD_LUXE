@@ -238,5 +238,117 @@
     "sizes": [],
     "composition": null,
     "status": "preview"
+  },
+  {
+    "id": "pantalon-large-cordon",
+    "name": "Pantalon large à cordon",
+    "description": "Une allure décontractée aux lignes généreuses. Ce pantalon présente des jambes larges, une large ceinture à la taille, un cordon de serrage et des poches latérales. À associer à un haut simple pour composer une tenue du quotidien.",
+    "image": "/assets/products/nouvelle-collection/pantalon-large-cordon-gris.webp",
+    "price": null,
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      "Gris",
+      "Marron",
+      "Noir",
+      "Blanc",
+      "Bordeaux"
+    ],
+    "variants": [
+      {
+        "color": "Gris",
+        "image": "/assets/products/nouvelle-collection/pantalon-large-cordon-gris.webp"
+      },
+      {
+        "color": "Marron",
+        "image": "/assets/products/nouvelle-collection/pantalon-large-cordon-marron.webp"
+      },
+      {
+        "color": "Noir",
+        "image": "/assets/products/nouvelle-collection/pantalon-large-cordon-noir.webp"
+      },
+      {
+        "color": "Blanc",
+        "image": "/assets/products/nouvelle-collection/pantalon-large-cordon-blanc.webp"
+      },
+      {
+        "color": "Bordeaux",
+        "image": "/assets/products/nouvelle-collection/pantalon-large-cordon-bordeaux.webp"
+      }
+    ],
+    "composition": null,
+    "status": "preview"
+  },
+  {
+    "id": "blouson-effet-cuir-revers",
+    "name": "Blouson effet cuir à revers",
+    "description": "Une pièce au caractère affirmé. Ce blouson effet cuir présente une coupe ample, de larges revers, des détails à pressions et une fermeture zippée sur le devant. Sa base élastiquée souligne le volume de la veste. À porter avec un jean ou un pantalon sobre.",
+    "image": "/assets/products/nouvelle-collection/blouson-effet-cuir-revers-bordeaux.webp",
+    "price": null,
+    "sizes": [],
+    "colors": [
+      "Bordeaux",
+      "Marron foncé",
+      "Noir"
+    ],
+    "variants": [
+      {
+        "color": "Bordeaux",
+        "image": "/assets/products/nouvelle-collection/blouson-effet-cuir-revers-bordeaux.webp"
+      },
+      {
+        "color": "Marron foncé",
+        "image": "/assets/products/nouvelle-collection/blouson-effet-cuir-revers-marron-fonce.webp"
+      },
+      {
+        "color": "Noir",
+        "image": "/assets/products/nouvelle-collection/blouson-effet-cuir-revers-noir.webp"
+      }
+    ],
+    "composition": null,
+    "status": "preview"
+  },
+  {
+    "id": "ensemble-zippe-evase",
+    "name": "Ensemble zippé à pantalon évasé",
+    "description": "Une silhouette coordonnée aux lignes ajustées. Cet ensemble deux pièces associe une veste zippée à col montant, manches longues et coutures dessinées à un pantalon évasé assorti. Portez les deux pièces ensemble pour une tenue harmonieuse.",
+    "image": "/assets/products/nouvelle-collection/ensemble-zippe-evase-marron.webp",
+    "price": null,
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      "Marron",
+      "Noir",
+      "Vert",
+      "Blanc"
+    ],
+    "variants": [
+      {
+        "color": "Marron",
+        "image": "/assets/products/nouvelle-collection/ensemble-zippe-evase-marron.webp"
+      },
+      {
+        "color": "Noir",
+        "image": "/assets/products/nouvelle-collection/ensemble-zippe-evase-noir.webp"
+      },
+      {
+        "color": "Vert",
+        "image": "/assets/products/nouvelle-collection/ensemble-zippe-evase-vert.webp"
+      },
+      {
+        "color": "Blanc",
+        "image": "/assets/products/nouvelle-collection/ensemble-zippe-evase-blanc.webp"
+      }
+    ],
+    "composition": null,
+    "status": "preview"
   }
 ]
