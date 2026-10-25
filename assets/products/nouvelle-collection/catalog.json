@@ -148,5 +148,95 @@
     "sizes": [],
     "composition": null,
     "status": "preview"
+  },
+  {
+    "id": "body-noir-manches-longues",
+    "name": "Body à manches longues — Noir",
+    "description": "Un essentiel épuré à porter au quotidien. Ce body noir présente un col rond, une coupe ajustée et des manches longues avec ouverture pour le pouce. À associer à un jean ou à un pantalon taille haute.",
+    "image": "/assets/products/nouvelle-collection/body-noir-manches-longues.webp",
+    "price": null,
+    "sizes": [],
+    "composition": null,
+    "status": "preview"
+  },
+  {
+    "id": "top-drape-bordeaux",
+    "name": "Top drapé à col montant — Bordeaux",
+    "description": "Une teinte profonde et une silhouette féminine. Ce top à manches longues associe un col montant à un drapé diagonal et des fronces sur les côtés. Portez-le avec un jean pour une allure décontractée ou un pantalon habillé.",
+    "image": "/assets/products/nouvelle-collection/top-drape-bordeaux.webp",
+    "price": null,
+    "sizes": [],
+    "composition": null,
+    "status": "preview"
+  },
+  {
+    "id": "top-drape-noir",
+    "name": "Top drapé à col montant — Noir",
+    "description": "Une pièce élégante aux lignes travaillées. Son col montant, ses manches longues et son drapé asymétrique apportent du relief à une coupe près du corps. Un modèle facile à associer à vos essentiels.",
+    "image": "/assets/products/nouvelle-collection/top-drape-noir.webp",
+    "price": null,
+    "sizes": [],
+    "composition": null,
+    "status": "preview"
+  },
+  {
+    "id": "jupe-denim-fendue",
+    "name": "Jupe midi en denim fendue — Bleu clair",
+    "description": "Le denim dans une version sobre et moderne. Cette jupe midi à coupe droite présente une fente sur le devant, des poches et une fermeture à bouton à la taille. À porter avec un t-shirt et des baskets pour un look quotidien.",
+    "image": "/assets/products/nouvelle-collection/jupe-denim-fendue.webp",
+    "price": null,
+    "sizes": [],
+    "composition": null,
+    "status": "preview"
+  },
+  {
+    "id": "salopette-denim-clair",
+    "name": "Salopette en denim — Bleu clair",
+    "description": "Une allure décontractée en une seule pièce. Cette salopette en denim clair présente des bretelles réglables à boucles, une poche sur la bavette et des jambes larges. Portez-la sur un haut uni pour mettre sa coupe en valeur.",
+    "image": "/assets/products/nouvelle-collection/salopette-denim-clair.webp",
+    "price": null,
+    "sizes": [],
+    "composition": null,
+    "status": "preview"
+  },
+  {
+    "id": "top-asymetrique-ivoire",
+    "name": "Top drapé à col bateau — Ivoire",
+    "description": "Une silhouette lumineuse aux détails délicats. Ce top ivoire à manches longues se distingue par son col bateau, ses fronces sur le côté et son bas asymétrique. À associer à un jean ou à un pantalon sobre.",
+    "image": "/assets/products/nouvelle-collection/top-asymetrique-ivoire.webp",
+    "price": null,
+    "sizes": [],
+    "composition": null,
+    "status": "preview"
+  },
+  {
+    "id": "body-echancre-noir",
+    "name": "Body échancré à col rond — Noir",
+    "description": "Un basique au style affirmé. Ce body noir à manches longues associe une encolure ronde à une coupe ajustée et échancrée sur les hanches. Il accompagne vos jeans et pantalons selon l’effet souhaité.",
+    "image": "/assets/products/nouvelle-collection/body-echancre-noir.webp",
+    "price": null,
+    "sizes": [],
+    "composition": null,
+    "status": "preview"
+  },
+  {
+    "id": "gilet-bijoux-marron",
+    "name": "Gilet sans manches à boutons bijoux — Marron",
+    "description": "Une pièce structurée relevée de détails dorés. Ce gilet marron sans manches présente un col rond, quatre boutons bijoux aux motifs variés et des poches passepoilées. À porter avec un pantalon clair pour une association élégante.",
+    "image": "/assets/products/nouvelle-collection/gilet-bijoux-marron.webp",
+    "price": null,
+    "sizes": [],
+    "composition": null,
+    "status": "preview"
+  },
+  {
+    "id": "ensemble-sport-chocolat",
+    "name": "Ensemble à bandes contrastées — Chocolat",
+    "description": "Un ensemble décontracté aux lignes graphiques. La veste zippée à col se coordonne à un pantalon large, souligné de bandes blanches et d’un cordon de serrage à la taille. À associer à des baskets pour compléter le look.",
+    "image": "/assets/products/nouvelle-collection/ensemble-sport-chocolat.webp",
+    "price": null,
+    "sizes": [],
+    "composition": null,
+    "status": "preview"
   }
 ]
