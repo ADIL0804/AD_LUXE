@@ -1,18 +1,11 @@
 {
-  "name": "AD_LUXE — Gestion boutique",
-  "short_name": "AD_LUXE",
-  "description": "Gestion de stock, ventes et dépenses AD_LUXE.",
-  "start_url": "./",
-  "scope": "./",
-  "display": "standalone",
-  "background_color": "#f8f6f5",
-  "theme_color": "#702c43",
-  "icons": [
-    {
-      "src": "icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    }
-  ]
+  "name":"AD_LUXE — Gestion boutique",
+  "short_name":"AD_LUXE",
+  "description":"Gestion de stock, ventes et dépenses AD_LUXE.",
+  "start_url":"./",
+  "scope":"./",
+  "display":"standalone",
+  "background_color":"#f8f6f5",
+  "theme_color":"#702c43",
+  "icons":[{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
 }
