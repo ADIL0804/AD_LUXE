@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#702c43"/>
+  <rect x="22" y="22" width="468" height="468" rx="98" fill="none" stroke="#d9bc8e" stroke-width="8"/>
+  <text x="256" y="276" text-anchor="middle" fill="#fffaf5" font-family="Georgia,serif" font-size="190" font-weight="bold" letter-spacing="-14">AD</text>
+  <path d="M115 326h282" stroke="#d9bc8e" stroke-width="7"/>
+  <text x="256" y="389" text-anchor="middle" fill="#f6e8d2" font-family="Georgia,serif" font-size="49" letter-spacing="14">LUXE</text>
+</svg>
